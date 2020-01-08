@@ -6,6 +6,11 @@
   "author": "aereal <aereal@aereal.org>",
   "license": "MIT",
   "private": true,
+  "dependencies": {
+    "@aws-cdk/core": "^1.20.0",
+    "@aws-cdk/cx-api": "^1.20.0",
+    "aws-cdk": "^1.20.0"
+  },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^2.15.0",
     "@typescript-eslint/parser": "^2.15.0",
