@@ -1,5 +1,6 @@
 import { App, AppProps, Environment } from "@aws-cdk/core";
 import { LambdaFunctionsStack } from "./stacks/lambda-functions";
+import { LockTableStack } from "./stacks/lock-table";
 
 interface NeocronAppProps extends AppProps {
   readonly env: Environment;
@@ -25,5 +26,6 @@ export class NeocronApp extends App {
     new LambdaFunctionsStack(this, "neocron-lambda-functions", {
       env: props.env,
     });
+    new LockTableStack(this, "neocron-lock-table", { env: props.env });
   }
 }
