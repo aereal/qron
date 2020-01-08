@@ -22,6 +22,8 @@ export class NeocronApp extends App {
   private constructor(props: NeocronAppProps) {
     super(props);
 
-    new LambdaFunctionsStack(this, "lambda-functions", { env: props.env });
+    new LambdaFunctionsStack(this, "neocron-lambda-functions", {
+      env: props.env,
+    });
   }
 }
