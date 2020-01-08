@@ -7,8 +7,22 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
+    "@aws-cdk/assets": "^1.20.0",
+    "@aws-cdk/aws-cloudwatch": "^1.20.0",
+    "@aws-cdk/aws-ec2": "^1.20.0",
+    "@aws-cdk/aws-events": "^1.20.0",
+    "@aws-cdk/aws-iam": "^1.20.0",
+    "@aws-cdk/aws-kms": "^1.20.0",
+    "@aws-cdk/aws-lambda": "^1.20.0",
+    "@aws-cdk/aws-logs": "^1.20.0",
+    "@aws-cdk/aws-s3": "^1.20.0",
+    "@aws-cdk/aws-s3-assets": "^1.20.0",
+    "@aws-cdk/aws-sqs": "^1.20.0",
+    "@aws-cdk/aws-ssm": "^1.20.0",
+    "@aws-cdk/aws-stepfunctions": "^1.20.0",
     "@aws-cdk/core": "^1.20.0",
     "@aws-cdk/cx-api": "^1.20.0",
+    "@aws-cdk/region-info": "^1.20.0",
     "aws-cdk": "^1.20.0"
   },
   "devDependencies": {
