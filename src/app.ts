@@ -1,4 +1,5 @@
 import { App, AppProps, Environment } from "@aws-cdk/core";
+import { LambdaFunctionsStack } from "./stacks/lambda-functions";
 
 interface NeocronAppProps extends AppProps {
   readonly env: Environment;
@@ -20,5 +21,7 @@ export class NeocronApp extends App {
 
   private constructor(props: NeocronAppProps) {
     super(props);
+
+    new LambdaFunctionsStack(this, "lambda-functions", { env: props.env });
   }
 }
