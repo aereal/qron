@@ -16,5 +16,67 @@
     "prettier": "^1.19.1",
     "ts-node": "^8.5.4",
     "typescript": "^3.7.4"
+  },
+  "scripts": {
+    "lint": "eslint --ext .ts src/"
+  },
+  "prettier": {
+    "trailingComma": "es5"
+  },
+  "eslintConfig": {
+    "extends": [
+      "eslint:recommended",
+      "plugin:@typescript-eslint/eslint-recommended",
+      "plugin:@typescript-eslint/recommended",
+      "plugin:@typescript-eslint/recommended-requiring-type-checking",
+      "plugin:prettier/recommended",
+      "prettier/@typescript-eslint",
+      "plugin:import/errors",
+      "plugin:import/warnings",
+      "plugin:import/typescript"
+    ],
+    "plugins": [
+      "@typescript-eslint",
+      "import"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "env": {
+      "node": true,
+      "es6": true
+    },
+    "parserOptions": {
+      "ecmaVersion": 2018,
+      "sourceType": "module",
+      "createDefaultProgram": true,
+      "project": "./tsconfig.json"
+    },
+    "rules": {
+      "no-use-before-define": "off",
+      "@typescript-eslint/no-use-before-define": [
+        "warn",
+        {
+          "functions": false,
+          "classes": false,
+          "variables": false,
+          "typedefs": false
+        }
+      ],
+      "@typescript-eslint/array-type": [
+        "warn",
+        {
+          "default": "array-simple",
+          "readonly": "array-simple"
+        }
+      ],
+      "@typescript-eslint/interface-name-prefix": [
+        "error",
+        {
+          "prefixWithI": "never"
+        }
+      ],
+      "import/no-cycle": 2,
+      "import/first": 1,
+      "import/order": 2
+    }
   }
 }
