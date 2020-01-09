@@ -7,14 +7,13 @@ import {
   Condition,
   IChainable,
   Fail,
+  INextable,
 } from "@aws-cdk/aws-stepfunctions";
-import { InvokeFunction } from "@aws-cdk/aws-stepfunctions-tasks";
-import { IFunction } from "@aws-cdk/aws-lambda";
 import { AttributeValue, UpdateItemTask } from "./dynamodb-sfn-task";
 
 export interface ScheduledTaskProps {
   readonly lockTable: ITable;
-  readonly taskFunction: IFunction;
+  readonly invokeMain: INextable;
   readonly taskName: string;
 }
 
@@ -24,7 +23,7 @@ export class ScheduledTask extends Construct {
   constructor(scope: Construct, id: string, props: ScheduledTaskProps) {
     super(scope, id);
 
-    const { lockTable, taskFunction, taskName } = props;
+    const { lockTable, invokeMain: taskFunction, taskName } = props;
 
     const lockKey: AttributeValue = {
       name: keyTaskName,
@@ -61,10 +60,6 @@ export class ScheduledTask extends Construct {
       resultPath: getLockResultPath,
     });
 
-    const invoke = new Task(this, "InvokeTask", {
-      task: new InvokeFunction(taskFunction),
-    });
-
     const freeLock = new Task(this, "FreeLock", {
       task: new UpdateItemTask({
         table: lockTable,
@@ -91,7 +86,7 @@ export class ScheduledTask extends Construct {
         .otherwise(freeLock.next(new Fail(this, "Finite", {})));
 
     new StateMachine(this, "StateMachine", {
-      definition: getLock.next(checkLock(invoke.next(freeLock))),
+      definition: getLock.next(checkLock(taskFunction.next(freeLock))),
     });
   }
 }

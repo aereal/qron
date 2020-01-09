@@ -7,6 +7,8 @@ import {
   Tracing,
 } from "@aws-cdk/aws-lambda";
 import { ITable } from "@aws-cdk/aws-dynamodb";
+import { Task } from "@aws-cdk/aws-stepfunctions";
+import { InvokeFunction } from "@aws-cdk/aws-stepfunctions-tasks";
 import { ScheduledTask } from "../constructs/scheduled-task";
 
 interface SleeperTaskStackProps extends StackProps {
@@ -27,7 +29,9 @@ export class SleeperTaskStack extends Stack {
     });
     new ScheduledTask(this, "SleeperTask", {
       lockTable: props.lockTable,
-      taskFunction,
+      invokeMain: new Task(this, "InvokeFunction", {
+        task: new InvokeFunction(taskFunction),
+      }),
       taskName: "sleeper",
     });
   }
