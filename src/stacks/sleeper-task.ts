@@ -9,6 +9,7 @@ import {
 import { ITable } from "@aws-cdk/aws-dynamodb";
 import { Task } from "@aws-cdk/aws-stepfunctions";
 import { InvokeFunction } from "@aws-cdk/aws-stepfunctions-tasks";
+import { Rule, Schedule } from "@aws-cdk/aws-events";
 import { ScheduledTask } from "../constructs/scheduled-task";
 
 interface SleeperTaskStackProps extends StackProps {
@@ -33,6 +34,9 @@ export class SleeperTaskStack extends Stack {
         task: new InvokeFunction(taskFunction),
       }),
       taskName: "sleeper",
+      invocationRule: new Rule(this, "RunEveryHourRule", {
+        schedule: Schedule.cron({ hour: "15", weekDay: "MON-FRI" }),
+      }),
     });
   }
 }

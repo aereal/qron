@@ -9,12 +9,15 @@ import {
   Fail,
   INextable,
 } from "@aws-cdk/aws-stepfunctions";
+import { Rule } from "@aws-cdk/aws-events";
+import { SfnStateMachine } from "@aws-cdk/aws-events-targets";
 import { AttributeValue, UpdateItemTask } from "./dynamodb-sfn-task";
 
 export interface ScheduledTaskProps {
   readonly lockTable: ITable;
   readonly invokeMain: INextable;
   readonly taskName: string;
+  readonly invocationRule: Rule;
 }
 
 const keyTaskName = "taskName";
@@ -23,7 +26,12 @@ export class ScheduledTask extends Construct {
   constructor(scope: Construct, id: string, props: ScheduledTaskProps) {
     super(scope, id);
 
-    const { lockTable, invokeMain: taskFunction, taskName } = props;
+    const {
+      lockTable,
+      invokeMain: taskFunction,
+      taskName,
+      invocationRule,
+    } = props;
 
     const lockKey: AttributeValue = {
       name: keyTaskName,
@@ -85,8 +93,10 @@ export class ScheduledTask extends Construct {
         )
         .otherwise(freeLock.next(new Fail(this, "Finite", {})));
 
-    new StateMachine(this, "StateMachine", {
+    const stateMachine = new StateMachine(this, "StateMachine", {
       definition: getLock.next(checkLock(taskFunction.next(freeLock))),
     });
+
+    invocationRule.addTarget(new SfnStateMachine(stateMachine));
   }
 }
