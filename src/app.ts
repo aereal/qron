@@ -1,6 +1,7 @@
 import { App, AppProps, Environment } from "@aws-cdk/core";
 import { LambdaFunctionsStack } from "./stacks/lambda-functions";
 import { LockTableStack } from "./stacks/lock-table";
+import { SleeperTaskStack } from "./stacks/sleeper-task";
 
 interface NeocronAppProps extends AppProps {
   readonly env: Environment;
@@ -26,6 +27,12 @@ export class NeocronApp extends App {
     new LambdaFunctionsStack(this, "neocron-lambda-functions", {
       env: props.env,
     });
-    new LockTableStack(this, "neocron-lock-table", { env: props.env });
+    const lockTableStack = new LockTableStack(this, "neocron-lock-table", {
+      env: props.env,
+    });
+    new SleeperTaskStack(this, "neocron-task-sleeper", {
+      env: props.env,
+      lockTable: lockTableStack.newLockTable,
+    });
   }
 }
