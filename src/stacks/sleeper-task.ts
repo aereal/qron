@@ -35,7 +35,7 @@ export class SleeperTaskStack extends Stack {
       }),
       taskName: "sleeper",
       invocationRule: new Rule(this, "RunEveryHourRule", {
-        schedule: Schedule.cron({ hour: "15", weekDay: "MON-FRI" }),
+        schedule: Schedule.cron({ minute: "0/10", weekDay: "MON-FRI" }),
       }),
     });
   }
