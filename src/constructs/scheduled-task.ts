@@ -8,6 +8,7 @@ import {
   IChainable,
   Fail,
   INextable,
+  Succeed,
 } from "@aws-cdk/aws-stepfunctions";
 import { Rule } from "@aws-cdk/aws-events";
 import { SfnStateMachine } from "@aws-cdk/aws-events-targets";
@@ -68,17 +69,18 @@ export class ScheduledTask extends Construct {
       resultPath: getLockResultPath,
     });
 
-    const freeLock = new Task(this, "FreeLock", {
-      task: new UpdateItemTask({
-        table: lockTable,
-        parameters: {
-          key: lockKey,
-          updateExpression: "SET handledCount = handledCount - :amount",
-          expressionAttributeValues: [amount],
-          returnValues: "ALL_NEW",
-        },
-      }),
-    });
+    const freeLock = (id: string): Task =>
+      new Task(this, id, {
+        task: new UpdateItemTask({
+          table: lockTable,
+          parameters: {
+            key: lockKey,
+            updateExpression: "SET handledCount = handledCount - :amount",
+            expressionAttributeValues: [amount],
+            returnValues: "ALL_NEW",
+          },
+        }),
+      });
 
     // TODO: otherwise
     // TODO: retry?
@@ -91,10 +93,16 @@ export class ScheduledTask extends Construct {
           ),
           next
         )
-        .otherwise(freeLock.next(new Fail(this, "Finite", {})));
+        .otherwise(freeLock("FailedLockFreed").next(new Fail(this, "Finite")));
 
     const stateMachine = new StateMachine(this, "StateMachine", {
-      definition: getLock.next(checkLock(taskFunction.next(freeLock))),
+      definition: getLock.next(
+        checkLock(
+          taskFunction.next(
+            freeLock("SuccessFreeLock").next(new Succeed(this, "Succeed"))
+          )
+        )
+      ),
     });
 
     invocationRule.addTarget(new SfnStateMachine(stateMachine));
