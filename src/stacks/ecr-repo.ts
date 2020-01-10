@@ -1,10 +1,14 @@
-import { Stack, Construct, StackProps } from "@aws-cdk/core";
-import { Repository } from "@aws-cdk/aws-ecr";
+import { Stack, Construct, StackProps, PhysicalName } from "@aws-cdk/core";
+import { Repository, IRepository } from "@aws-cdk/aws-ecr";
 
 export class EcrRepoStack extends Stack {
+  public readonly repository: IRepository;
+
   constructor(scope: Construct, id: string, props: StackProps) {
     super(scope, id, props);
 
-    new Repository(this, "NeocronRepository", {});
+    this.repository = new Repository(this, "NeocronRepository", {
+      repositoryName: PhysicalName.GENERATE_IF_NEEDED,
+    });
   }
 }

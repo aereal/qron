@@ -3,6 +3,7 @@ import { LambdaFunctionsStack } from "./stacks/lambda-functions";
 import { LockTableStack } from "./stacks/lock-table";
 import { SleeperTaskStack } from "./stacks/sleeper-task";
 import { EcrRepoStack } from "./stacks/ecr-repo";
+import { SleeperEcsStack } from "./stacks/sleeper-ecs";
 
 interface NeocronAppProps extends AppProps {
   readonly env: Environment;
@@ -31,7 +32,14 @@ export class NeocronApp extends App {
     const lockTableStack = new LockTableStack(this, "neocron-lock-table", {
       env: props.env,
     });
-    new EcrRepoStack(this, "neocron-ecr-repo", {});
+    const ecrRepoStack = new EcrRepoStack(this, "neocron-ecr-repo", {
+      env: props.env,
+    });
+    new SleeperEcsStack(this, "neocron-task-sleeper-ecs", {
+      env: props.env,
+      repository: ecrRepoStack.repository,
+      lockTable: lockTableStack.newLockTable,
+    });
     new SleeperTaskStack(this, "neocron-task-sleeper", {
       env: props.env,
       lockTable: lockTableStack.newLockTable,
