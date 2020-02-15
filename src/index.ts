@@ -1,3 +1,3 @@
-import { NeocronApp } from "./app";
+import { QronApp } from "./app";
 
-NeocronApp.newFromContext().synth();
+QronApp.newFromContext().synth();
