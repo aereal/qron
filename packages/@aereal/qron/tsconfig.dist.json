@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "alwaysStrict": true,
+    "declaration": true,
+    "experimentalDecorators": true,
+    "inlineSourceMap": true,
+    "inlineSources": true,
+    "lib": ["es2018"],
+    "module": "commonjs",
+    "noFallthroughCasesInSwitch": true,
+    "outDir": "built",
+    "strict": true,
+    "target": "ES2018"
+  },
+  "include": [
+    "src"
+  ],
+  "exclude": ["cdk.out"]
+}

@@ -12,7 +12,7 @@ import { LogGroup, RetentionDays } from "@aws-cdk/aws-logs";
 import { Task, ServiceIntegrationPattern } from "@aws-cdk/aws-stepfunctions";
 import { RunEcsFargateTask } from "@aws-cdk/aws-stepfunctions-tasks";
 import { Rule, Schedule } from "@aws-cdk/aws-events";
-import { ScheduledTask } from "../constructs/scheduled-task";
+import { ScheduledTask } from "@aereal/qron";
 
 interface SleeperEcsStackProps extends StackProps {
   readonly repository: IRepository;
