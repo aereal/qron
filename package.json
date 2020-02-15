@@ -5,14 +5,13 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "test": "wsrun -c test"
+    "test": "lerna run test"
   },
   "workspaces": [
     "packages/*",
     "packages/@aereal/*"
   ],
   "devDependencies": {
-    "lerna": "^3.20.2",
-    "wsrun": "^5.2.0"
+    "lerna": "^3.20.2"
   }
 }
