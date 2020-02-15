@@ -4,10 +4,12 @@
   "author": "aereal <aereal@aereal.org>",
   "license": "MIT",
   "private": true,
-  "scripts": {
-  },
+  "scripts": {},
   "workspaces": [
     "packages/*",
     "packages/@aereal/*"
-  ]
+  ],
+  "devDependencies": {
+    "wsrun": "^5.2.0"
+  }
 }
