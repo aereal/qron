@@ -5,6 +5,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
+    "bootstrap": "lerna bootstrap",
     "test": "lerna run test"
   },
   "workspaces": [

@@ -40,5 +40,7 @@ jobs:
           node-version: '12.x'
       - name: install
         run: yarn install --frozen-lockfile
+      - name: bootstrap
+        run: yarn bootstrap
       - name: test
         run: yarn test
