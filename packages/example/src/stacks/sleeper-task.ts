@@ -10,7 +10,7 @@ import { ITable } from "@aws-cdk/aws-dynamodb";
 import { Task } from "@aws-cdk/aws-stepfunctions";
 import { InvokeFunction } from "@aws-cdk/aws-stepfunctions-tasks";
 import { Rule, Schedule } from "@aws-cdk/aws-events";
-import { ScheduledTask } from "../constructs/scheduled-task";
+import { ScheduledTask } from "@aereal/qron";
 
 interface SleeperTaskStackProps extends StackProps {
   readonly lockTable: ITable;
