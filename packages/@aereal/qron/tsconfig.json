@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.dist.json",
+  "compilerOptions": {
+    "noEmit": true
+  },
+  "include": [
+    "test"
+  ]
+}
