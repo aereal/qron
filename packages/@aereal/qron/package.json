@@ -1,0 +1,8 @@
+{
+  "author": "aereal <aereal@aereal.org>",
+  "license": "MIT",
+  "main": "index.js",
+  "name": "qron",
+  "repository": "git@github.com:aereal/qron.git",
+  "version": "0.0.1"
+}

@@ -8,7 +8,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/aereal/qron/sleeper"
+	"github.com/aereal/qron/packages/example/sleeper"
 )
 
 func main() {
