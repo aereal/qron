@@ -4,7 +4,9 @@
   "author": "aereal <aereal@aereal.org>",
   "license": "MIT",
   "private": true,
-  "scripts": {},
+  "scripts": {
+    "test": "wsrun -c test"
+  },
   "workspaces": [
     "packages/*",
     "packages/@aereal/*"
