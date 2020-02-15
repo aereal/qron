@@ -67,7 +67,8 @@
     "typescript": "^3.7.4"
   },
   "scripts": {
-    "lint": "eslint --ext .ts src/"
+    "lint": "eslint --ext .ts src/",
+    "test": "jest"
   },
   "prettier": {
     "trailingComma": "es5"
@@ -127,5 +128,22 @@
       "import/first": 1,
       "import/order": 2
     }
+  },
+  "jest": {
+    "roots": [
+      "<rootDir>/src",
+      "<rootDir>/test"
+    ],
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json"
+    ]
   }
 }
