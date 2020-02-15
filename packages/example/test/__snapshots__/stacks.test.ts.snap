@@ -1,0 +1,913 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Stacks Stack qron-ecr-repo 1`] = `
+Object {
+  "Outputs": Object {
+    "ExportsOutputFnGetAttQronRepository37AAE7DEArn2BE563AD": Object {
+      "Export": Object {
+        "Name": "qron-ecr-repo:ExportsOutputFnGetAttQronRepository37AAE7DEArn2BE563AD",
+      },
+      "Value": Object {
+        "Fn::GetAtt": Array [
+          "QronRepository37AAE7DE",
+          "Arn",
+        ],
+      },
+    },
+    "ExportsOutputRefQronRepository37AAE7DE83BB8B9F": Object {
+      "Export": Object {
+        "Name": "qron-ecr-repo:ExportsOutputRefQronRepository37AAE7DE83BB8B9F",
+      },
+      "Value": Object {
+        "Ref": "QronRepository37AAE7DE",
+      },
+    },
+  },
+  "Resources": Object {
+    "QronRepository37AAE7DE": Object {
+      "DeletionPolicy": "Retain",
+      "Type": "AWS::ECR::Repository",
+      "UpdateReplacePolicy": "Retain",
+    },
+  },
+}
+`;
+
+exports[`Stacks Stack qron-lambda-functions 1`] = `
+Object {
+  "Parameters": Object {
+    "AssetParameters1ebc9d3ac2033816c4abb63e4afd69d350b4aba8704cc9236b82ea520b74f4b0ArtifactHash4A934180": Object {
+      "Description": "Artifact hash for asset \\"1ebc9d3ac2033816c4abb63e4afd69d350b4aba8704cc9236b82ea520b74f4b0\\"",
+      "Type": "String",
+    },
+    "AssetParameters1ebc9d3ac2033816c4abb63e4afd69d350b4aba8704cc9236b82ea520b74f4b0S3Bucket5EA66AEF": Object {
+      "Description": "S3 bucket for asset \\"1ebc9d3ac2033816c4abb63e4afd69d350b4aba8704cc9236b82ea520b74f4b0\\"",
+      "Type": "String",
+    },
+    "AssetParameters1ebc9d3ac2033816c4abb63e4afd69d350b4aba8704cc9236b82ea520b74f4b0S3VersionKeyD171B821": Object {
+      "Description": "S3 key for asset version \\"1ebc9d3ac2033816c4abb63e4afd69d350b4aba8704cc9236b82ea520b74f4b0\\"",
+      "Type": "String",
+    },
+  },
+  "Resources": Object {
+    "SleepFunction0243A416": Object {
+      "DependsOn": Array [
+        "SleepFunctionServiceRoleDefaultPolicy77016FEF",
+        "SleepFunctionServiceRole7E150B9F",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParameters1ebc9d3ac2033816c4abb63e4afd69d350b4aba8704cc9236b82ea520b74f4b0S3Bucket5EA66AEF",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters1ebc9d3ac2033816c4abb63e4afd69d350b4aba8704cc9236b82ea520b74f4b0S3VersionKeyD171B821",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters1ebc9d3ac2033816c4abb63e4afd69d350b4aba8704cc9236b82ea520b74f4b0S3VersionKeyD171B821",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Handler": "sleep",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "SleepFunctionServiceRole7E150B9F",
+            "Arn",
+          ],
+        },
+        "Runtime": "go1.x",
+        "Timeout": 600,
+        "TracingConfig": Object {
+          "Mode": "Active",
+        },
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "SleepFunctionServiceRole7E150B9F": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "SleepFunctionServiceRoleDefaultPolicy77016FEF": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
+                "xray:PutTraceSegments",
+                "xray:PutTelemetryRecords",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "SleepFunctionServiceRoleDefaultPolicy77016FEF",
+        "Roles": Array [
+          Object {
+            "Ref": "SleepFunctionServiceRole7E150B9F",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+  },
+}
+`;
+
+exports[`Stacks Stack qron-lock-table 1`] = `
+Object {
+  "Outputs": Object {
+    "ExportsOutputFnGetAttNewLockTableB8F3FB45Arn6F37C0C8": Object {
+      "Export": Object {
+        "Name": "qron-lock-table:ExportsOutputFnGetAttNewLockTableB8F3FB45Arn6F37C0C8",
+      },
+      "Value": Object {
+        "Fn::GetAtt": Array [
+          "NewLockTableB8F3FB45",
+          "Arn",
+        ],
+      },
+    },
+    "ExportsOutputRefNewLockTableB8F3FB458E1EBBFF": Object {
+      "Export": Object {
+        "Name": "qron-lock-table:ExportsOutputRefNewLockTableB8F3FB458E1EBBFF",
+      },
+      "Value": Object {
+        "Ref": "NewLockTableB8F3FB45",
+      },
+    },
+  },
+  "Resources": Object {
+    "NewLockTableB8F3FB45": Object {
+      "DeletionPolicy": "Retain",
+      "Properties": Object {
+        "AttributeDefinitions": Array [
+          Object {
+            "AttributeName": "taskName",
+            "AttributeType": "S",
+          },
+        ],
+        "KeySchema": Array [
+          Object {
+            "AttributeName": "taskName",
+            "KeyType": "HASH",
+          },
+        ],
+        "ProvisionedThroughput": Object {
+          "ReadCapacityUnits": 5,
+          "WriteCapacityUnits": 5,
+        },
+      },
+      "Type": "AWS::DynamoDB::Table",
+      "UpdateReplacePolicy": "Retain",
+    },
+  },
+}
+`;
+
+exports[`Stacks Stack qron-task-sleeper 1`] = `
+Object {
+  "Parameters": Object {
+    "AssetParameters1ebc9d3ac2033816c4abb63e4afd69d350b4aba8704cc9236b82ea520b74f4b0ArtifactHash4A934180": Object {
+      "Description": "Artifact hash for asset \\"1ebc9d3ac2033816c4abb63e4afd69d350b4aba8704cc9236b82ea520b74f4b0\\"",
+      "Type": "String",
+    },
+    "AssetParameters1ebc9d3ac2033816c4abb63e4afd69d350b4aba8704cc9236b82ea520b74f4b0S3Bucket5EA66AEF": Object {
+      "Description": "S3 bucket for asset \\"1ebc9d3ac2033816c4abb63e4afd69d350b4aba8704cc9236b82ea520b74f4b0\\"",
+      "Type": "String",
+    },
+    "AssetParameters1ebc9d3ac2033816c4abb63e4afd69d350b4aba8704cc9236b82ea520b74f4b0S3VersionKeyD171B821": Object {
+      "Description": "S3 key for asset version \\"1ebc9d3ac2033816c4abb63e4afd69d350b4aba8704cc9236b82ea520b74f4b0\\"",
+      "Type": "String",
+    },
+  },
+  "Resources": Object {
+    "RunEveryHourRule04806ED3": Object {
+      "Properties": Object {
+        "ScheduleExpression": "cron(0/10 * ? * MON-FRI *)",
+        "State": "ENABLED",
+        "Targets": Array [
+          Object {
+            "Arn": Object {
+              "Ref": "SleeperTaskStateMachineA76E058D",
+            },
+            "Id": "Target0",
+            "RoleArn": Object {
+              "Fn::GetAtt": Array [
+                "SleeperTaskStateMachineEventsRoleBB4B23B3",
+                "Arn",
+              ],
+            },
+          },
+        ],
+      },
+      "Type": "AWS::Events::Rule",
+    },
+    "SleepFunction0243A416": Object {
+      "DependsOn": Array [
+        "SleepFunctionServiceRoleDefaultPolicy77016FEF",
+        "SleepFunctionServiceRole7E150B9F",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParameters1ebc9d3ac2033816c4abb63e4afd69d350b4aba8704cc9236b82ea520b74f4b0S3Bucket5EA66AEF",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters1ebc9d3ac2033816c4abb63e4afd69d350b4aba8704cc9236b82ea520b74f4b0S3VersionKeyD171B821",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters1ebc9d3ac2033816c4abb63e4afd69d350b4aba8704cc9236b82ea520b74f4b0S3VersionKeyD171B821",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Handler": "sleep",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "SleepFunctionServiceRole7E150B9F",
+            "Arn",
+          ],
+        },
+        "Runtime": "go1.x",
+        "Timeout": 600,
+        "TracingConfig": Object {
+          "Mode": "Active",
+        },
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "SleepFunctionServiceRole7E150B9F": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "SleepFunctionServiceRoleDefaultPolicy77016FEF": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
+                "xray:PutTraceSegments",
+                "xray:PutTelemetryRecords",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "SleepFunctionServiceRoleDefaultPolicy77016FEF",
+        "Roles": Array [
+          Object {
+            "Ref": "SleepFunctionServiceRole7E150B9F",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "SleeperTaskStateMachineA76E058D": Object {
+      "DependsOn": Array [
+        "SleeperTaskStateMachineRoleDefaultPolicy26176C49",
+        "SleeperTaskStateMachineRoleA508B81E",
+      ],
+      "Properties": Object {
+        "DefinitionString": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "{\\"StartAt\\":\\"GetLock\\",\\"States\\":{\\"GetLock\\":{\\"Next\\":\\"CheckLock\\",\\"Parameters\\":{\\"TableName\\":\\"",
+              Object {
+                "Fn::ImportValue": "qron-lock-table:ExportsOutputRefNewLockTableB8F3FB458E1EBBFF",
+              },
+              "\\",\\"Key\\":{\\"taskName\\":{\\"S\\":\\"sleeper\\"}},\\"ExpressionAttributeValues\\":{\\":default\\":{\\"N\\":\\"0\\"},\\":amount\\":{\\"N\\":\\"1\\"}},\\"UpdateExpression\\":\\"SET handledCount = if_not_exists(handledCount, :default) + :amount\\",\\"ReturnValues\\":\\"ALL_NEW\\"},\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:aws:states:::dynamodb:updateItem\\",\\"ResultPath\\":\\"$.Lock\\"},\\"CheckLock\\":{\\"Type\\":\\"Choice\\",\\"Choices\\":[{\\"Variable\\":\\"$.Lock.Attributes.handledCount.N\\",\\"StringEquals\\":\\"1\\",\\"Next\\":\\"InvokeFunction\\"}],\\"Default\\":\\"FailedLockFreed\\"},\\"FailedLockFreed\\":{\\"Next\\":\\"Finite\\",\\"Parameters\\":{\\"TableName\\":\\"",
+              Object {
+                "Fn::ImportValue": "qron-lock-table:ExportsOutputRefNewLockTableB8F3FB458E1EBBFF",
+              },
+              "\\",\\"Key\\":{\\"taskName\\":{\\"S\\":\\"sleeper\\"}},\\"ExpressionAttributeValues\\":{\\":amount\\":{\\"N\\":\\"1\\"}},\\"UpdateExpression\\":\\"SET handledCount = handledCount - :amount\\",\\"ReturnValues\\":\\"ALL_NEW\\"},\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:aws:states:::dynamodb:updateItem\\"},\\"Finite\\":{\\"Type\\":\\"Fail\\"},\\"InvokeFunction\\":{\\"Next\\":\\"SuccessFreeLock\\",\\"Type\\":\\"Task\\",\\"Resource\\":\\"",
+              Object {
+                "Fn::GetAtt": Array [
+                  "SleepFunction0243A416",
+                  "Arn",
+                ],
+              },
+              "\\"},\\"SuccessFreeLock\\":{\\"Next\\":\\"Succeed\\",\\"Parameters\\":{\\"TableName\\":\\"",
+              Object {
+                "Fn::ImportValue": "qron-lock-table:ExportsOutputRefNewLockTableB8F3FB458E1EBBFF",
+              },
+              "\\",\\"Key\\":{\\"taskName\\":{\\"S\\":\\"sleeper\\"}},\\"ExpressionAttributeValues\\":{\\":amount\\":{\\"N\\":\\"1\\"}},\\"UpdateExpression\\":\\"SET handledCount = handledCount - :amount\\",\\"ReturnValues\\":\\"ALL_NEW\\"},\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:aws:states:::dynamodb:updateItem\\"},\\"Succeed\\":{\\"Type\\":\\"Succeed\\"}}}",
+            ],
+          ],
+        },
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "SleeperTaskStateMachineRoleA508B81E",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::StepFunctions::StateMachine",
+    },
+    "SleeperTaskStateMachineEventsRoleBB4B23B3": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "events.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "SleeperTaskStateMachineEventsRoleDefaultPolicy2CCDAA33": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "states:StartExecution",
+              "Effect": "Allow",
+              "Resource": Object {
+                "Ref": "SleeperTaskStateMachineA76E058D",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "SleeperTaskStateMachineEventsRoleDefaultPolicy2CCDAA33",
+        "Roles": Array [
+          Object {
+            "Ref": "SleeperTaskStateMachineEventsRoleBB4B23B3",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "SleeperTaskStateMachineRoleA508B81E": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "states.ap-northeast-1.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "SleeperTaskStateMachineRoleDefaultPolicy26176C49": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "dynamodb:UpdateItem",
+              "Effect": "Allow",
+              "Resource": Object {
+                "Fn::ImportValue": "qron-lock-table:ExportsOutputFnGetAttNewLockTableB8F3FB45Arn6F37C0C8",
+              },
+            },
+            Object {
+              "Action": "lambda:InvokeFunction",
+              "Effect": "Allow",
+              "Resource": Object {
+                "Fn::GetAtt": Array [
+                  "SleepFunction0243A416",
+                  "Arn",
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "SleeperTaskStateMachineRoleDefaultPolicy26176C49",
+        "Roles": Array [
+          Object {
+            "Ref": "SleeperTaskStateMachineRoleA508B81E",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+  },
+}
+`;
+
+exports[`Stacks Stack qron-task-sleeper-ecs 1`] = `
+Object {
+  "Resources": Object {
+    "ClusterEB0386A7": Object {
+      "Type": "AWS::ECS::Cluster",
+    },
+    "MainStateSecurityGroup04FBAE53": Object {
+      "Properties": Object {
+        "GroupDescription": "qron-task-sleeper-ecs/MainState/SecurityGroup",
+        "SecurityGroupEgress": Array [
+          Object {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow all outbound traffic by default",
+            "IpProtocol": "-1",
+          },
+        ],
+        "VpcId": "vpc-12345",
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
+    "RunEveryHourRule04806ED3": Object {
+      "Properties": Object {
+        "ScheduleExpression": "cron(0/10 * ? * MON-FRI *)",
+        "State": "ENABLED",
+        "Targets": Array [
+          Object {
+            "Arn": Object {
+              "Ref": "SleeperEcsTaskStateMachineB21333D2",
+            },
+            "Id": "Target0",
+            "RoleArn": Object {
+              "Fn::GetAtt": Array [
+                "SleeperEcsTaskStateMachineEventsRoleA451BE82",
+                "Arn",
+              ],
+            },
+          },
+        ],
+      },
+      "Type": "AWS::Events::Rule",
+    },
+    "SleeperEcsTaskStateMachineB21333D2": Object {
+      "DependsOn": Array [
+        "SleeperEcsTaskStateMachineRoleDefaultPolicyDA7C4C89",
+        "SleeperEcsTaskStateMachineRole02E1B7F2",
+      ],
+      "Properties": Object {
+        "DefinitionString": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "{\\"StartAt\\":\\"GetLock\\",\\"States\\":{\\"GetLock\\":{\\"Next\\":\\"CheckLock\\",\\"Parameters\\":{\\"TableName\\":\\"",
+              Object {
+                "Fn::ImportValue": "qron-lock-table:ExportsOutputRefNewLockTableB8F3FB458E1EBBFF",
+              },
+              "\\",\\"Key\\":{\\"taskName\\":{\\"S\\":\\"sleeper-ecs\\"}},\\"ExpressionAttributeValues\\":{\\":default\\":{\\"N\\":\\"0\\"},\\":amount\\":{\\"N\\":\\"1\\"}},\\"UpdateExpression\\":\\"SET handledCount = if_not_exists(handledCount, :default) + :amount\\",\\"ReturnValues\\":\\"ALL_NEW\\"},\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:aws:states:::dynamodb:updateItem\\",\\"ResultPath\\":\\"$.Lock\\"},\\"CheckLock\\":{\\"Type\\":\\"Choice\\",\\"Choices\\":[{\\"Variable\\":\\"$.Lock.Attributes.handledCount.N\\",\\"StringEquals\\":\\"1\\",\\"Next\\":\\"MainState\\"}],\\"Default\\":\\"FailedLockFreed\\"},\\"FailedLockFreed\\":{\\"Next\\":\\"Finite\\",\\"Parameters\\":{\\"TableName\\":\\"",
+              Object {
+                "Fn::ImportValue": "qron-lock-table:ExportsOutputRefNewLockTableB8F3FB458E1EBBFF",
+              },
+              "\\",\\"Key\\":{\\"taskName\\":{\\"S\\":\\"sleeper-ecs\\"}},\\"ExpressionAttributeValues\\":{\\":amount\\":{\\"N\\":\\"1\\"}},\\"UpdateExpression\\":\\"SET handledCount = handledCount - :amount\\",\\"ReturnValues\\":\\"ALL_NEW\\"},\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:aws:states:::dynamodb:updateItem\\"},\\"Finite\\":{\\"Type\\":\\"Fail\\"},\\"MainState\\":{\\"Next\\":\\"SuccessFreeLock\\",\\"Parameters\\":{\\"Cluster\\":\\"",
+              Object {
+                "Fn::GetAtt": Array [
+                  "ClusterEB0386A7",
+                  "Arn",
+                ],
+              },
+              "\\",\\"TaskDefinition\\":\\"",
+              Object {
+                "Ref": "SleeperTaskDefinitionD35C9706",
+              },
+              "\\",\\"NetworkConfiguration\\":{\\"AwsvpcConfiguration\\":{\\"Subnets\\":[\\"p-12345\\",\\"p-67890\\"],\\"SecurityGroups\\":[\\"",
+              Object {
+                "Fn::GetAtt": Array [
+                  "MainStateSecurityGroup04FBAE53",
+                  "GroupId",
+                ],
+              },
+              "\\"]}},\\"Overrides\\":{\\"ContainerOverrides\\":[{\\"Name\\":\\"main\\",\\"Command\\":[\\"-wait\\",\\"3s\\"]}]},\\"LaunchType\\":\\"FARGATE\\"},\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":states:::ecs:runTask.sync\\"},\\"SuccessFreeLock\\":{\\"Next\\":\\"Succeed\\",\\"Parameters\\":{\\"TableName\\":\\"",
+              Object {
+                "Fn::ImportValue": "qron-lock-table:ExportsOutputRefNewLockTableB8F3FB458E1EBBFF",
+              },
+              "\\",\\"Key\\":{\\"taskName\\":{\\"S\\":\\"sleeper-ecs\\"}},\\"ExpressionAttributeValues\\":{\\":amount\\":{\\"N\\":\\"1\\"}},\\"UpdateExpression\\":\\"SET handledCount = handledCount - :amount\\",\\"ReturnValues\\":\\"ALL_NEW\\"},\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:aws:states:::dynamodb:updateItem\\"},\\"Succeed\\":{\\"Type\\":\\"Succeed\\"}}}",
+            ],
+          ],
+        },
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "SleeperEcsTaskStateMachineRole02E1B7F2",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::StepFunctions::StateMachine",
+    },
+    "SleeperEcsTaskStateMachineEventsRoleA451BE82": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "events.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "SleeperEcsTaskStateMachineEventsRoleDefaultPolicyDE03CBBA": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "states:StartExecution",
+              "Effect": "Allow",
+              "Resource": Object {
+                "Ref": "SleeperEcsTaskStateMachineB21333D2",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "SleeperEcsTaskStateMachineEventsRoleDefaultPolicyDE03CBBA",
+        "Roles": Array [
+          Object {
+            "Ref": "SleeperEcsTaskStateMachineEventsRoleA451BE82",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "SleeperEcsTaskStateMachineRole02E1B7F2": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "states.ap-northeast-1.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "SleeperEcsTaskStateMachineRoleDefaultPolicyDA7C4C89": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "dynamodb:UpdateItem",
+              "Effect": "Allow",
+              "Resource": Object {
+                "Fn::ImportValue": "qron-lock-table:ExportsOutputFnGetAttNewLockTableB8F3FB45Arn6F37C0C8",
+              },
+            },
+            Object {
+              "Action": "ecs:RunTask",
+              "Effect": "Allow",
+              "Resource": Object {
+                "Ref": "SleeperTaskDefinitionD35C9706",
+              },
+            },
+            Object {
+              "Action": Array [
+                "ecs:StopTask",
+                "ecs:DescribeTasks",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+            Object {
+              "Action": "iam:PassRole",
+              "Effect": "Allow",
+              "Resource": Array [
+                Object {
+                  "Fn::GetAtt": Array [
+                    "SleeperTaskDefinitionTaskRole1744E03C",
+                    "Arn",
+                  ],
+                },
+                Object {
+                  "Fn::GetAtt": Array [
+                    "SleeperTaskDefinitionExecutionRoleE9F85A39",
+                    "Arn",
+                  ],
+                },
+              ],
+            },
+            Object {
+              "Action": Array [
+                "events:PutTargets",
+                "events:PutRule",
+                "events:DescribeRule",
+              ],
+              "Effect": "Allow",
+              "Resource": Object {
+                "Fn::Join": Array [
+                  "",
+                  Array [
+                    "arn:",
+                    Object {
+                      "Ref": "AWS::Partition",
+                    },
+                    ":events:ap-northeast-1:dummy:rule/StepFunctionsGetEventsForECSTaskRule",
+                  ],
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "SleeperEcsTaskStateMachineRoleDefaultPolicyDA7C4C89",
+        "Roles": Array [
+          Object {
+            "Ref": "SleeperEcsTaskStateMachineRole02E1B7F2",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "SleeperTaskDefinitionD35C9706": Object {
+      "Properties": Object {
+        "ContainerDefinitions": Array [
+          Object {
+            "Essential": true,
+            "Image": Object {
+              "Fn::Join": Array [
+                "",
+                Array [
+                  Object {
+                    "Fn::Select": Array [
+                      4,
+                      Object {
+                        "Fn::Split": Array [
+                          ":",
+                          Object {
+                            "Fn::ImportValue": "qron-ecr-repo:ExportsOutputFnGetAttQronRepository37AAE7DEArn2BE563AD",
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                  ".dkr.ecr.",
+                  Object {
+                    "Fn::Select": Array [
+                      3,
+                      Object {
+                        "Fn::Split": Array [
+                          ":",
+                          Object {
+                            "Fn::ImportValue": "qron-ecr-repo:ExportsOutputFnGetAttQronRepository37AAE7DEArn2BE563AD",
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                  ".",
+                  Object {
+                    "Ref": "AWS::URLSuffix",
+                  },
+                  "/",
+                  Object {
+                    "Fn::ImportValue": "qron-ecr-repo:ExportsOutputRefQronRepository37AAE7DE83BB8B9F",
+                  },
+                  ":latest",
+                ],
+              ],
+            },
+            "LogConfiguration": Object {
+              "LogDriver": "awslogs",
+              "Options": Object {
+                "awslogs-group": Object {
+                  "Ref": "TaskLogGroup933EA2D6",
+                },
+                "awslogs-region": "ap-northeast-1",
+                "awslogs-stream-prefix": "main",
+              },
+            },
+            "Name": "main",
+          },
+        ],
+        "Cpu": "256",
+        "ExecutionRoleArn": Object {
+          "Fn::GetAtt": Array [
+            "SleeperTaskDefinitionExecutionRoleE9F85A39",
+            "Arn",
+          ],
+        },
+        "Family": "qrontasksleeperecsSleeperTaskDefinitionB963756F",
+        "Memory": "512",
+        "NetworkMode": "awsvpc",
+        "RequiresCompatibilities": Array [
+          "FARGATE",
+        ],
+        "TaskRoleArn": Object {
+          "Fn::GetAtt": Array [
+            "SleeperTaskDefinitionTaskRole1744E03C",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::ECS::TaskDefinition",
+    },
+    "SleeperTaskDefinitionExecutionRoleDefaultPolicy742750F4": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
+                "ecr:BatchCheckLayerAvailability",
+                "ecr:GetDownloadUrlForLayer",
+                "ecr:BatchGetImage",
+              ],
+              "Effect": "Allow",
+              "Resource": Object {
+                "Fn::ImportValue": "qron-ecr-repo:ExportsOutputFnGetAttQronRepository37AAE7DEArn2BE563AD",
+              },
+            },
+            Object {
+              "Action": "ecr:GetAuthorizationToken",
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+            Object {
+              "Action": Array [
+                "logs:CreateLogStream",
+                "logs:PutLogEvents",
+              ],
+              "Effect": "Allow",
+              "Resource": Object {
+                "Fn::GetAtt": Array [
+                  "TaskLogGroup933EA2D6",
+                  "Arn",
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "SleeperTaskDefinitionExecutionRoleDefaultPolicy742750F4",
+        "Roles": Array [
+          Object {
+            "Ref": "SleeperTaskDefinitionExecutionRoleE9F85A39",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "SleeperTaskDefinitionExecutionRoleE9F85A39": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "ecs-tasks.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "SleeperTaskDefinitionTaskRole1744E03C": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "ecs-tasks.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "TaskLogGroup933EA2D6": Object {
+      "DeletionPolicy": "Retain",
+      "Properties": Object {
+        "RetentionInDays": 7,
+      },
+      "Type": "AWS::Logs::LogGroup",
+      "UpdateReplacePolicy": "Retain",
+    },
+  },
+}
+`;

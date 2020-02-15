@@ -23,6 +23,14 @@ export class QronApp extends App {
     });
   };
 
+  static newForTest = (): QronApp =>
+    new QronApp({
+      env: {
+        account: "dummy",
+        region: "ap-northeast-1",
+      },
+    });
+
   private constructor(props: QronAppProps) {
     super(props);
 
