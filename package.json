@@ -12,6 +12,7 @@
     "packages/@aereal/*"
   ],
   "devDependencies": {
+    "lerna": "^3.20.2",
     "wsrun": "^5.2.0"
   }
 }
