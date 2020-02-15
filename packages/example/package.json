@@ -69,7 +69,8 @@
   },
   "scripts": {
     "lint": "eslint --ext .ts src/",
-    "test": "jest"
+    "test": "jest",
+    "build": "tsc -p tsconfig.build.json --noEmit"
   },
   "prettier": {
     "trailingComma": "es5"
