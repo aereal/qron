@@ -7,7 +7,7 @@ export class EcrRepoStack extends Stack {
   constructor(scope: Construct, id: string, props: StackProps) {
     super(scope, id, props);
 
-    this.repository = new Repository(this, "NeocronRepository", {
+    this.repository = new Repository(this, "QronRepository", {
       repositoryName: PhysicalName.GENERATE_IF_NEEDED,
     });
   }

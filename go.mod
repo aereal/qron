@@ -1,4 +1,4 @@
-module github.com/aereal/neocron
+module github.com/aereal/qron
 
 go 1.13
 

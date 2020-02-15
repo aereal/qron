@@ -5,7 +5,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/aereal/neocron/sleeper"
+	"github.com/aereal/qron/sleeper"
 	"github.com/aws/aws-lambda-go/lambda"
 )
 

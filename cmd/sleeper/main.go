@@ -8,7 +8,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/aereal/neocron/sleeper"
+	"github.com/aereal/qron/sleeper"
 )
 
 func main() {
