@@ -1,5 +1,50 @@
 {
   "extends": [
-    "config:base"
+    "config:base",
+    ":masterIssue",
+    ":prConcurrentLimit10",
+    ":separateMultipleMajorReleases",
+    ":timezone(Asia/Tokyo)"
+  ],
+  "ignorePresets": [
+    ":prConcurrentLimit20"
+  ],
+  "labels": [
+    "renovate"
+  ],
+  "postUpdateOptions": [
+    "yarnDedupeHighest",
+    "gomodTidy"
+  ],
+  "npm": {
+    "rangeStrategy": "bump"
+  },
+  "pin": {
+    "automerge": true
+  },
+  "packageRules": [
+    {
+      "packagePatterns": [
+        "^@types/"
+      ],
+      "automerge": true,
+      "major": {
+        "automerge": false
+      }
+    }
+  ],
+  "packageRules": [
+    {
+      "groupName": "linters",
+      "extends": [
+        "packages:linters"
+      ],
+      "packageNames": [
+        "prettier"
+      ],
+      "packagePatterns": [
+        "^@typescript-eslint/"
+      ]
+    }
   ]
 }
