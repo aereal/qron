@@ -31,9 +31,7 @@
       "major": {
         "automerge": false
       }
-    }
-  ],
-  "packageRules": [
+    },
     {
       "groupName": "linters",
       "extends": [
