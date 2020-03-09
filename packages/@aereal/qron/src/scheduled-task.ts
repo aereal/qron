@@ -27,12 +27,7 @@ export class ScheduledTask extends Construct {
   constructor(scope: Construct, id: string, props: ScheduledTaskProps) {
     super(scope, id);
 
-    const {
-      lockTable,
-      invokeMain: taskFunction,
-      taskName,
-      invocationRule,
-    } = props;
+    const { lockTable, invokeMain, taskName, invocationRule } = props;
 
     const lockKey: AttributeValue = {
       name: keyTaskName,
@@ -98,7 +93,7 @@ export class ScheduledTask extends Construct {
     const stateMachine = new StateMachine(this, "StateMachine", {
       definition: getLock.next(
         checkLock(
-          taskFunction.next(
+          invokeMain.next(
             freeLock("SuccessFreeLock").next(new Succeed(this, "Succeed"))
           )
         )
