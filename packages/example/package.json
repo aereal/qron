@@ -1,13 +1,13 @@
 {
   "name": "example",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "index.js",
   "repository": "git@github.com:aereal/qron.git",
   "author": "aereal <aereal@aereal.org>",
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "@aereal/qron": "^0.0.2",
+    "@aereal/qron": "^0.0.3",
     "@aws-cdk/assets": "1.27.0",
     "@aws-cdk/aws-apigateway": "1.27.0",
     "@aws-cdk/aws-applicationautoscaling": "1.27.0",
