@@ -65,7 +65,7 @@ Object {
               Object {
                 "Ref": "LockTableB9DACF42",
               },
-              "\\",\\"Key\\":{\\"taskName\\":{\\"S\\":\\"test-task\\"}},\\"ExpressionAttributeValues\\":{\\":amount\\":{\\"N\\":\\"1\\"}},\\"UpdateExpression\\":\\"SET handledCount = handledCount - :amount\\",\\"ReturnValues\\":\\"ALL_NEW\\"},\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:aws:states:::dynamodb:updateItem\\"},\\"Finite\\":{\\"Type\\":\\"Fail\\"},\\"MainStack\\":{\\"Next\\":\\"SuccessFreeLock\\",\\"Parameters\\":{\\"TopicArn\\":\\"",
+              "\\",\\"Key\\":{\\"taskName\\":{\\"S\\":\\"test-task\\"}},\\"ExpressionAttributeValues\\":{\\":amount\\":{\\"N\\":\\"1\\"}},\\"UpdateExpression\\":\\"SET handledCount = handledCount - :amount\\",\\"ReturnValues\\":\\"ALL_NEW\\"},\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:aws:states:::dynamodb:updateItem\\"},\\"Finite\\":{\\"Type\\":\\"Fail\\"},\\"MainStack\\":{\\"Next\\":\\"SuccessFreeLock\\",\\"Catch\\":[{\\"ErrorEquals\\":[\\"States.ALL\\"],\\"Next\\":\\"AssumeLockFreed\\"}],\\"Parameters\\":{\\"TopicArn\\":\\"",
               Object {
                 "Ref": "TopicBFC7AF6E",
               },
@@ -77,7 +77,11 @@ Object {
               Object {
                 "Ref": "LockTableB9DACF42",
               },
-              "\\",\\"Key\\":{\\"taskName\\":{\\"S\\":\\"test-task\\"}},\\"ExpressionAttributeValues\\":{\\":amount\\":{\\"N\\":\\"1\\"}},\\"UpdateExpression\\":\\"SET handledCount = handledCount - :amount\\",\\"ReturnValues\\":\\"ALL_NEW\\"},\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:aws:states:::dynamodb:updateItem\\"},\\"Succeed\\":{\\"Type\\":\\"Succeed\\"}}}",
+              "\\",\\"Key\\":{\\"taskName\\":{\\"S\\":\\"test-task\\"}},\\"ExpressionAttributeValues\\":{\\":amount\\":{\\"N\\":\\"1\\"}},\\"UpdateExpression\\":\\"SET handledCount = handledCount - :amount\\",\\"ReturnValues\\":\\"ALL_NEW\\"},\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:aws:states:::dynamodb:updateItem\\"},\\"Succeed\\":{\\"Type\\":\\"Succeed\\"},\\"AssumeLockFreed\\":{\\"End\\":true,\\"Parameters\\":{\\"TableName\\":\\"",
+              Object {
+                "Ref": "LockTableB9DACF42",
+              },
+              "\\",\\"Key\\":{\\"taskName\\":{\\"S\\":\\"test-task\\"}},\\"ExpressionAttributeValues\\":{\\":amount\\":{\\"N\\":\\"1\\"}},\\"UpdateExpression\\":\\"SET handledCount = handledCount - :amount\\",\\"ReturnValues\\":\\"ALL_NEW\\"},\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:aws:states:::dynamodb:updateItem\\"}}}",
             ],
           ],
         },

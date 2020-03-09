@@ -92,9 +92,11 @@ export class ScheduledTask extends Construct {
     const stateMachine = new StateMachine(this, "StateMachine", {
       definition: getLock.next(
         checkLock(
-          invokeMain.next(
-            freeLock("SuccessFreeLock").next(new Succeed(this, "Succeed"))
-          )
+          invokeMain
+            .addCatch(freeLock("AssumeLockFreed"))
+            .next(
+              freeLock("SuccessFreeLock").next(new Succeed(this, "Succeed"))
+            )
         )
       ),
     });
