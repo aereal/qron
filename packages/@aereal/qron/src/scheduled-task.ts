@@ -7,7 +7,6 @@ import {
   Condition,
   IChainable,
   Fail,
-  INextable,
   Succeed,
 } from "@aws-cdk/aws-stepfunctions";
 import { Rule } from "@aws-cdk/aws-events";
@@ -16,7 +15,7 @@ import { AttributeValue, UpdateItemTask } from "./dynamodb-sfn-task";
 
 export interface ScheduledTaskProps {
   readonly lockTable: ITable;
-  readonly invokeMain: INextable;
+  readonly invokeMain: Task;
   readonly taskName: string;
   readonly invocationRule: Rule;
 }
