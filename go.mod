@@ -2,4 +2,4 @@ module github.com/aereal/qron
 
 go 1.13
 
-require github.com/aws/aws-lambda-go v1.13.3
+require github.com/aws/aws-lambda-go v1.15.0
