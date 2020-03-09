@@ -114,5 +114,8 @@
   },
   "prettier": {
     "trailingComma": "es5"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
