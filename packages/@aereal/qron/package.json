@@ -5,7 +5,7 @@
   "types": "built/index.d.ts",
   "name": "@aereal/qron",
   "repository": "git@github.com:aereal/qron.git",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "scripts": {
     "test": "jest",
     "build": "tsc -p tsconfig.build.json"
