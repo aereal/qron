@@ -12,7 +12,7 @@ import {
 } from "@aws-cdk/aws-stepfunctions";
 import { AttributeValue, UpdateItemTask } from "./dynamodb-sfn-task";
 
-export interface ScheduledTaskProps {
+export interface TransactionalTaskProps {
   readonly lockTable: ITable;
   readonly invokeMain: Task;
   readonly taskName: string;
@@ -23,7 +23,7 @@ const keyTaskName = "taskName";
 export class TransactionalTask extends Construct {
   public readonly stateMachine: IStateMachine;
 
-  constructor(scope: Construct, id: string, props: ScheduledTaskProps) {
+  constructor(scope: Construct, id: string, props: TransactionalTaskProps) {
     super(scope, id);
 
     const { lockTable, invokeMain, taskName } = props;
