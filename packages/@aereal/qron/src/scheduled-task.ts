@@ -7,7 +7,6 @@ import {
   Condition,
   IChainable,
   Fail,
-  INextable,
   Succeed,
 } from "@aws-cdk/aws-stepfunctions";
 import { Rule } from "@aws-cdk/aws-events";
@@ -16,7 +15,7 @@ import { AttributeValue, UpdateItemTask } from "./dynamodb-sfn-task";
 
 export interface ScheduledTaskProps {
   readonly lockTable: ITable;
-  readonly invokeMain: INextable;
+  readonly invokeMain: Task;
   readonly taskName: string;
   readonly invocationRule: Rule;
 }
@@ -27,12 +26,7 @@ export class ScheduledTask extends Construct {
   constructor(scope: Construct, id: string, props: ScheduledTaskProps) {
     super(scope, id);
 
-    const {
-      lockTable,
-      invokeMain: taskFunction,
-      taskName,
-      invocationRule,
-    } = props;
+    const { lockTable, invokeMain, taskName, invocationRule } = props;
 
     const lockKey: AttributeValue = {
       name: keyTaskName,
@@ -98,9 +92,11 @@ export class ScheduledTask extends Construct {
     const stateMachine = new StateMachine(this, "StateMachine", {
       definition: getLock.next(
         checkLock(
-          taskFunction.next(
-            freeLock("SuccessFreeLock").next(new Succeed(this, "Succeed"))
-          )
+          invokeMain
+            .addCatch(freeLock("AssumeLockFreed"))
+            .next(
+              freeLock("SuccessFreeLock").next(new Succeed(this, "Succeed"))
+            )
         )
       ),
     });
