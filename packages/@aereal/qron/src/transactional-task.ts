@@ -8,25 +8,25 @@ import {
   IChainable,
   Fail,
   Succeed,
+  IStateMachine,
 } from "@aws-cdk/aws-stepfunctions";
-import { Rule } from "@aws-cdk/aws-events";
-import { SfnStateMachine } from "@aws-cdk/aws-events-targets";
 import { AttributeValue, UpdateItemTask } from "./dynamodb-sfn-task";
 
 export interface ScheduledTaskProps {
   readonly lockTable: ITable;
   readonly invokeMain: Task;
   readonly taskName: string;
-  readonly invocationRule: Rule;
 }
 
 const keyTaskName = "taskName";
 
 export class TransactionalTask extends Construct {
+  public readonly stateMachine: IStateMachine;
+
   constructor(scope: Construct, id: string, props: ScheduledTaskProps) {
     super(scope, id);
 
-    const { lockTable, invokeMain, taskName, invocationRule } = props;
+    const { lockTable, invokeMain, taskName } = props;
 
     const lockKey: AttributeValue = {
       name: keyTaskName,
@@ -89,7 +89,7 @@ export class TransactionalTask extends Construct {
         )
         .otherwise(freeLock("FailedLockFreed").next(new Fail(this, "Finite")));
 
-    const stateMachine = new StateMachine(this, "StateMachine", {
+    this.stateMachine = new StateMachine(this, "StateMachine", {
       definition: getLock.next(
         checkLock(
           invokeMain
@@ -100,7 +100,5 @@ export class TransactionalTask extends Construct {
         )
       ),
     });
-
-    invocationRule.addTarget(new SfnStateMachine(stateMachine));
   }
 }
