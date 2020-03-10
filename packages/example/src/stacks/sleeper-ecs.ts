@@ -12,7 +12,8 @@ import { LogGroup, RetentionDays } from "@aws-cdk/aws-logs";
 import { Task, ServiceIntegrationPattern } from "@aws-cdk/aws-stepfunctions";
 import { RunEcsFargateTask } from "@aws-cdk/aws-stepfunctions-tasks";
 import { Rule, Schedule } from "@aws-cdk/aws-events";
-import { ScheduledTask } from "@aereal/qron";
+import { SfnStateMachine } from "@aws-cdk/aws-events-targets";
+import { TransactionalTask } from "@aereal/qron";
 
 interface SleeperEcsStackProps extends StackProps {
   readonly repository: IRepository;
@@ -49,7 +50,7 @@ export class SleeperEcsStack extends Stack {
       }),
     });
 
-    new ScheduledTask(this, "SleeperEcsTask", {
+    const task = new TransactionalTask(this, "SleeperEcsTask", {
       lockTable,
       invokeMain: new Task(this, "MainState", {
         task: new RunEcsFargateTask({
@@ -65,9 +66,10 @@ export class SleeperEcsStack extends Stack {
         }),
       }),
       taskName: "sleeper-ecs",
-      invocationRule: new Rule(this, "RunEveryHourRule", {
-        schedule: Schedule.cron({ minute: "0/10", weekDay: "MON-FRI" }),
-      }),
     });
+    const rule = new Rule(this, "RunEveryHourRule", {
+      schedule: Schedule.cron({ minute: "0/10", weekDay: "MON-FRI" }),
+    });
+    rule.addTarget(new SfnStateMachine(task.stateMachine));
   }
 }

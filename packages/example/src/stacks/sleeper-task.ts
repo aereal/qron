@@ -10,7 +10,8 @@ import { ITable } from "@aws-cdk/aws-dynamodb";
 import { Task } from "@aws-cdk/aws-stepfunctions";
 import { InvokeFunction } from "@aws-cdk/aws-stepfunctions-tasks";
 import { Rule, Schedule } from "@aws-cdk/aws-events";
-import { ScheduledTask } from "@aereal/qron";
+import { SfnStateMachine } from "@aws-cdk/aws-events-targets";
+import { TransactionalTask } from "@aereal/qron";
 
 interface SleeperTaskStackProps extends StackProps {
   readonly lockTable: ITable;
@@ -28,15 +29,16 @@ export class SleeperTaskStack extends Stack {
       runtime: Runtime.GO_1_X,
       tracing: Tracing.ACTIVE,
     });
-    new ScheduledTask(this, "SleeperTask", {
+    const task = new TransactionalTask(this, "SleeperTask", {
       lockTable: props.lockTable,
       invokeMain: new Task(this, "InvokeFunction", {
         task: new InvokeFunction(taskFunction),
       }),
       taskName: "sleeper",
-      invocationRule: new Rule(this, "RunEveryHourRule", {
-        schedule: Schedule.cron({ minute: "0/10", weekDay: "MON-FRI" }),
-      }),
     });
+    const rule = new Rule(this, "RunEveryHourRule", {
+      schedule: Schedule.cron({ minute: "0/10", weekDay: "MON-FRI" }),
+    });
+    rule.addTarget(new SfnStateMachine(task.stateMachine));
   }
 }
