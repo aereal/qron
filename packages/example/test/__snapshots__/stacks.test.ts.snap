@@ -389,7 +389,7 @@ Object {
               Object {
                 "Fn::ImportValue": "qron-lock-table:ExportsOutputRefNewLockTableB8F3FB458E1EBBFF",
               },
-              "\\",\\"Key\\":{\\"taskName\\":{\\"S\\":\\"sleeper\\"}},\\"ExpressionAttributeValues\\":{\\":amount\\":{\\"N\\":\\"1\\"}},\\"UpdateExpression\\":\\"SET handledCount = handledCount - :amount\\",\\"ReturnValues\\":\\"ALL_NEW\\"},\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:aws:states:::dynamodb:updateItem\\"},\\"Finite\\":{\\"Type\\":\\"Fail\\"},\\"InvokeFunction\\":{\\"Next\\":\\"SuccessFreeLock\\",\\"Type\\":\\"Task\\",\\"Resource\\":\\"",
+              "\\",\\"Key\\":{\\"taskName\\":{\\"S\\":\\"sleeper\\"}},\\"ExpressionAttributeValues\\":{\\":amount\\":{\\"N\\":\\"1\\"}},\\"UpdateExpression\\":\\"SET handledCount = handledCount - :amount\\",\\"ReturnValues\\":\\"ALL_NEW\\"},\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:aws:states:::dynamodb:updateItem\\"},\\"Finite\\":{\\"Type\\":\\"Fail\\"},\\"InvokeFunction\\":{\\"Next\\":\\"SuccessFreeLock\\",\\"Catch\\":[{\\"ErrorEquals\\":[\\"States.ALL\\"],\\"Next\\":\\"AssumeLockFreed\\"}],\\"Type\\":\\"Task\\",\\"Resource\\":\\"",
               Object {
                 "Fn::GetAtt": Array [
                   "SleepFunction0243A416",
@@ -400,7 +400,11 @@ Object {
               Object {
                 "Fn::ImportValue": "qron-lock-table:ExportsOutputRefNewLockTableB8F3FB458E1EBBFF",
               },
-              "\\",\\"Key\\":{\\"taskName\\":{\\"S\\":\\"sleeper\\"}},\\"ExpressionAttributeValues\\":{\\":amount\\":{\\"N\\":\\"1\\"}},\\"UpdateExpression\\":\\"SET handledCount = handledCount - :amount\\",\\"ReturnValues\\":\\"ALL_NEW\\"},\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:aws:states:::dynamodb:updateItem\\"},\\"Succeed\\":{\\"Type\\":\\"Succeed\\"}}}",
+              "\\",\\"Key\\":{\\"taskName\\":{\\"S\\":\\"sleeper\\"}},\\"ExpressionAttributeValues\\":{\\":amount\\":{\\"N\\":\\"1\\"}},\\"UpdateExpression\\":\\"SET handledCount = handledCount - :amount\\",\\"ReturnValues\\":\\"ALL_NEW\\"},\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:aws:states:::dynamodb:updateItem\\"},\\"Succeed\\":{\\"Type\\":\\"Succeed\\"},\\"AssumeLockFreed\\":{\\"End\\":true,\\"Parameters\\":{\\"TableName\\":\\"",
+              Object {
+                "Fn::ImportValue": "qron-lock-table:ExportsOutputRefNewLockTableB8F3FB458E1EBBFF",
+              },
+              "\\",\\"Key\\":{\\"taskName\\":{\\"S\\":\\"sleeper\\"}},\\"ExpressionAttributeValues\\":{\\":amount\\":{\\"N\\":\\"1\\"}},\\"UpdateExpression\\":\\"SET handledCount = handledCount - :amount\\",\\"ReturnValues\\":\\"ALL_NEW\\"},\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:aws:states:::dynamodb:updateItem\\"}}}",
             ],
           ],
         },
@@ -566,7 +570,7 @@ Object {
               Object {
                 "Fn::ImportValue": "qron-lock-table:ExportsOutputRefNewLockTableB8F3FB458E1EBBFF",
               },
-              "\\",\\"Key\\":{\\"taskName\\":{\\"S\\":\\"sleeper-ecs\\"}},\\"ExpressionAttributeValues\\":{\\":amount\\":{\\"N\\":\\"1\\"}},\\"UpdateExpression\\":\\"SET handledCount = handledCount - :amount\\",\\"ReturnValues\\":\\"ALL_NEW\\"},\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:aws:states:::dynamodb:updateItem\\"},\\"Finite\\":{\\"Type\\":\\"Fail\\"},\\"MainState\\":{\\"Next\\":\\"SuccessFreeLock\\",\\"Parameters\\":{\\"Cluster\\":\\"",
+              "\\",\\"Key\\":{\\"taskName\\":{\\"S\\":\\"sleeper-ecs\\"}},\\"ExpressionAttributeValues\\":{\\":amount\\":{\\"N\\":\\"1\\"}},\\"UpdateExpression\\":\\"SET handledCount = handledCount - :amount\\",\\"ReturnValues\\":\\"ALL_NEW\\"},\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:aws:states:::dynamodb:updateItem\\"},\\"Finite\\":{\\"Type\\":\\"Fail\\"},\\"MainState\\":{\\"Next\\":\\"SuccessFreeLock\\",\\"Catch\\":[{\\"ErrorEquals\\":[\\"States.ALL\\"],\\"Next\\":\\"AssumeLockFreed\\"}],\\"Parameters\\":{\\"Cluster\\":\\"",
               Object {
                 "Fn::GetAtt": Array [
                   "ClusterEB0386A7",
@@ -592,7 +596,11 @@ Object {
               Object {
                 "Fn::ImportValue": "qron-lock-table:ExportsOutputRefNewLockTableB8F3FB458E1EBBFF",
               },
-              "\\",\\"Key\\":{\\"taskName\\":{\\"S\\":\\"sleeper-ecs\\"}},\\"ExpressionAttributeValues\\":{\\":amount\\":{\\"N\\":\\"1\\"}},\\"UpdateExpression\\":\\"SET handledCount = handledCount - :amount\\",\\"ReturnValues\\":\\"ALL_NEW\\"},\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:aws:states:::dynamodb:updateItem\\"},\\"Succeed\\":{\\"Type\\":\\"Succeed\\"}}}",
+              "\\",\\"Key\\":{\\"taskName\\":{\\"S\\":\\"sleeper-ecs\\"}},\\"ExpressionAttributeValues\\":{\\":amount\\":{\\"N\\":\\"1\\"}},\\"UpdateExpression\\":\\"SET handledCount = handledCount - :amount\\",\\"ReturnValues\\":\\"ALL_NEW\\"},\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:aws:states:::dynamodb:updateItem\\"},\\"Succeed\\":{\\"Type\\":\\"Succeed\\"},\\"AssumeLockFreed\\":{\\"End\\":true,\\"Parameters\\":{\\"TableName\\":\\"",
+              Object {
+                "Fn::ImportValue": "qron-lock-table:ExportsOutputRefNewLockTableB8F3FB458E1EBBFF",
+              },
+              "\\",\\"Key\\":{\\"taskName\\":{\\"S\\":\\"sleeper-ecs\\"}},\\"ExpressionAttributeValues\\":{\\":amount\\":{\\"N\\":\\"1\\"}},\\"UpdateExpression\\":\\"SET handledCount = handledCount - :amount\\",\\"ReturnValues\\":\\"ALL_NEW\\"},\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:aws:states:::dynamodb:updateItem\\"}}}",
             ],
           ],
         },
