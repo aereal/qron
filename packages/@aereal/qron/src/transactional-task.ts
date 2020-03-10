@@ -22,7 +22,7 @@ export interface ScheduledTaskProps {
 
 const keyTaskName = "taskName";
 
-export class ScheduledTask extends Construct {
+export class TransactionalTask extends Construct {
   constructor(scope: Construct, id: string, props: ScheduledTaskProps) {
     super(scope, id);
 

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ScheduledTask ok 1`] = `
+exports[`TransactionalTask ok 1`] = `
 Object {
   "Resources": Object {
     "LockTableB9DACF42": Object {

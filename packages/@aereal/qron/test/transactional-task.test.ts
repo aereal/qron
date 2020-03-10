@@ -5,9 +5,9 @@ import { Task, TaskInput } from "@aws-cdk/aws-stepfunctions";
 import { PublishToTopic } from "@aws-cdk/aws-stepfunctions-tasks";
 import { Topic } from "@aws-cdk/aws-sns";
 import { SynthUtils } from "@aws-cdk/assert";
-import { ScheduledTask } from "../src";
+import { TransactionalTask } from "../src";
 
-describe("ScheduledTask", () => {
+describe("TransactionalTask", () => {
   test("ok", () => {
     const stack = new Stack();
     const lockTable = new Table(stack, "LockTable", {
@@ -17,7 +17,7 @@ describe("ScheduledTask", () => {
       },
     });
     const topic = new Topic(stack, "Topic");
-    new ScheduledTask(stack, "Task", {
+    new TransactionalTask(stack, "Task", {
       lockTable,
       taskName: "test-task",
       invocationRule: new Rule(stack, "RunEveryHourRule", {

@@ -12,7 +12,7 @@ import { LogGroup, RetentionDays } from "@aws-cdk/aws-logs";
 import { Task, ServiceIntegrationPattern } from "@aws-cdk/aws-stepfunctions";
 import { RunEcsFargateTask } from "@aws-cdk/aws-stepfunctions-tasks";
 import { Rule, Schedule } from "@aws-cdk/aws-events";
-import { ScheduledTask } from "@aereal/qron";
+import { TransactionalTask } from "@aereal/qron";
 
 interface SleeperEcsStackProps extends StackProps {
   readonly repository: IRepository;
@@ -49,7 +49,7 @@ export class SleeperEcsStack extends Stack {
       }),
     });
 
-    new ScheduledTask(this, "SleeperEcsTask", {
+    new TransactionalTask(this, "SleeperEcsTask", {
       lockTable,
       invokeMain: new Task(this, "MainState", {
         task: new RunEcsFargateTask({
