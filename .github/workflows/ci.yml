@@ -46,3 +46,13 @@ jobs:
         run: yarn build
       - name: test
         run: yarn test
+      - name: build docs
+        run: yarn workspace aereal/@qron typedoc src/
+      - name: publish docs
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: packages/@aereal/qron/docs
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+
