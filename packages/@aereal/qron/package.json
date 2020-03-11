@@ -9,7 +9,7 @@
   "scripts": {
     "test": "jest",
     "build": "tsc -p tsconfig.build.json",
-    "docs": "rm -rf docs/ && typedoc --mode library --excludeNotExported src/"
+    "docs": "rm -rf docs/ && typedoc --options typedoc.json src/"
   },
   "peerDependencies": {
     "@aws-cdk/aws-dynamodb": ">= 1.27.0",
