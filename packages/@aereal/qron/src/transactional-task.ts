@@ -13,13 +13,31 @@ import {
 import { AttributeValue, UpdateItemTask } from "./dynamodb-sfn-task";
 
 export interface TransactionalTaskProps {
+  /**
+   * DynamoDB table manages tasks concurrency.
+   * It must have partition key that's name is `taskName` and type is string.
+   */
   readonly lockTable: ITable;
+
   readonly invokeMain: Task;
+
+  /**
+   * taskName is used as lock key so it must be unique in same [[lockTable]].
+   */
   readonly taskName: string;
 }
 
 const keyTaskName = "taskName";
 
+/**
+ * TransactionalTask executes given main task and manages its concurrency.
+ *
+ * Most common AWS services guarantee at-least-once execution but not exactly-once.
+ *
+ * The TransactionalTask uses Step Function as task runner and DynamoDB as exclusive lock.
+ *
+ * So we can run some task that supported by Step Functions task in exactly-once manner if max concurrency is 1.
+ */
 export class TransactionalTask extends Construct {
   public readonly stateMachine: IStateMachine;
 
