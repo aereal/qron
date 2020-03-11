@@ -4231,7 +4231,7 @@ has@^1.0.3:
   resolved "https://registry.yarnpkg.com/heap/-/heap-0.2.6.tgz#087e1f10b046932fc8594dd9e6d378afc9d1e5ac"
   integrity sha1-CH4fELBGky/IWU3Z5tN4r8nR5aw=
 
-highlight.js@^9.17.1:
+highlight.js@^9.18.0:
   version "9.18.1"
   resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-9.18.1.tgz#ed21aa001fe6252bb10a3d76d47573c6539fe13c"
   integrity sha512-OrVKYz70LHsnCgmbXctv/bfuvntIKDz177h0Co37DQ5jamGZLVmoCVMtjMtNZY3X9DrCcKfklHPNeA0uPZhSJg==
@@ -7969,37 +7969,31 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
-typedoc-default-themes@^0.7.2:
-  version "0.7.2"
-  resolved "https://registry.yarnpkg.com/typedoc-default-themes/-/typedoc-default-themes-0.7.2.tgz#1e9896f920b58e6da0bba9d7e643738d02405a5a"
-  integrity sha512-fiFKlFO6VTqjcno8w6WpTsbCgXmfPHVjnLfYkmByZE7moaz+E2DSpAT+oHtDHv7E0BM5kAhPrHJELP2J2Y2T9A==
+typedoc-default-themes@0.8.0-0:
+  version "0.8.0-0"
+  resolved "https://registry.yarnpkg.com/typedoc-default-themes/-/typedoc-default-themes-0.8.0-0.tgz#80b7080837b2c9eba36c2fe06601ebe01973a0cd"
+  integrity sha512-blFWppm5aKnaPOa1tpGO9MLu+njxq7P3rtkXK4QxJBNszA+Jg7x0b+Qx0liXU1acErur6r/iZdrwxp5DUFdSXw==
   dependencies:
     backbone "^1.4.0"
     jquery "^3.4.1"
     lunr "^2.3.8"
     underscore "^1.9.1"
 
-typedoc@^0.16.11:
-  version "0.16.11"
-  resolved "https://registry.yarnpkg.com/typedoc/-/typedoc-0.16.11.tgz#95f862c6eba78533edc9af7096d2295b718eddc1"
-  integrity sha512-YEa5i0/n0yYmLJISJ5+po6seYfJQJ5lQYcHCPF9ffTF92DB/TAZO/QrazX5skPHNPtmlIht5FdTXCM2kC7jQFQ==
+typedoc@^0.17.0-3:
+  version "0.17.0-3"
+  resolved "https://registry.yarnpkg.com/typedoc/-/typedoc-0.17.0-3.tgz#91996e77427ff3a208ab76595a927ee11b75e9e8"
+  integrity sha512-DO2djkR4NHgzAWfNbJb2eQKsFMs+gOuYBXlQ8dOSCjkAK5DRI7ZywDufBGPUw7Ue9Qwi2Cw1DxLd3reDq8wFuQ==
   dependencies:
     "@types/minimatch" "3.0.3"
     fs-extra "^8.1.0"
     handlebars "^4.7.2"
-    highlight.js "^9.17.1"
+    highlight.js "^9.18.0"
     lodash "^4.17.15"
     marked "^0.8.0"
     minimatch "^3.0.0"
     progress "^2.0.3"
     shelljs "^0.8.3"
-    typedoc-default-themes "^0.7.2"
-    typescript "3.7.x"
-
-typescript@3.7.x:
-  version "3.7.5"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.7.5.tgz#0692e21f65fd4108b9330238aac11dd2e177a1ae"
-  integrity sha512-/P5lkRXkWHNAbcJIiHPfRoKqyd7bsyCma1hZNUGfn20qm64T6ZBlrzprymeu918H+mB/0rIg2gGK/BXkhhYgBw==
+    typedoc-default-themes "0.8.0-0"
 
 typescript@^3.8.3:
   version "3.8.3"

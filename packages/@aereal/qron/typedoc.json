@@ -1,0 +1,9 @@
+{
+  "mode": "library",
+  "theme": "minimal",
+  "excludeNotExported": true,
+  "excludeExternals": true,
+  "externalPattern": [
+    "src/dynamodb-sfn-task.ts"
+  ]
+}
