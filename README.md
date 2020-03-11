@@ -1,4 +1,5 @@
 ![npm-badge][npm-badge]
+![github-actions-status][github-actions-status]
 
 # qron
 
@@ -16,3 +17,4 @@ yarn lerna publish
 
 [aws-cdk]: https://github.com/aws/aws-cdk
 [npm-badge]: https://img.shields.io/npm/v/@aereal/qron
+[github-actions-status]: https://github.com/aereal/qron/workflows/CI/badge.svg
