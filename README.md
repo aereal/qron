@@ -7,6 +7,10 @@ qron provides [AWS CDK][aws-cdk] construct libraries that build cron-alternative
 
 qron is aimed for the system executes tasks periodically and run in exactly-once manner.
 
+## Document
+
+https://aereal.github.io/qron/
+
 ## How to release
 
 ```
