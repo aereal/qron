@@ -2,8 +2,8 @@ import { Stack } from "@aws-cdk/core";
 import { Table, AttributeType } from "@aws-cdk/aws-dynamodb";
 import { Rule, Schedule } from "@aws-cdk/aws-events";
 import { SfnStateMachine } from "@aws-cdk/aws-events-targets";
-import { Task, TaskInput } from "@aws-cdk/aws-stepfunctions";
-import { PublishToTopic } from "@aws-cdk/aws-stepfunctions-tasks";
+import { TaskInput } from "@aws-cdk/aws-stepfunctions";
+import { SnsPublish } from "@aws-cdk/aws-stepfunctions-tasks";
 import { Topic } from "@aws-cdk/aws-sns";
 import { SynthUtils } from "@aws-cdk/assert";
 import { TransactionalTask } from "../src";
@@ -21,10 +21,9 @@ describe("TransactionalTask", () => {
     new TransactionalTask(stack, "Task", {
       lockTable,
       taskName: "test-task",
-      invokeMain: new Task(stack, "MainStack", {
-        task: new PublishToTopic(topic, {
-          message: TaskInput.fromObject({}),
-        }),
+      invokeMain: new SnsPublish(stack, "PublishTopic", {
+        topic,
+        message: TaskInput.fromObject({}),
       }),
     });
 
@@ -43,10 +42,9 @@ describe("TransactionalTask", () => {
     const task = new TransactionalTask(stack, "Task", {
       lockTable,
       taskName: "test-task",
-      invokeMain: new Task(stack, "MainStack", {
-        task: new PublishToTopic(topic, {
-          message: TaskInput.fromObject({}),
-        }),
+      invokeMain: new SnsPublish(stack, "PublishTopic", {
+        topic,
+        message: TaskInput.fromObject({}),
       }),
     });
     new Rule(stack, "RunEveryHourRule", {
