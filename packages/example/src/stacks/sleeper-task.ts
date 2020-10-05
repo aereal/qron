@@ -1,5 +1,5 @@
 import { join } from "path";
-import { TransactionalTask } from "@aereal/qron";
+import { RunTransaction } from "@aereal/qron";
 import { ITable } from "@aws-cdk/aws-dynamodb";
 import { Rule, Schedule } from "@aws-cdk/aws-events";
 import { SfnStateMachine } from "@aws-cdk/aws-events-targets";
@@ -9,6 +9,7 @@ import {
   Runtime,
   Tracing,
 } from "@aws-cdk/aws-lambda";
+import { StateMachine } from "@aws-cdk/aws-stepfunctions";
 import { LambdaInvoke } from "@aws-cdk/aws-stepfunctions-tasks";
 import { Construct, Duration, Stack, StackProps } from "@aws-cdk/core";
 
@@ -28,16 +29,18 @@ export class SleeperTaskStack extends Stack {
       runtime: Runtime.GO_1_X,
       tracing: Tracing.ACTIVE,
     });
-    const task = new TransactionalTask(this, "SleeperTask", {
-      lockTable: props.lockTable,
-      invokeMain: new LambdaInvoke(this, "InvokeLambda", {
-        lambdaFunction: taskFunction,
+    const stateMachine = new StateMachine(this, "SleeperStateMachine", {
+      definition: new RunTransaction(this, "SleeperTask", {
+        lockTable: props.lockTable,
+        invokeMain: new LambdaInvoke(this, "InvokeLambda", {
+          lambdaFunction: taskFunction,
+        }),
+        taskName: "sleeper",
       }),
-      taskName: "sleeper",
     });
     const rule = new Rule(this, "RunEveryHourRule", {
       schedule: Schedule.cron({ minute: "0/10", weekDay: "MON-FRI" }),
     });
-    rule.addTarget(new SfnStateMachine(task.stateMachine));
+    rule.addTarget(new SfnStateMachine(stateMachine));
   }
 }

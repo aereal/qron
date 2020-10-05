@@ -232,12 +232,12 @@ Object {
         "Targets": Array [
           Object {
             "Arn": Object {
-              "Ref": "SleeperTaskStateMachineA76E058D",
+              "Ref": "SleeperStateMachine0355D20B",
             },
             "Id": "Target0",
             "RoleArn": Object {
               "Fn::GetAtt": Array [
-                "SleeperTaskStateMachineEventsRoleBB4B23B3",
+                "SleeperStateMachineEventsRole7F419CF5",
                 "Arn",
               ],
             },
@@ -360,10 +360,10 @@ Object {
       },
       "Type": "AWS::IAM::Policy",
     },
-    "SleeperTaskStateMachineA76E058D": Object {
+    "SleeperStateMachine0355D20B": Object {
       "DependsOn": Array [
-        "SleeperTaskStateMachineRoleDefaultPolicy26176C49",
-        "SleeperTaskStateMachineRoleA508B81E",
+        "SleeperStateMachineRoleDefaultPolicyB51087B9",
+        "SleeperStateMachineRole69FC8248",
       ],
       "Properties": Object {
         "DefinitionString": Object {
@@ -378,7 +378,7 @@ Object {
               Object {
                 "Fn::ImportValue": "qron-lock-table:ExportsOutputRefNewLockTableB8F3FB458E1EBBFF",
               },
-              "\\",\\"ExpressionAttributeValues\\":{\\":v5\\":{\\"N\\":\\"0\\"},\\":v6\\":{\\"N\\":\\"1\\"}},\\"ReturnValues\\":\\"ALL_NEW\\",\\"UpdateExpression\\":\\"SET handledCount = if_not_exists(handledCount, :v5) + :v6\\"}},\\"CheckLock\\":{\\"Type\\":\\"Choice\\",\\"Choices\\":[{\\"Variable\\":\\"$.Lock.Attributes.handledCount.N\\",\\"StringEquals\\":\\"1\\",\\"Next\\":\\"InvokeLambda\\"}],\\"Default\\":\\"FailedLockFreed\\"},\\"FailedLockFreed\\":{\\"Next\\":\\"Finite\\",\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:",
+              "\\",\\"ExpressionAttributeValues\\":{\\":v8\\":{\\"N\\":\\"0\\"},\\":v9\\":{\\"N\\":\\"1\\"}},\\"ReturnValues\\":\\"ALL_NEW\\",\\"UpdateExpression\\":\\"SET handledCount = if_not_exists(handledCount, :v8) + :v9\\"}},\\"CheckLock\\":{\\"Type\\":\\"Choice\\",\\"Choices\\":[{\\"Variable\\":\\"$.Lock.Attributes.handledCount.N\\",\\"StringEquals\\":\\"1\\",\\"Next\\":\\"InvokeLambda\\"}],\\"Default\\":\\"FailedLockFreed\\"},\\"FailedLockFreed\\":{\\"Next\\":\\"Finite\\",\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:",
               Object {
                 "Ref": "AWS::Partition",
               },
@@ -386,7 +386,7 @@ Object {
               Object {
                 "Fn::ImportValue": "qron-lock-table:ExportsOutputRefNewLockTableB8F3FB458E1EBBFF",
               },
-              "\\",\\"ExpressionAttributeValues\\":{\\":v9\\":{\\"N\\":\\"1\\"}},\\"ReturnValues\\":\\"ALL_NEW\\",\\"UpdateExpression\\":\\"SET handledCount = handledCount - :v9\\"}},\\"Finite\\":{\\"Type\\":\\"Fail\\"},\\"InvokeLambda\\":{\\"Next\\":\\"SuccessFreeLock\\",\\"Retry\\":[{\\"ErrorEquals\\":[\\"Lambda.ServiceException\\",\\"Lambda.AWSLambdaException\\",\\"Lambda.SdkClientException\\"],\\"IntervalSeconds\\":2,\\"MaxAttempts\\":6,\\"BackoffRate\\":2}],\\"Catch\\":[{\\"ErrorEquals\\":[\\"States.ALL\\"],\\"Next\\":\\"AssumeLockFreed\\"}],\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:",
+              "\\",\\"ExpressionAttributeValues\\":{\\":v7\\":{\\"N\\":\\"1\\"}},\\"ReturnValues\\":\\"ALL_NEW\\",\\"UpdateExpression\\":\\"SET handledCount = handledCount - :v7\\"}},\\"Finite\\":{\\"Type\\":\\"Fail\\"},\\"InvokeLambda\\":{\\"Next\\":\\"SuccessFreeLock\\",\\"Retry\\":[{\\"ErrorEquals\\":[\\"Lambda.ServiceException\\",\\"Lambda.AWSLambdaException\\",\\"Lambda.SdkClientException\\"],\\"IntervalSeconds\\":2,\\"MaxAttempts\\":6,\\"BackoffRate\\":2}],\\"Catch\\":[{\\"ErrorEquals\\":[\\"States.ALL\\"],\\"Next\\":\\"AssumeLockFreed\\"}],\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:",
               Object {
                 "Ref": "AWS::Partition",
               },
@@ -397,7 +397,7 @@ Object {
                   "Arn",
                 ],
               },
-              "\\",\\"Payload.$\\":\\"$\\"}},\\"SuccessFreeLock\\":{\\"Next\\":\\"Succeed\\",\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:",
+              "\\",\\"Payload.$\\":\\"$\\"}},\\"SuccessFreeLock\\":{\\"End\\":true,\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:",
               Object {
                 "Ref": "AWS::Partition",
               },
@@ -405,7 +405,7 @@ Object {
               Object {
                 "Fn::ImportValue": "qron-lock-table:ExportsOutputRefNewLockTableB8F3FB458E1EBBFF",
               },
-              "\\",\\"ExpressionAttributeValues\\":{\\":v8\\":{\\"N\\":\\"1\\"}},\\"ReturnValues\\":\\"ALL_NEW\\",\\"UpdateExpression\\":\\"SET handledCount = handledCount - :v8\\"}},\\"Succeed\\":{\\"Type\\":\\"Succeed\\"},\\"AssumeLockFreed\\":{\\"End\\":true,\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:",
+              "\\",\\"ExpressionAttributeValues\\":{\\":v6\\":{\\"N\\":\\"1\\"}},\\"ReturnValues\\":\\"ALL_NEW\\",\\"UpdateExpression\\":\\"SET handledCount = handledCount - :v6\\"}},\\"AssumeLockFreed\\":{\\"End\\":true,\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:",
               Object {
                 "Ref": "AWS::Partition",
               },
@@ -413,20 +413,20 @@ Object {
               Object {
                 "Fn::ImportValue": "qron-lock-table:ExportsOutputRefNewLockTableB8F3FB458E1EBBFF",
               },
-              "\\",\\"ExpressionAttributeValues\\":{\\":v7\\":{\\"N\\":\\"1\\"}},\\"ReturnValues\\":\\"ALL_NEW\\",\\"UpdateExpression\\":\\"SET handledCount = handledCount - :v7\\"}}}}",
+              "\\",\\"ExpressionAttributeValues\\":{\\":v5\\":{\\"N\\":\\"1\\"}},\\"ReturnValues\\":\\"ALL_NEW\\",\\"UpdateExpression\\":\\"SET handledCount = handledCount - :v5\\"}}}}",
             ],
           ],
         },
         "RoleArn": Object {
           "Fn::GetAtt": Array [
-            "SleeperTaskStateMachineRoleA508B81E",
+            "SleeperStateMachineRole69FC8248",
             "Arn",
           ],
         },
       },
       "Type": "AWS::StepFunctions::StateMachine",
     },
-    "SleeperTaskStateMachineEventsRoleBB4B23B3": Object {
+    "SleeperStateMachineEventsRole7F419CF5": Object {
       "Properties": Object {
         "AssumeRolePolicyDocument": Object {
           "Statement": Array [
@@ -443,7 +443,7 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "SleeperTaskStateMachineEventsRoleDefaultPolicy2CCDAA33": Object {
+    "SleeperStateMachineEventsRoleDefaultPolicy08E70912": Object {
       "Properties": Object {
         "PolicyDocument": Object {
           "Statement": Array [
@@ -451,22 +451,22 @@ Object {
               "Action": "states:StartExecution",
               "Effect": "Allow",
               "Resource": Object {
-                "Ref": "SleeperTaskStateMachineA76E058D",
+                "Ref": "SleeperStateMachine0355D20B",
               },
             },
           ],
           "Version": "2012-10-17",
         },
-        "PolicyName": "SleeperTaskStateMachineEventsRoleDefaultPolicy2CCDAA33",
+        "PolicyName": "SleeperStateMachineEventsRoleDefaultPolicy08E70912",
         "Roles": Array [
           Object {
-            "Ref": "SleeperTaskStateMachineEventsRoleBB4B23B3",
+            "Ref": "SleeperStateMachineEventsRole7F419CF5",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "SleeperTaskStateMachineRoleA508B81E": Object {
+    "SleeperStateMachineRole69FC8248": Object {
       "Properties": Object {
         "AssumeRolePolicyDocument": Object {
           "Statement": Array [
@@ -483,7 +483,7 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "SleeperTaskStateMachineRoleDefaultPolicy26176C49": Object {
+    "SleeperStateMachineRoleDefaultPolicyB51087B9": Object {
       "Properties": Object {
         "PolicyDocument": Object {
           "Statement": Array [
@@ -519,10 +519,10 @@ Object {
           ],
           "Version": "2012-10-17",
         },
-        "PolicyName": "SleeperTaskStateMachineRoleDefaultPolicy26176C49",
+        "PolicyName": "SleeperStateMachineRoleDefaultPolicyB51087B9",
         "Roles": Array [
           Object {
-            "Ref": "SleeperTaskStateMachineRoleA508B81E",
+            "Ref": "SleeperStateMachineRole69FC8248",
           },
         ],
       },
@@ -559,12 +559,12 @@ Object {
         "Targets": Array [
           Object {
             "Arn": Object {
-              "Ref": "SleeperEcsTaskStateMachineB21333D2",
+              "Ref": "StateMachine2E01A3A5",
             },
             "Id": "Target0",
             "RoleArn": Object {
               "Fn::GetAtt": Array [
-                "SleeperEcsTaskStateMachineEventsRoleA451BE82",
+                "StateMachineEventsRoleDBCDECD1",
                 "Arn",
               ],
             },
@@ -572,208 +572,6 @@ Object {
         ],
       },
       "Type": "AWS::Events::Rule",
-    },
-    "SleeperEcsTaskStateMachineB21333D2": Object {
-      "DependsOn": Array [
-        "SleeperEcsTaskStateMachineRoleDefaultPolicyDA7C4C89",
-        "SleeperEcsTaskStateMachineRole02E1B7F2",
-      ],
-      "Properties": Object {
-        "DefinitionString": Object {
-          "Fn::Join": Array [
-            "",
-            Array [
-              "{\\"StartAt\\":\\"GetLock\\",\\"States\\":{\\"GetLock\\":{\\"Next\\":\\"CheckLock\\",\\"Type\\":\\"Task\\",\\"ResultPath\\":\\"$.Lock\\",\\"Resource\\":\\"arn:",
-              Object {
-                "Ref": "AWS::Partition",
-              },
-              ":states:::dynamodb:updateItem\\",\\"Parameters\\":{\\"Key\\":{\\"taskName\\":{\\"S\\":\\"sleeper-ecs\\"}},\\"TableName\\":\\"",
-              Object {
-                "Fn::ImportValue": "qron-lock-table:ExportsOutputRefNewLockTableB8F3FB458E1EBBFF",
-              },
-              "\\",\\"ExpressionAttributeValues\\":{\\":v0\\":{\\"N\\":\\"0\\"},\\":v1\\":{\\"N\\":\\"1\\"}},\\"ReturnValues\\":\\"ALL_NEW\\",\\"UpdateExpression\\":\\"SET handledCount = if_not_exists(handledCount, :v0) + :v1\\"}},\\"CheckLock\\":{\\"Type\\":\\"Choice\\",\\"Choices\\":[{\\"Variable\\":\\"$.Lock.Attributes.handledCount.N\\",\\"StringEquals\\":\\"1\\",\\"Next\\":\\"MainState\\"}],\\"Default\\":\\"FailedLockFreed\\"},\\"FailedLockFreed\\":{\\"Next\\":\\"Finite\\",\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:",
-              Object {
-                "Ref": "AWS::Partition",
-              },
-              ":states:::dynamodb:updateItem\\",\\"Parameters\\":{\\"Key\\":{\\"taskName\\":{\\"S\\":\\"sleeper-ecs\\"}},\\"TableName\\":\\"",
-              Object {
-                "Fn::ImportValue": "qron-lock-table:ExportsOutputRefNewLockTableB8F3FB458E1EBBFF",
-              },
-              "\\",\\"ExpressionAttributeValues\\":{\\":v4\\":{\\"N\\":\\"1\\"}},\\"ReturnValues\\":\\"ALL_NEW\\",\\"UpdateExpression\\":\\"SET handledCount = handledCount - :v4\\"}},\\"Finite\\":{\\"Type\\":\\"Fail\\"},\\"MainState\\":{\\"Next\\":\\"SuccessFreeLock\\",\\"Catch\\":[{\\"ErrorEquals\\":[\\"States.ALL\\"],\\"Next\\":\\"AssumeLockFreed\\"}],\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:",
-              Object {
-                "Ref": "AWS::Partition",
-              },
-              ":states:::ecs:runTask\\",\\"Parameters\\":{\\"Cluster\\":\\"",
-              Object {
-                "Fn::GetAtt": Array [
-                  "ClusterEB0386A7",
-                  "Arn",
-                ],
-              },
-              "\\",\\"TaskDefinition\\":\\"",
-              Object {
-                "Ref": "SleeperTaskDefinitionD35C9706",
-              },
-              "\\",\\"NetworkConfiguration\\":{\\"AwsvpcConfiguration\\":{\\"Subnets\\":[\\"p-12345\\",\\"p-67890\\"],\\"SecurityGroups\\":[\\"",
-              Object {
-                "Fn::GetAtt": Array [
-                  "MainStateSecurityGroup04FBAE53",
-                  "GroupId",
-                ],
-              },
-              "\\"]}},\\"Overrides\\":{\\"ContainerOverrides\\":[{\\"Name\\":\\"main\\",\\"Command\\":[\\"-wait\\",\\"3s\\"]}]},\\"LaunchType\\":\\"FARGATE\\",\\"PlatformVersion\\":\\"LATEST\\"}},\\"SuccessFreeLock\\":{\\"Next\\":\\"Succeed\\",\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:",
-              Object {
-                "Ref": "AWS::Partition",
-              },
-              ":states:::dynamodb:updateItem\\",\\"Parameters\\":{\\"Key\\":{\\"taskName\\":{\\"S\\":\\"sleeper-ecs\\"}},\\"TableName\\":\\"",
-              Object {
-                "Fn::ImportValue": "qron-lock-table:ExportsOutputRefNewLockTableB8F3FB458E1EBBFF",
-              },
-              "\\",\\"ExpressionAttributeValues\\":{\\":v3\\":{\\"N\\":\\"1\\"}},\\"ReturnValues\\":\\"ALL_NEW\\",\\"UpdateExpression\\":\\"SET handledCount = handledCount - :v3\\"}},\\"Succeed\\":{\\"Type\\":\\"Succeed\\"},\\"AssumeLockFreed\\":{\\"End\\":true,\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:",
-              Object {
-                "Ref": "AWS::Partition",
-              },
-              ":states:::dynamodb:updateItem\\",\\"Parameters\\":{\\"Key\\":{\\"taskName\\":{\\"S\\":\\"sleeper-ecs\\"}},\\"TableName\\":\\"",
-              Object {
-                "Fn::ImportValue": "qron-lock-table:ExportsOutputRefNewLockTableB8F3FB458E1EBBFF",
-              },
-              "\\",\\"ExpressionAttributeValues\\":{\\":v2\\":{\\"N\\":\\"1\\"}},\\"ReturnValues\\":\\"ALL_NEW\\",\\"UpdateExpression\\":\\"SET handledCount = handledCount - :v2\\"}}}}",
-            ],
-          ],
-        },
-        "RoleArn": Object {
-          "Fn::GetAtt": Array [
-            "SleeperEcsTaskStateMachineRole02E1B7F2",
-            "Arn",
-          ],
-        },
-      },
-      "Type": "AWS::StepFunctions::StateMachine",
-    },
-    "SleeperEcsTaskStateMachineEventsRoleA451BE82": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Principal": Object {
-                "Service": "events.amazonaws.com",
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-      },
-      "Type": "AWS::IAM::Role",
-    },
-    "SleeperEcsTaskStateMachineEventsRoleDefaultPolicyDE03CBBA": Object {
-      "Properties": Object {
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": "states:StartExecution",
-              "Effect": "Allow",
-              "Resource": Object {
-                "Ref": "SleeperEcsTaskStateMachineB21333D2",
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "PolicyName": "SleeperEcsTaskStateMachineEventsRoleDefaultPolicyDE03CBBA",
-        "Roles": Array [
-          Object {
-            "Ref": "SleeperEcsTaskStateMachineEventsRoleA451BE82",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Policy",
-    },
-    "SleeperEcsTaskStateMachineRole02E1B7F2": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Principal": Object {
-                "Service": "states.ap-northeast-1.amazonaws.com",
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-      },
-      "Type": "AWS::IAM::Role",
-    },
-    "SleeperEcsTaskStateMachineRoleDefaultPolicyDA7C4C89": Object {
-      "Properties": Object {
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": "dynamodb:UpdateItem",
-              "Effect": "Allow",
-              "Resource": Object {
-                "Fn::Join": Array [
-                  "",
-                  Array [
-                    "arn:",
-                    Object {
-                      "Ref": "AWS::Partition",
-                    },
-                    ":dynamodb:ap-northeast-1:dummy:table/",
-                    Object {
-                      "Fn::ImportValue": "qron-lock-table:ExportsOutputRefNewLockTableB8F3FB458E1EBBFF",
-                    },
-                  ],
-                ],
-              },
-            },
-            Object {
-              "Action": "ecs:RunTask",
-              "Effect": "Allow",
-              "Resource": Object {
-                "Ref": "SleeperTaskDefinitionD35C9706",
-              },
-            },
-            Object {
-              "Action": Array [
-                "ecs:StopTask",
-                "ecs:DescribeTasks",
-              ],
-              "Effect": "Allow",
-              "Resource": "*",
-            },
-            Object {
-              "Action": "iam:PassRole",
-              "Effect": "Allow",
-              "Resource": Array [
-                Object {
-                  "Fn::GetAtt": Array [
-                    "SleeperTaskDefinitionTaskRole1744E03C",
-                    "Arn",
-                  ],
-                },
-                Object {
-                  "Fn::GetAtt": Array [
-                    "SleeperTaskDefinitionExecutionRoleE9F85A39",
-                    "Arn",
-                  ],
-                },
-              ],
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "PolicyName": "SleeperEcsTaskStateMachineRoleDefaultPolicyDA7C4C89",
-        "Roles": Array [
-          Object {
-            "Ref": "SleeperEcsTaskStateMachineRole02E1B7F2",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Policy",
     },
     "SleeperTaskDefinitionD35C9706": Object {
       "Properties": Object {
@@ -936,6 +734,208 @@ Object {
         },
       },
       "Type": "AWS::IAM::Role",
+    },
+    "StateMachine2E01A3A5": Object {
+      "DependsOn": Array [
+        "StateMachineRoleDefaultPolicyDF1E6607",
+        "StateMachineRoleB840431D",
+      ],
+      "Properties": Object {
+        "DefinitionString": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "{\\"StartAt\\":\\"GetLock\\",\\"States\\":{\\"GetLock\\":{\\"Next\\":\\"CheckLock\\",\\"Type\\":\\"Task\\",\\"ResultPath\\":\\"$.Lock\\",\\"Resource\\":\\"arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":states:::dynamodb:updateItem\\",\\"Parameters\\":{\\"Key\\":{\\"taskName\\":{\\"S\\":\\"sleeper-ecs\\"}},\\"TableName\\":\\"",
+              Object {
+                "Fn::ImportValue": "qron-lock-table:ExportsOutputRefNewLockTableB8F3FB458E1EBBFF",
+              },
+              "\\",\\"ExpressionAttributeValues\\":{\\":v3\\":{\\"N\\":\\"0\\"},\\":v4\\":{\\"N\\":\\"1\\"}},\\"ReturnValues\\":\\"ALL_NEW\\",\\"UpdateExpression\\":\\"SET handledCount = if_not_exists(handledCount, :v3) + :v4\\"}},\\"CheckLock\\":{\\"Type\\":\\"Choice\\",\\"Choices\\":[{\\"Variable\\":\\"$.Lock.Attributes.handledCount.N\\",\\"StringEquals\\":\\"1\\",\\"Next\\":\\"MainState\\"}],\\"Default\\":\\"FailedLockFreed\\"},\\"FailedLockFreed\\":{\\"Next\\":\\"Finite\\",\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":states:::dynamodb:updateItem\\",\\"Parameters\\":{\\"Key\\":{\\"taskName\\":{\\"S\\":\\"sleeper-ecs\\"}},\\"TableName\\":\\"",
+              Object {
+                "Fn::ImportValue": "qron-lock-table:ExportsOutputRefNewLockTableB8F3FB458E1EBBFF",
+              },
+              "\\",\\"ExpressionAttributeValues\\":{\\":v2\\":{\\"N\\":\\"1\\"}},\\"ReturnValues\\":\\"ALL_NEW\\",\\"UpdateExpression\\":\\"SET handledCount = handledCount - :v2\\"}},\\"Finite\\":{\\"Type\\":\\"Fail\\"},\\"MainState\\":{\\"Next\\":\\"SuccessFreeLock\\",\\"Catch\\":[{\\"ErrorEquals\\":[\\"States.ALL\\"],\\"Next\\":\\"AssumeLockFreed\\"}],\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":states:::ecs:runTask\\",\\"Parameters\\":{\\"Cluster\\":\\"",
+              Object {
+                "Fn::GetAtt": Array [
+                  "ClusterEB0386A7",
+                  "Arn",
+                ],
+              },
+              "\\",\\"TaskDefinition\\":\\"",
+              Object {
+                "Ref": "SleeperTaskDefinitionD35C9706",
+              },
+              "\\",\\"NetworkConfiguration\\":{\\"AwsvpcConfiguration\\":{\\"Subnets\\":[\\"p-12345\\",\\"p-67890\\"],\\"SecurityGroups\\":[\\"",
+              Object {
+                "Fn::GetAtt": Array [
+                  "MainStateSecurityGroup04FBAE53",
+                  "GroupId",
+                ],
+              },
+              "\\"]}},\\"Overrides\\":{\\"ContainerOverrides\\":[{\\"Name\\":\\"main\\",\\"Command\\":[\\"-wait\\",\\"3s\\"]}]},\\"LaunchType\\":\\"FARGATE\\",\\"PlatformVersion\\":\\"LATEST\\"}},\\"SuccessFreeLock\\":{\\"End\\":true,\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":states:::dynamodb:updateItem\\",\\"Parameters\\":{\\"Key\\":{\\"taskName\\":{\\"S\\":\\"sleeper-ecs\\"}},\\"TableName\\":\\"",
+              Object {
+                "Fn::ImportValue": "qron-lock-table:ExportsOutputRefNewLockTableB8F3FB458E1EBBFF",
+              },
+              "\\",\\"ExpressionAttributeValues\\":{\\":v1\\":{\\"N\\":\\"1\\"}},\\"ReturnValues\\":\\"ALL_NEW\\",\\"UpdateExpression\\":\\"SET handledCount = handledCount - :v1\\"}},\\"AssumeLockFreed\\":{\\"End\\":true,\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":states:::dynamodb:updateItem\\",\\"Parameters\\":{\\"Key\\":{\\"taskName\\":{\\"S\\":\\"sleeper-ecs\\"}},\\"TableName\\":\\"",
+              Object {
+                "Fn::ImportValue": "qron-lock-table:ExportsOutputRefNewLockTableB8F3FB458E1EBBFF",
+              },
+              "\\",\\"ExpressionAttributeValues\\":{\\":v0\\":{\\"N\\":\\"1\\"}},\\"ReturnValues\\":\\"ALL_NEW\\",\\"UpdateExpression\\":\\"SET handledCount = handledCount - :v0\\"}}}}",
+            ],
+          ],
+        },
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "StateMachineRoleB840431D",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::StepFunctions::StateMachine",
+    },
+    "StateMachineEventsRoleDBCDECD1": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "events.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "StateMachineEventsRoleDefaultPolicyFB602CA9": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "states:StartExecution",
+              "Effect": "Allow",
+              "Resource": Object {
+                "Ref": "StateMachine2E01A3A5",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "StateMachineEventsRoleDefaultPolicyFB602CA9",
+        "Roles": Array [
+          Object {
+            "Ref": "StateMachineEventsRoleDBCDECD1",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "StateMachineRoleB840431D": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "states.ap-northeast-1.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "StateMachineRoleDefaultPolicyDF1E6607": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "dynamodb:UpdateItem",
+              "Effect": "Allow",
+              "Resource": Object {
+                "Fn::Join": Array [
+                  "",
+                  Array [
+                    "arn:",
+                    Object {
+                      "Ref": "AWS::Partition",
+                    },
+                    ":dynamodb:ap-northeast-1:dummy:table/",
+                    Object {
+                      "Fn::ImportValue": "qron-lock-table:ExportsOutputRefNewLockTableB8F3FB458E1EBBFF",
+                    },
+                  ],
+                ],
+              },
+            },
+            Object {
+              "Action": "ecs:RunTask",
+              "Effect": "Allow",
+              "Resource": Object {
+                "Ref": "SleeperTaskDefinitionD35C9706",
+              },
+            },
+            Object {
+              "Action": Array [
+                "ecs:StopTask",
+                "ecs:DescribeTasks",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+            Object {
+              "Action": "iam:PassRole",
+              "Effect": "Allow",
+              "Resource": Array [
+                Object {
+                  "Fn::GetAtt": Array [
+                    "SleeperTaskDefinitionTaskRole1744E03C",
+                    "Arn",
+                  ],
+                },
+                Object {
+                  "Fn::GetAtt": Array [
+                    "SleeperTaskDefinitionExecutionRoleE9F85A39",
+                    "Arn",
+                  ],
+                },
+              ],
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "StateMachineRoleDefaultPolicyDF1E6607",
+        "Roles": Array [
+          Object {
+            "Ref": "StateMachineRoleB840431D",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
     },
     "TaskLogGroup933EA2D6": Object {
       "DeletionPolicy": "Retain",

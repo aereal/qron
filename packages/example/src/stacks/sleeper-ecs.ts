@@ -1,4 +1,4 @@
-import { TransactionalTask } from "@aereal/qron";
+import { RunTransaction } from "@aereal/qron";
 import { ITable } from "@aws-cdk/aws-dynamodb";
 import { Vpc } from "@aws-cdk/aws-ec2";
 import { IRepository } from "@aws-cdk/aws-ecr";
@@ -12,7 +12,7 @@ import {
 import { Rule, Schedule } from "@aws-cdk/aws-events";
 import { SfnStateMachine } from "@aws-cdk/aws-events-targets";
 import { LogGroup, RetentionDays } from "@aws-cdk/aws-logs";
-import { IntegrationPattern } from "@aws-cdk/aws-stepfunctions";
+import { IntegrationPattern, StateMachine } from "@aws-cdk/aws-stepfunctions";
 import {
   EcsFargateLaunchTarget,
   EcsRunTask,
@@ -58,24 +58,26 @@ export class SleeperEcsStack extends Stack {
       }),
     });
 
-    const task = new TransactionalTask(this, "SleeperEcsTask", {
-      lockTable,
-      invokeMain: new EcsRunTask(this, "MainState", {
-        cluster,
-        taskDefinition,
-        integrationPattern: IntegrationPattern.REQUEST_RESPONSE,
-        launchTarget: new EcsFargateLaunchTarget({
-          platformVersion: FargatePlatformVersion.LATEST,
+    const stateMachine = new StateMachine(this, "StateMachine", {
+      definition: new RunTransaction(this, "SleeperEcsTask", {
+        lockTable,
+        invokeMain: new EcsRunTask(this, "MainState", {
+          cluster,
+          taskDefinition,
+          integrationPattern: IntegrationPattern.REQUEST_RESPONSE,
+          launchTarget: new EcsFargateLaunchTarget({
+            platformVersion: FargatePlatformVersion.LATEST,
+          }),
+          containerOverrides: [
+            { containerDefinition: mainContainer, command: ["-wait", "3s"] },
+          ],
         }),
-        containerOverrides: [
-          { containerDefinition: mainContainer, command: ["-wait", "3s"] },
-        ],
+        taskName: "sleeper-ecs",
       }),
-      taskName: "sleeper-ecs",
     });
     const rule = new Rule(this, "RunEveryHourRule", {
       schedule: Schedule.cron({ minute: "0/10", weekDay: "MON-FRI" }),
     });
-    rule.addTarget(new SfnStateMachine(task.stateMachine));
+    rule.addTarget(new SfnStateMachine(stateMachine));
   }
 }
