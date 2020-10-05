@@ -4,10 +4,9 @@ import {
   Choice,
   Condition,
   Fail,
-  IChainable,
-  IStateMachine,
-  StateMachine,
-  Succeed,
+  INextable,
+  State,
+  StateMachineFragment,
   TaskStateBase,
 } from "@aws-cdk/aws-stepfunctions";
 import {
@@ -17,13 +16,16 @@ import {
 } from "@aws-cdk/aws-stepfunctions-tasks";
 import { Construct } from "@aws-cdk/core";
 
-export interface TransactionalTaskProps {
+export interface RunTransactionalTaskProps {
   /**
    * DynamoDB table manages tasks concurrency.
    * It must have partition key that's name is `taskName` and type is string.
    */
   readonly lockTable: ITable;
 
+  /**
+   * Main task state.
+   */
   readonly invokeMain: TaskStateBase;
 
   /**
@@ -35,16 +37,17 @@ export interface TransactionalTaskProps {
 const keyTaskName = "taskName";
 
 /**
- * TransactionalTask executes given main task and manages its concurrency.
+ * RunTransaction executes given main task and manages its concurrency.
  *
  * Most common AWS services guarantee at-least-once execution but not exactly-once.
  *
- * The TransactionalTask uses Step Function as task runner and DynamoDB as exclusive lock.
+ * The RunTransaction uses Step Function as task runner and DynamoDB as exclusive lock.
  *
  * So we can run some task that supported by Step Functions task in exactly-once manner if max concurrency is 1.
  */
-export class TransactionalTask extends Construct {
-  public readonly stateMachine: IStateMachine;
+export class RunTransactionalTask extends StateMachineFragment {
+  public readonly startState: State;
+  public readonly endStates: INextable[];
   private readonly getLockResultPath: string = "$.Lock";
   private readonly lockTable: ITable;
   private readonly taskName: string;
@@ -52,7 +55,7 @@ export class TransactionalTask extends Construct {
     1
   );
 
-  constructor(scope: Construct, id: string, props: TransactionalTaskProps) {
+  constructor(scope: Construct, id: string, props: RunTransactionalTaskProps) {
     super(scope, id);
 
     const { lockTable, invokeMain, taskName } = props;
@@ -60,37 +63,26 @@ export class TransactionalTask extends Construct {
     this.taskName = taskName;
 
     const getLockResultPath = "$.Lock";
-
+    const assumeLockFreed = this.freeLockTask("AssumeLockFreed");
+    const onSuccess = this.freeLockTask("SuccessFreeLock");
+    const failedLockFreed = this.freeLockTask("FailedLockFreed");
+    const invokeWithRecover = invokeMain
+      .addCatch(assumeLockFreed)
+      .next(onSuccess);
+    const checkLock = new Choice(this, "CheckLock")
+      .when(
+        Condition.stringEquals(
+          `${getLockResultPath}.Attributes.handledCount.N`,
+          "1"
+        ),
+        invokeWithRecover
+      )
+      .otherwise(failedLockFreed.next(new Fail(this, "Finite")))
+      .afterwards();
     const getLock = this.getLockTask();
-
-    // TODO: otherwise
-    // TODO: retry?
-    const checkLock = (next: IChainable): Choice =>
-      new Choice(this, "CheckLock")
-        .when(
-          Condition.stringEquals(
-            `${getLockResultPath}.Attributes.handledCount.N`,
-            "1"
-          ),
-          next
-        )
-        .otherwise(
-          this.freeLockTask("FailedLockFreed").next(new Fail(this, "Finite"))
-        );
-
-    this.stateMachine = new StateMachine(this, "StateMachine", {
-      definition: getLock.next(
-        checkLock(
-          invokeMain
-            .addCatch(this.freeLockTask("AssumeLockFreed"))
-            .next(
-              this.freeLockTask("SuccessFreeLock").next(
-                new Succeed(this, "Succeed")
-              )
-            )
-        )
-      ),
-    });
+    const definition = getLock.next(checkLock);
+    this.startState = definition.startState;
+    this.endStates = [...onSuccess.endStates, ...assumeLockFreed.endStates];
   }
 
   /**
