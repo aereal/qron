@@ -16,6 +16,7 @@
     "@aws-cdk/aws-events": ">= 1.66.0",
     "@aws-cdk/aws-iam": ">= 1.66.0",
     "@aws-cdk/aws-stepfunctions": ">= 1.66.0",
+    "@aws-cdk/aws-stepfunctions-tasks": ">= 1.66.0",
     "@aws-cdk/core": ">= 1.66.0"
   },
   "devDependencies": {
