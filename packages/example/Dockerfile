@@ -1,6 +1,6 @@
 # syntax = docker/dockerfile:experimental
 
-FROM golang:1.13 as builder
+FROM golang:1.15 as builder
 ENV APP_DIR /go/src/github.com/aereal/qron
 ENV GO111MODULE on
 ENV CGO_ENABLED 0
