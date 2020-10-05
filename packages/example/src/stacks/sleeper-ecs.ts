@@ -1,4 +1,4 @@
-import { RunTransaction } from "@aereal/qron";
+import { RunTransactionalTask } from "@aereal/qron";
 import { ITable } from "@aws-cdk/aws-dynamodb";
 import { Vpc } from "@aws-cdk/aws-ec2";
 import { IRepository } from "@aws-cdk/aws-ecr";
@@ -59,7 +59,7 @@ export class SleeperEcsStack extends Stack {
     });
 
     const stateMachine = new StateMachine(this, "StateMachine", {
-      definition: new RunTransaction(this, "SleeperEcsTask", {
+      definition: new RunTransactionalTask(this, "SleeperEcsTask", {
         lockTable,
         invokeMain: new EcsRunTask(this, "MainState", {
           cluster,

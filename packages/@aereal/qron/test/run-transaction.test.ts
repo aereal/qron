@@ -4,7 +4,7 @@ import { Topic } from "@aws-cdk/aws-sns";
 import { StateMachine, TaskInput } from "@aws-cdk/aws-stepfunctions";
 import { SnsPublish } from "@aws-cdk/aws-stepfunctions-tasks";
 import { Stack } from "@aws-cdk/core";
-import { RunTransaction } from "../src/run-transaction";
+import { RunTransactionalTask } from "../src/run-transaction";
 
 describe("TransactionalTask", () => {
   test("ok", () => {
@@ -17,7 +17,7 @@ describe("TransactionalTask", () => {
     });
     const topic = new Topic(stack, "Topic");
     new StateMachine(stack, "StateMachine", {
-      definition: new RunTransaction(stack, "RunTransaction", {
+      definition: new RunTransactionalTask(stack, "RunTransaction", {
         lockTable,
         taskName: "test-task",
         invokeMain: new SnsPublish(stack, "PublishTopic", {

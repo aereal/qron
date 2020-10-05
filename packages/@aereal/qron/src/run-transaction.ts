@@ -16,7 +16,7 @@ import {
 } from "@aws-cdk/aws-stepfunctions-tasks";
 import { Construct } from "@aws-cdk/core";
 
-export interface RunTransactionProps {
+export interface RunTransactionalTaskProps {
   /**
    * DynamoDB table manages tasks concurrency.
    * It must have partition key that's name is `taskName` and type is string.
@@ -45,7 +45,7 @@ const keyTaskName = "taskName";
  *
  * So we can run some task that supported by Step Functions task in exactly-once manner if max concurrency is 1.
  */
-export class RunTransaction extends StateMachineFragment {
+export class RunTransactionalTask extends StateMachineFragment {
   public readonly startState: State;
   public readonly endStates: INextable[];
   private readonly getLockResultPath: string = "$.Lock";
@@ -55,7 +55,7 @@ export class RunTransaction extends StateMachineFragment {
     1
   );
 
-  constructor(scope: Construct, id: string, props: RunTransactionProps) {
+  constructor(scope: Construct, id: string, props: RunTransactionalTaskProps) {
     super(scope, id);
 
     const { lockTable, invokeMain, taskName } = props;

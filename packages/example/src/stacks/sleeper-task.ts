@@ -1,5 +1,5 @@
 import { join } from "path";
-import { RunTransaction } from "@aereal/qron";
+import { RunTransactionalTask } from "@aereal/qron";
 import { ITable } from "@aws-cdk/aws-dynamodb";
 import { Rule, Schedule } from "@aws-cdk/aws-events";
 import { SfnStateMachine } from "@aws-cdk/aws-events-targets";
@@ -30,7 +30,7 @@ export class SleeperTaskStack extends Stack {
       tracing: Tracing.ACTIVE,
     });
     const stateMachine = new StateMachine(this, "SleeperStateMachine", {
-      definition: new RunTransaction(this, "SleeperTask", {
+      definition: new RunTransactionalTask(this, "SleeperTask", {
         lockTable: props.lockTable,
         invokeMain: new LambdaInvoke(this, "InvokeLambda", {
           lambdaFunction: taskFunction,
