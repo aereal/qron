@@ -389,7 +389,7 @@ Object {
               Object {
                 "Fn::ImportValue": "qron-lock-table:ExportsOutputRefNewLockTableB8F3FB458E1EBBFF",
               },
-              "\\",\\"Key\\":{\\"taskName\\":{\\"S\\":\\"sleeper\\"}},\\"ExpressionAttributeValues\\":{\\":amount\\":{\\"N\\":\\"1\\"}},\\"UpdateExpression\\":\\"SET handledCount = handledCount - :amount\\",\\"ReturnValues\\":\\"ALL_NEW\\"},\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:aws:states:::dynamodb:updateItem\\"},\\"Finite\\":{\\"Type\\":\\"Fail\\"},\\"InvokeLambda\\":{\\"Next\\":\\"SuccessFreeLock\\",\\"Catch\\":[{\\"ErrorEquals\\":[\\"States.ALL\\"],\\"Next\\":\\"AssumeLockFreed\\"}],\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:",
+              "\\",\\"Key\\":{\\"taskName\\":{\\"S\\":\\"sleeper\\"}},\\"ExpressionAttributeValues\\":{\\":amount\\":{\\"N\\":\\"1\\"}},\\"UpdateExpression\\":\\"SET handledCount = handledCount - :amount\\",\\"ReturnValues\\":\\"ALL_NEW\\"},\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:aws:states:::dynamodb:updateItem\\"},\\"Finite\\":{\\"Type\\":\\"Fail\\"},\\"InvokeLambda\\":{\\"Next\\":\\"SuccessFreeLock\\",\\"Retry\\":[{\\"ErrorEquals\\":[\\"Lambda.ServiceException\\",\\"Lambda.AWSLambdaException\\",\\"Lambda.SdkClientException\\"],\\"IntervalSeconds\\":2,\\"MaxAttempts\\":6,\\"BackoffRate\\":2}],\\"Catch\\":[{\\"ErrorEquals\\":[\\"States.ALL\\"],\\"Next\\":\\"AssumeLockFreed\\"}],\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:",
               Object {
                 "Ref": "AWS::Partition",
               },
