@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>TransactionalTaskProps | @aereal/qron</title>
+	<title>RunTransactionalTask | @aereal/qron</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style type="text/css">/*! normalize.css v1.1.3 | MIT License | git.io/normalize */
@@ -2363,33 +2363,116 @@ img {
 </header>
 <nav class="tsd-navigation secondary">
 	<ul>
-		<li class=" tsd-kind-class tsd-parent-kind-module">
-			<a href="../classes/_transactional_task_.transactionaltask.html" class="tsd-kind-icon">Transactional<wbr>Task</a>
-		</li>
-		<li class="current tsd-kind-interface tsd-parent-kind-module">
-			<a href="_transactional_task_.transactionaltaskprops.html" class="tsd-kind-icon">Transactional<wbr>Task<wbr>Props</a>
+		<li class="current tsd-kind-class tsd-parent-kind-module">
+			<a href="_run_transaction_.runtransactionaltask.html" class="tsd-kind-icon">Run<wbr>Transactional<wbr>Task</a>
 			<ul>
-				<li class=" tsd-kind-property tsd-parent-kind-interface">
-					<a href="_transactional_task_.transactionaltaskprops.html#invokemain" class="tsd-kind-icon">invoke<wbr>Main</a>
+				<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
+					<a href="_run_transaction_.runtransactionaltask.html#constructor" class="tsd-kind-icon">constructor</a>
 				</li>
-				<li class=" tsd-kind-property tsd-parent-kind-interface">
-					<a href="_transactional_task_.transactionaltaskprops.html#locktable" class="tsd-kind-icon">lock<wbr>Table</a>
+				<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a href="_run_transaction_.runtransactionaltask.html#amount" class="tsd-kind-icon">amount</a>
 				</li>
-				<li class=" tsd-kind-property tsd-parent-kind-interface">
-					<a href="_transactional_task_.transactionaltaskprops.html#taskname" class="tsd-kind-icon">task<wbr>Name</a>
+				<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
+					<a href="_run_transaction_.runtransactionaltask.html#endstates" class="tsd-kind-icon">end<wbr>States</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a href="_run_transaction_.runtransactionaltask.html#getlockresultpath" class="tsd-kind-icon">get<wbr>Lock<wbr>Result<wbr>Path</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a href="_run_transaction_.runtransactionaltask.html#locktable" class="tsd-kind-icon">lock<wbr>Table</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a href="_run_transaction_.runtransactionaltask.html#node" class="tsd-kind-icon">node</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
+					<a href="_run_transaction_.runtransactionaltask.html#startstate" class="tsd-kind-icon">start<wbr>State</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a href="_run_transaction_.runtransactionaltask.html#taskname" class="tsd-kind-icon">task<wbr>Name</a>
+				</li>
+				<li class=" tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
+					<a href="_run_transaction_.runtransactionaltask.html#id" class="tsd-kind-icon">id</a>
+				</li>
+				<li class=" tsd-kind-get-signature tsd-parent-kind-class tsd-is-private">
+					<a href="_run_transaction_.runtransactionaltask.html#lockkey" class="tsd-kind-icon">lock<wbr>Key</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a href="_run_transaction_.runtransactionaltask.html#freelocktask" class="tsd-kind-icon">free<wbr>Lock<wbr>Task</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a href="_run_transaction_.runtransactionaltask.html#getlocktask" class="tsd-kind-icon">get<wbr>Lock<wbr>Task</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a href="_run_transaction_.runtransactionaltask.html#next" class="tsd-kind-icon">next</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited tsd-is-protected">
+					<a href="_run_transaction_.runtransactionaltask.html#onprepare" class="tsd-kind-icon">on<wbr>Prepare</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited tsd-is-protected">
+					<a href="_run_transaction_.runtransactionaltask.html#onsynthesize" class="tsd-kind-icon">on<wbr>Synthesize</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited tsd-is-protected">
+					<a href="_run_transaction_.runtransactionaltask.html#onvalidate" class="tsd-kind-icon">on<wbr>Validate</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a href="_run_transaction_.runtransactionaltask.html#prefixstates" class="tsd-kind-icon">prefix<wbr>States</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+					<a href="_run_transaction_.runtransactionaltask.html#prepare" class="tsd-kind-icon">prepare</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+					<a href="_run_transaction_.runtransactionaltask.html#synthesize" class="tsd-kind-icon">synthesize</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a href="_run_transaction_.runtransactionaltask.html#tosinglestate" class="tsd-kind-icon">to<wbr>Single<wbr>State</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a href="_run_transaction_.runtransactionaltask.html#tostring" class="tsd-kind-icon">to<wbr>String</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+					<a href="_run_transaction_.runtransactionaltask.html#validate" class="tsd-kind-icon">validate</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-static">
+					<a href="_run_transaction_.runtransactionaltask.html#isconstruct" class="tsd-kind-icon">is<wbr>Construct</a>
 				</li>
 			</ul>
+		</li>
+		<li class=" tsd-kind-interface tsd-parent-kind-module">
+			<a href="../interfaces/_run_transaction_.runtransactionaltaskprops.html" class="tsd-kind-icon">Run<wbr>Transactional<wbr>Task<wbr>Props</a>
 		</li>
 	</ul>
 </nav>
 <div class="container container-main">
 	<div class="content-wrap">
+		<section class="tsd-panel tsd-comment">
+			<div class="tsd-comment tsd-typography">
+				<div class="lead">
+					<p>RunTransaction executes given main task and manages its concurrency.</p>
+				</div>
+				<p>Most common AWS services guarantee at-least-once execution but not exactly-once.</p>
+				<p>The RunTransaction uses Step Function as task runner and DynamoDB as exclusive lock.</p>
+				<p>So we can run some task that supported by Step Functions task in exactly-once manner if max concurrency is 1.</p>
+			</div>
+		</section>
 		<section class="tsd-panel tsd-hierarchy">
 			<h3>Hierarchy</h3>
 			<ul class="tsd-hierarchy">
 				<li>
-					<span class="target">TransactionalTaskProps</span>
+					<span class="tsd-signature-type">StateMachineFragment</span>
+					<ul class="tsd-hierarchy">
+						<li>
+							<span class="target">RunTransactionalTask</span>
+						</li>
+					</ul>
 				</li>
+			</ul>
+		</section>
+		<section class="tsd-panel">
+			<h3>Implements</h3>
+			<ul class="tsd-hierarchy">
+				<li><span class="tsd-signature-type">IConstruct</span></li>
+				<li><span class="tsd-signature-type">IConstruct</span></li>
+				<li><span class="tsd-signature-type">IChainable</span></li>
 			</ul>
 		</section>
 		<section class="tsd-panel-group tsd-index-group">
@@ -2397,58 +2480,583 @@ img {
 			<section class="tsd-panel tsd-index-panel">
 				<div class="tsd-index-content">
 					<section class="tsd-index-section ">
+						<h3>Constructors</h3>
+						<ul class="tsd-index-list">
+							<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite"><a href="_run_transaction_.runtransactionaltask.html#constructor" class="tsd-kind-icon">constructor</a></li>
+						</ul>
+					</section>
+					<section class="tsd-index-section ">
 						<h3>Properties</h3>
 						<ul class="tsd-index-list">
-							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_transactional_task_.transactionaltaskprops.html#invokemain" class="tsd-kind-icon">invoke<wbr>Main</a></li>
-							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_transactional_task_.transactionaltaskprops.html#locktable" class="tsd-kind-icon">lock<wbr>Table</a></li>
-							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_transactional_task_.transactionaltaskprops.html#taskname" class="tsd-kind-icon">task<wbr>Name</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_run_transaction_.runtransactionaltask.html#amount" class="tsd-kind-icon">amount</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-class tsd-is-overwrite"><a href="_run_transaction_.runtransactionaltask.html#endstates" class="tsd-kind-icon">end<wbr>States</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_run_transaction_.runtransactionaltask.html#getlockresultpath" class="tsd-kind-icon">get<wbr>Lock<wbr>Result<wbr>Path</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_run_transaction_.runtransactionaltask.html#locktable" class="tsd-kind-icon">lock<wbr>Table</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_run_transaction_.runtransactionaltask.html#node" class="tsd-kind-icon">node</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-class tsd-is-overwrite"><a href="_run_transaction_.runtransactionaltask.html#startstate" class="tsd-kind-icon">start<wbr>State</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_run_transaction_.runtransactionaltask.html#taskname" class="tsd-kind-icon">task<wbr>Name</a></li>
+						</ul>
+					</section>
+					<section class="tsd-index-section ">
+						<h3>Accessors</h3>
+						<ul class="tsd-index-list">
+							<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited"><a href="_run_transaction_.runtransactionaltask.html#id" class="tsd-kind-icon">id</a></li>
+							<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-private"><a href="_run_transaction_.runtransactionaltask.html#lockkey" class="tsd-kind-icon">lock<wbr>Key</a></li>
+						</ul>
+					</section>
+					<section class="tsd-index-section ">
+						<h3>Methods</h3>
+						<ul class="tsd-index-list">
+							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_run_transaction_.runtransactionaltask.html#freelocktask" class="tsd-kind-icon">free<wbr>Lock<wbr>Task</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_run_transaction_.runtransactionaltask.html#getlocktask" class="tsd-kind-icon">get<wbr>Lock<wbr>Task</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_run_transaction_.runtransactionaltask.html#next" class="tsd-kind-icon">next</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited tsd-is-protected"><a href="_run_transaction_.runtransactionaltask.html#onprepare" class="tsd-kind-icon">on<wbr>Prepare</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited tsd-is-protected"><a href="_run_transaction_.runtransactionaltask.html#onsynthesize" class="tsd-kind-icon">on<wbr>Synthesize</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited tsd-is-protected"><a href="_run_transaction_.runtransactionaltask.html#onvalidate" class="tsd-kind-icon">on<wbr>Validate</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_run_transaction_.runtransactionaltask.html#prefixstates" class="tsd-kind-icon">prefix<wbr>States</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="_run_transaction_.runtransactionaltask.html#prepare" class="tsd-kind-icon">prepare</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="_run_transaction_.runtransactionaltask.html#synthesize" class="tsd-kind-icon">synthesize</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_run_transaction_.runtransactionaltask.html#tosinglestate" class="tsd-kind-icon">to<wbr>Single<wbr>State</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_run_transaction_.runtransactionaltask.html#tostring" class="tsd-kind-icon">to<wbr>String</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="_run_transaction_.runtransactionaltask.html#validate" class="tsd-kind-icon">validate</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-static"><a href="_run_transaction_.runtransactionaltask.html#isconstruct" class="tsd-kind-icon">is<wbr>Construct</a></li>
 						</ul>
 					</section>
 				</div>
 			</section>
 		</section>
 		<section class="tsd-panel-group tsd-member-group ">
+			<h2>Constructors</h2>
+			<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
+				<a name="constructor" class="tsd-anchor"></a>
+				<h3>constructor</h3>
+				<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
+					<li class="tsd-signature tsd-kind-icon">new <wbr>Run<wbr>Transactional<wbr>Task<span class="tsd-signature-symbol">(</span>scope<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Construct</span>, id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, props<span class="tsd-signature-symbol">: </span><a href="../interfaces/_index_.runtransactionaltaskprops.html" class="tsd-signature-type">RunTransactionalTaskProps</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_run_transaction_.runtransactionaltask.html" class="tsd-signature-type">RunTransactionalTask</a></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<p>Overrides Construct.__constructor</p>
+							<ul>
+								<li>Defined in <a href="https://github.com/aereal/qron/blob/f986097/packages/@aereal/qron/src/run-transaction.ts#L56">packages/@aereal/qron/src/run-transaction.ts:56</a></li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>scope: <span class="tsd-signature-type">Construct</span></h5>
+							</li>
+							<li>
+								<h5>id: <span class="tsd-signature-type">string</span></h5>
+							</li>
+							<li>
+								<h5>props: <a href="../interfaces/_index_.runtransactionaltaskprops.html" class="tsd-signature-type">RunTransactionalTaskProps</a></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <a href="_run_transaction_.runtransactionaltask.html" class="tsd-signature-type">RunTransactionalTask</a></h4>
+					</li>
+				</ul>
+			</section>
+		</section>
+		<section class="tsd-panel-group tsd-member-group ">
 			<h2>Properties</h2>
-			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-				<a name="invokemain" class="tsd-anchor"></a>
-				<h3>invoke<wbr>Main</h3>
-				<div class="tsd-signature tsd-kind-icon">invoke<wbr>Main<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">TaskStateBase</span></div>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+				<a name="amount" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagPrivate">Private</span> amount</h3>
+				<div class="tsd-signature tsd-kind-icon">amount<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">DynamoAttributeValue</span><span class="tsd-signature-symbol"> = DynamoAttributeValue.fromNumber(1)</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/aereal/qron/blob/1884919/packages/@aereal/qron/src/transactional-task.ts#L27">packages/@aereal/qron/src/transactional-task.ts:27</a></li>
+						<li>Defined in <a href="https://github.com/aereal/qron/blob/f986097/packages/@aereal/qron/src/run-transaction.ts#L54">packages/@aereal/qron/src/run-transaction.ts:54</a></li>
 					</ul>
 				</aside>
 			</section>
-			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
+				<a name="endstates" class="tsd-anchor"></a>
+				<h3>end<wbr>States</h3>
+				<div class="tsd-signature tsd-kind-icon">end<wbr>States<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">INextable</span><span class="tsd-signature-symbol">[]</span></div>
+				<aside class="tsd-sources">
+					<p>Overrides StateMachineFragment.endStates</p>
+					<ul>
+						<li>Defined in <a href="https://github.com/aereal/qron/blob/f986097/packages/@aereal/qron/src/run-transaction.ts#L50">packages/@aereal/qron/src/run-transaction.ts:50</a></li>
+					</ul>
+				</aside>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+				<a name="getlockresultpath" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagPrivate">Private</span> get<wbr>Lock<wbr>Result<wbr>Path</h3>
+				<div class="tsd-signature tsd-kind-icon">get<wbr>Lock<wbr>Result<wbr>Path<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;$.Lock&quot;</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/aereal/qron/blob/f986097/packages/@aereal/qron/src/run-transaction.ts#L51">packages/@aereal/qron/src/run-transaction.ts:51</a></li>
+					</ul>
+				</aside>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
 				<a name="locktable" class="tsd-anchor"></a>
-				<h3>lock<wbr>Table</h3>
+				<h3><span class="tsd-flag ts-flagPrivate">Private</span> lock<wbr>Table</h3>
 				<div class="tsd-signature tsd-kind-icon">lock<wbr>Table<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ITable</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/aereal/qron/blob/1884919/packages/@aereal/qron/src/transactional-task.ts#L25">packages/@aereal/qron/src/transactional-task.ts:25</a></li>
+						<li>Defined in <a href="https://github.com/aereal/qron/blob/f986097/packages/@aereal/qron/src/run-transaction.ts#L52">packages/@aereal/qron/src/run-transaction.ts:52</a></li>
+					</ul>
+				</aside>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+				<a name="node" class="tsd-anchor"></a>
+				<h3>node</h3>
+				<div class="tsd-signature tsd-kind-icon">node<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ConstructNode</span></div>
+				<aside class="tsd-sources">
+					<p>Inherited from <a href="_index_.runtransactionaltask.html">RunTransactionalTask</a>.<a href="_index_.runtransactionaltask.html#node">node</a></p>
+					<ul>
+						<li>Defined in node_modules/@aws-cdk/core/lib/construct-compat.d.ts:54</li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>DynamoDB table manages tasks concurrency.
-						It must have partition key that&#39;s name is <code>taskName</code> and type is string.</p>
+						<p>The construct tree node associated with this construct.</p>
 					</div>
 				</div>
 			</section>
-			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
+				<a name="startstate" class="tsd-anchor"></a>
+				<h3>start<wbr>State</h3>
+				<div class="tsd-signature tsd-kind-icon">start<wbr>State<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">State</span></div>
+				<aside class="tsd-sources">
+					<p>Overrides StateMachineFragment.startState</p>
+					<ul>
+						<li>Defined in <a href="https://github.com/aereal/qron/blob/f986097/packages/@aereal/qron/src/run-transaction.ts#L49">packages/@aereal/qron/src/run-transaction.ts:49</a></li>
+					</ul>
+				</aside>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
 				<a name="taskname" class="tsd-anchor"></a>
-				<h3>task<wbr>Name</h3>
+				<h3><span class="tsd-flag ts-flagPrivate">Private</span> task<wbr>Name</h3>
 				<div class="tsd-signature tsd-kind-icon">task<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/aereal/qron/blob/1884919/packages/@aereal/qron/src/transactional-task.ts#L32">packages/@aereal/qron/src/transactional-task.ts:32</a></li>
+						<li>Defined in <a href="https://github.com/aereal/qron/blob/f986097/packages/@aereal/qron/src/run-transaction.ts#L53">packages/@aereal/qron/src/run-transaction.ts:53</a></li>
 					</ul>
 				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>taskName is used as lock key so it must be unique in same <a href="_transactional_task_.transactionaltaskprops.html#locktable">lockTable</a>.</p>
-					</div>
-				</div>
+			</section>
+		</section>
+		<section class="tsd-panel-group tsd-member-group ">
+			<h2>Accessors</h2>
+			<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
+				<a name="id" class="tsd-anchor"></a>
+				<h3>id</h3>
+				<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
+					<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> id<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<p>Inherited from <a href="_index_.runtransactionaltask.html">RunTransactionalTask</a>.<a href="_index_.runtransactionaltask.html#id">id</a></p>
+							<ul>
+								<li>Defined in node_modules/@aws-cdk/aws-stepfunctions/lib/state-machine-fragment.d.ts:21</li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Descriptive identifier for this chainable.</p>
+							</div>
+						</div>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class tsd-is-private">
+				<a name="lockkey" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagPrivate">Private</span> lock<wbr>Key</h3>
+				<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class tsd-is-private">
+					<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> lockKey<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{}</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/aereal/qron/blob/f986097/packages/@aereal/qron/src/run-transaction.ts#L129">packages/@aereal/qron/src/run-transaction.ts:129</a></li>
+							</ul>
+						</aside>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">{}</span></h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-index-signature">
+								<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">DynamoAttributeValue</span></h5>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</section>
+		</section>
+		<section class="tsd-panel-group tsd-member-group ">
+			<h2>Methods</h2>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+				<a name="freelocktask" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagPrivate">Private</span> free<wbr>Lock<wbr>Task</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<li class="tsd-signature tsd-kind-icon">free<wbr>Lock<wbr>Task<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DynamoUpdateItem</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/aereal/qron/blob/f986097/packages/@aereal/qron/src/run-transaction.ts#L110">packages/@aereal/qron/src/run-transaction.ts:110</a></li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>id: <span class="tsd-signature-type">string</span></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">DynamoUpdateItem</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+				<a name="getlocktask" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagPrivate">Private</span> get<wbr>Lock<wbr>Task</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<li class="tsd-signature tsd-kind-icon">get<wbr>Lock<wbr>Task<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DynamoUpdateItem</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/aereal/qron/blob/f986097/packages/@aereal/qron/src/run-transaction.ts#L91">packages/@aereal/qron/src/run-transaction.ts:91</a></li>
+							</ul>
+						</aside>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">DynamoUpdateItem</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+				<a name="next" class="tsd-anchor"></a>
+				<h3>next</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<li class="tsd-signature tsd-kind-icon">next<span class="tsd-signature-symbol">(</span>next<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">IChainable</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Chain</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<p>Inherited from <a href="_index_.runtransactionaltask.html">RunTransactionalTask</a>.<a href="_index_.runtransactionaltask.html#next">next</a></p>
+							<ul>
+								<li>Defined in node_modules/@aws-cdk/aws-stepfunctions/lib/state-machine-fragment.d.ts:46</li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Continue normal execution with the given state.</p>
+							</div>
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>next: <span class="tsd-signature-type">IChainable</span></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Chain</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited tsd-is-protected">
+				<a name="onprepare" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagProtected">Protected</span> on<wbr>Prepare</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited tsd-is-protected">
+					<li class="tsd-signature tsd-kind-icon">on<wbr>Prepare<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<p>Inherited from <a href="_index_.runtransactionaltask.html">RunTransactionalTask</a>.<a href="_index_.runtransactionaltask.html#onprepare">onPrepare</a></p>
+							<p>Overrides Construct.onPrepare</p>
+							<ul>
+								<li>Defined in node_modules/@aws-cdk/core/lib/construct-compat.d.ts:78</li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Perform final modifications before synthesis.</p>
+							</div>
+							<p>This method can be implemented by derived constructs in order to perform
+								final changes before synthesis. prepare() will be called after child
+							constructs have been prepared.</p>
+							<p>This is an advanced framework feature. Only use this if you
+							understand the implications.</p>
+						</div>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited tsd-is-protected">
+				<a name="onsynthesize" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagProtected">Protected</span> on<wbr>Synthesize</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited tsd-is-protected">
+					<li class="tsd-signature tsd-kind-icon">on<wbr>Synthesize<span class="tsd-signature-symbol">(</span>session<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ISynthesisSession</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<p>Inherited from <a href="_index_.runtransactionaltask.html">RunTransactionalTask</a>.<a href="_index_.runtransactionaltask.html#onsynthesize">onSynthesize</a></p>
+							<p>Overrides Construct.onSynthesize</p>
+							<ul>
+								<li>Defined in node_modules/@aws-cdk/core/lib/construct-compat.d.ts:87</li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Allows this construct to emit artifacts into the cloud assembly during synthesis.</p>
+							</div>
+							<p>This method is usually implemented by framework-level constructs such as <code>Stack</code> and <code>Asset</code>
+							as they participate in synthesizing the cloud assembly.</p>
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>session: <span class="tsd-signature-type">ISynthesisSession</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>The synthesis session.</p>
+								</div>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited tsd-is-protected">
+				<a name="onvalidate" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagProtected">Protected</span> on<wbr>Validate</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited tsd-is-protected">
+					<li class="tsd-signature tsd-kind-icon">on<wbr>Validate<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<p>Inherited from <a href="_index_.runtransactionaltask.html">RunTransactionalTask</a>.<a href="_index_.runtransactionaltask.html#onvalidate">onValidate</a></p>
+							<p>Overrides Construct.onValidate</p>
+							<ul>
+								<li>Defined in node_modules/@aws-cdk/core/lib/construct-compat.d.ts:67</li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Validate the current construct.</p>
+							</div>
+							<p>This method can be implemented by derived constructs in order to perform
+							validation logic. It is called on all constructs before synthesis.</p>
+						</div>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h4>
+						<p>An array of validation error messages, or an empty array if the construct is valid.</p>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+				<a name="prefixstates" class="tsd-anchor"></a>
+				<h3>prefix<wbr>States</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<li class="tsd-signature tsd-kind-icon">prefix<wbr>States<span class="tsd-signature-symbol">(</span>prefix<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">StateMachineFragment</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<p>Inherited from <a href="_index_.runtransactionaltask.html">RunTransactionalTask</a>.<a href="_index_.runtransactionaltask.html#prefixstates">prefixStates</a></p>
+							<ul>
+								<li>Defined in node_modules/@aws-cdk/aws-stepfunctions/lib/state-machine-fragment.d.ts:30</li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Prefix the IDs of all states in this state machine fragment.</p>
+							</div>
+							<p>Use this to avoid multiple copies of the state machine all having the
+							same state IDs.</p>
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> prefix: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>The prefix to add.</p>
+								</div>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">StateMachineFragment</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+				<a name="prepare" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagProtected">Protected</span> prepare</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+					<li class="tsd-signature tsd-kind-icon">prepare<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<p>Inherited from <a href="_index_.runtransactionaltask.html">RunTransactionalTask</a>.<a href="_index_.runtransactionaltask.html#prepare">prepare</a></p>
+							<ul>
+								<li>Defined in node_modules/@aws-cdk/core/lib/construct-compat.d.ts:107</li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Perform final modifications before synthesis.</p>
+							</div>
+							<p>This method can be implemented by derived constructs in order to perform
+								final changes before synthesis. prepare() will be called after child
+							constructs have been prepared.</p>
+							<p>This is an advanced framework feature. Only use this if you
+							understand the implications.</p>
+						</div>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+				<a name="synthesize" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagProtected">Protected</span> synthesize</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+					<li class="tsd-signature tsd-kind-icon">synthesize<span class="tsd-signature-symbol">(</span>session<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ISynthesisSession</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<p>Inherited from <a href="_index_.runtransactionaltask.html">RunTransactionalTask</a>.<a href="_index_.runtransactionaltask.html#synthesize">synthesize</a></p>
+							<ul>
+								<li>Defined in node_modules/@aws-cdk/core/lib/construct-compat.d.ts:116</li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Allows this construct to emit artifacts into the cloud assembly during synthesis.</p>
+							</div>
+							<p>This method is usually implemented by framework-level constructs such as <code>Stack</code> and <code>Asset</code>
+							as they participate in synthesizing the cloud assembly.</p>
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>session: <span class="tsd-signature-type">ISynthesisSession</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>The synthesis session.</p>
+								</div>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+				<a name="tosinglestate" class="tsd-anchor"></a>
+				<h3>to<wbr>Single<wbr>State</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<li class="tsd-signature tsd-kind-icon">to<wbr>Single<wbr>State<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">SingleStateOptions</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Parallel</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<p>Inherited from <a href="_index_.runtransactionaltask.html">RunTransactionalTask</a>.<a href="_index_.runtransactionaltask.html#tosinglestate">toSingleState</a></p>
+							<ul>
+								<li>Defined in node_modules/@aws-cdk/aws-stepfunctions/lib/state-machine-fragment.d.ts:42</li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Wrap all states in this state machine fragment up into a single state.</p>
+							</div>
+							<p>This can be used to add retry or error handling onto this state
+							machine fragment.</p>
+							<p>Be aware that this changes the result of the inner state machine
+								to be an array with the result of the state machine in it. Adjust
+								your paths accordingly. For example, change &#39;outputPath&#39; to
+							&#39;$[0]&#39;.</p>
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <span class="tsd-signature-type">SingleStateOptions</span></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Parallel</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+				<a name="tostring" class="tsd-anchor"></a>
+				<h3>to<wbr>String</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<li class="tsd-signature tsd-kind-icon">to<wbr>String<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<p>Inherited from <a href="_index_.runtransactionaltask.html">RunTransactionalTask</a>.<a href="_index_.runtransactionaltask.html#tostring">toString</a></p>
+							<ul>
+								<li>Defined in node_modules/constructs/lib/construct.d.ts:237</li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Returns a string representation of this construct.</p>
+							</div>
+						</div>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+				<a name="validate" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagProtected">Protected</span> validate</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+					<li class="tsd-signature tsd-kind-icon">validate<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<p>Inherited from <a href="_index_.runtransactionaltask.html">RunTransactionalTask</a>.<a href="_index_.runtransactionaltask.html#validate">validate</a></p>
+							<ul>
+								<li>Defined in node_modules/@aws-cdk/core/lib/construct-compat.d.ts:96</li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Validate the current construct.</p>
+							</div>
+							<p>This method can be implemented by derived constructs in order to perform
+							validation logic. It is called on all constructs before synthesis.</p>
+						</div>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h4>
+						<p>An array of validation error messages, or an empty array if the construct is valid.</p>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-static">
+				<a name="isconstruct" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagStatic">Static</span> is<wbr>Construct</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-static">
+					<li class="tsd-signature tsd-kind-icon">is<wbr>Construct<span class="tsd-signature-symbol">(</span>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">x</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-type">Construct</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<p>Inherited from <a href="_index_.runtransactionaltask.html">RunTransactionalTask</a>.<a href="_index_.runtransactionaltask.html#isconstruct">isConstruct</a></p>
+							<ul>
+								<li>Defined in node_modules/@aws-cdk/core/lib/construct-compat.d.ts:50</li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Return whether the given object is a Construct.</p>
+							</div>
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>x: <span class="tsd-signature-type">any</span></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">x</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-type">Construct</span></h4>
+					</li>
+				</ul>
 			</section>
 		</section>
 		<footer class="with-border-bottom">
