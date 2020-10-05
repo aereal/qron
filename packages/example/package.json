@@ -53,6 +53,7 @@
     "aws-cdk": "1.66.0"
   },
   "devDependencies": {
+    "@aereal/eslint-config": "^0.1.4",
     "@aws-cdk/aws-batch": "^1.66.0",
     "@aws-cdk/aws-codeguruprofiler": "^1.66.0",
     "@aws-cdk/aws-cognito": "^1.66.0",
@@ -63,15 +64,19 @@
     "@aws-cdk/custom-resources": "^1.66.0",
     "@types/jest": "^26.0.14",
     "@types/node": "^13.13.4",
-    "@typescript-eslint/eslint-plugin": "^3.10.1",
-    "@typescript-eslint/parser": "^3.10.1",
+    "@typescript-eslint/eslint-plugin": "^4.3.0",
+    "@typescript-eslint/parser": "^4.3.0",
     "constructs": "^3.0.4",
-    "eslint": "^7.7.0",
-    "eslint-config-prettier": "^6.10.0",
-    "eslint-plugin-import": "^2.20.1",
-    "eslint-plugin-prettier": "^3.1.2",
+    "eslint": "^7.10.0",
+    "eslint-config-prettier": "^6.12.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsdoc": "^30.6.3",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.21.3",
+    "eslint-plugin-react-hooks": "^4.1.2",
     "jest": "^26.5.0",
-    "prettier": "^2.1.0",
+    "prettier": "^2.1.2",
     "ts-jest": "^26.4.1",
     "ts-node": "^8.6.2",
     "typescript": "^4.0.3"
@@ -86,58 +91,13 @@
   },
   "eslintConfig": {
     "extends": [
-      "eslint:recommended",
-      "plugin:@typescript-eslint/eslint-recommended",
-      "plugin:@typescript-eslint/recommended",
-      "plugin:@typescript-eslint/recommended-requiring-type-checking",
-      "plugin:prettier/recommended",
-      "prettier/@typescript-eslint",
-      "plugin:import/errors",
-      "plugin:import/warnings",
-      "plugin:import/typescript"
+      "@aereal/eslint-config/presets/typescript"
     ],
-    "plugins": [
-      "@typescript-eslint",
-      "import"
-    ],
-    "parser": "@typescript-eslint/parser",
-    "env": {
-      "node": true,
-      "es6": true
-    },
     "parserOptions": {
       "ecmaVersion": 2018,
       "sourceType": "module",
       "createDefaultProgram": true,
       "project": "./tsconfig.json"
-    },
-    "rules": {
-      "no-use-before-define": "off",
-      "@typescript-eslint/no-use-before-define": [
-        "warn",
-        {
-          "functions": false,
-          "classes": false,
-          "variables": false,
-          "typedefs": false
-        }
-      ],
-      "@typescript-eslint/array-type": [
-        "warn",
-        {
-          "default": "array-simple",
-          "readonly": "array-simple"
-        }
-      ],
-      "@typescript-eslint/interface-name-prefix": [
-        "error",
-        {
-          "prefixWithI": "never"
-        }
-      ],
-      "import/no-cycle": 2,
-      "import/first": 1,
-      "import/order": 2
     }
   },
   "jest": {

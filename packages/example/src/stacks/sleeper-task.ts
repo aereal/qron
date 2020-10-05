@@ -1,16 +1,16 @@
 import { join } from "path";
-import { Stack, StackProps, Construct, Duration } from "@aws-cdk/core";
+import { TransactionalTask } from "@aereal/qron";
+import { ITable } from "@aws-cdk/aws-dynamodb";
+import { Rule, Schedule } from "@aws-cdk/aws-events";
+import { SfnStateMachine } from "@aws-cdk/aws-events-targets";
 import {
-  Function as LambdaFunction,
   Code,
+  Function as LambdaFunction,
   Runtime,
   Tracing,
 } from "@aws-cdk/aws-lambda";
-import { ITable } from "@aws-cdk/aws-dynamodb";
 import { LambdaInvoke } from "@aws-cdk/aws-stepfunctions-tasks";
-import { Rule, Schedule } from "@aws-cdk/aws-events";
-import { SfnStateMachine } from "@aws-cdk/aws-events-targets";
-import { TransactionalTask } from "@aereal/qron";
+import { Construct, Duration, Stack, StackProps } from "@aws-cdk/core";
 
 interface SleeperTaskStackProps extends StackProps {
   readonly lockTable: ITable;

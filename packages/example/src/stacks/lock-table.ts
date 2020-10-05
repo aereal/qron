@@ -1,5 +1,5 @@
-import { Stack, Construct, StackProps } from "@aws-cdk/core";
-import { Table, AttributeType, ITable } from "@aws-cdk/aws-dynamodb";
+import { AttributeType, ITable, Table } from "@aws-cdk/aws-dynamodb";
+import { Construct, Stack, StackProps } from "@aws-cdk/core";
 
 export class LockTableStack extends Stack {
   public readonly newLockTable: ITable;

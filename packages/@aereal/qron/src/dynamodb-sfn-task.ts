@@ -1,9 +1,14 @@
+/* eslint-disable @typescript-eslint/ban-types */
+/* eslint-disable @typescript-eslint/no-invalid-this */
+/* eslint-disable @typescript-eslint/explicit-member-accessibility */
+/* eslint-disable @typescript-eslint/member-ordering */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import { Attribute, ITable } from "@aws-cdk/aws-dynamodb";
+import { PolicyStatement } from "@aws-cdk/aws-iam";
 import {
   IStepFunctionsTask,
   StepFunctionsTaskConfig,
 } from "@aws-cdk/aws-stepfunctions";
-import { ITable, Attribute } from "@aws-cdk/aws-dynamodb";
-import { PolicyStatement } from "@aws-cdk/aws-iam";
 
 export interface AttributeValue extends Attribute {
   readonly value: any;
@@ -53,6 +58,9 @@ interface GetItemParameters {
   readonly attributesToGet?: string[];
 }
 
+/**
+ *
+ */
 export class GetItemTask extends DynamoDBStepFunctionsTask<GetItemParameters> {
   actionResourceArn = "arn:aws:states:::dynamodb:getItem";
 
@@ -76,6 +84,9 @@ interface PutItemParamters {
   readonly key: string;
 }
 
+/**
+ *
+ */
 export class PutItemTask extends DynamoDBStepFunctionsTask<PutItemParamters> {
   actionResourceArn = "arn:aws:states:::dynamodb:putItem";
 
@@ -96,6 +107,9 @@ interface DeleteItemParamters {
   readonly key: AttributeValue;
 }
 
+/**
+ *
+ */
 export class DeleteItemTask extends DynamoDBStepFunctionsTask<
   DeleteItemParamters
 > {
@@ -128,6 +142,9 @@ interface UpdateItemParameters {
   readonly returnValues?: UpdateItemReturnValues;
 }
 
+/**
+ *
+ */
 export class UpdateItemTask extends DynamoDBStepFunctionsTask<
   UpdateItemParameters
 > {

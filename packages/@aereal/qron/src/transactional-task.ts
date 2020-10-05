@@ -1,16 +1,16 @@
-import { Construct } from "@aws-cdk/core";
-import { ITable, AttributeType } from "@aws-cdk/aws-dynamodb";
+import { AttributeType, ITable } from "@aws-cdk/aws-dynamodb";
 import {
-  StateMachine,
-  Task,
   Choice,
   Condition,
-  IChainable,
   Fail,
-  Succeed,
+  IChainable,
   IStateMachine,
+  StateMachine,
+  Succeed,
+  Task,
   TaskStateBase,
 } from "@aws-cdk/aws-stepfunctions";
+import { Construct } from "@aws-cdk/core";
 import { AttributeValue, UpdateItemTask } from "./dynamodb-sfn-task";
 
 export interface TransactionalTaskProps {
