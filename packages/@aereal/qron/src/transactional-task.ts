@@ -9,6 +9,7 @@ import {
   Fail,
   Succeed,
   IStateMachine,
+  TaskStateBase,
 } from "@aws-cdk/aws-stepfunctions";
 import { AttributeValue, UpdateItemTask } from "./dynamodb-sfn-task";
 
@@ -19,7 +20,7 @@ export interface TransactionalTaskProps {
    */
   readonly lockTable: ITable;
 
-  readonly invokeMain: Task;
+  readonly invokeMain: TaskStateBase;
 
   /**
    * taskName is used as lock key so it must be unique in same [[lockTable]].

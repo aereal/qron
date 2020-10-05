@@ -7,8 +7,7 @@ import {
   Tracing,
 } from "@aws-cdk/aws-lambda";
 import { ITable } from "@aws-cdk/aws-dynamodb";
-import { Task } from "@aws-cdk/aws-stepfunctions";
-import { InvokeFunction } from "@aws-cdk/aws-stepfunctions-tasks";
+import { LambdaInvoke } from "@aws-cdk/aws-stepfunctions-tasks";
 import { Rule, Schedule } from "@aws-cdk/aws-events";
 import { SfnStateMachine } from "@aws-cdk/aws-events-targets";
 import { TransactionalTask } from "@aereal/qron";
@@ -31,8 +30,8 @@ export class SleeperTaskStack extends Stack {
     });
     const task = new TransactionalTask(this, "SleeperTask", {
       lockTable: props.lockTable,
-      invokeMain: new Task(this, "InvokeFunction", {
-        task: new InvokeFunction(taskFunction),
+      invokeMain: new LambdaInvoke(this, "InvokeLambda", {
+        lambdaFunction: taskFunction,
       }),
       taskName: "sleeper",
     });
