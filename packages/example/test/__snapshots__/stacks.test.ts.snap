@@ -385,18 +385,22 @@ Object {
               Object {
                 "Fn::ImportValue": "qron-lock-table:ExportsOutputRefNewLockTableB8F3FB458E1EBBFF",
               },
-              "\\",\\"Key\\":{\\"taskName\\":{\\"S\\":\\"sleeper\\"}},\\"ExpressionAttributeValues\\":{\\":default\\":{\\"N\\":\\"0\\"},\\":amount\\":{\\"N\\":\\"1\\"}},\\"UpdateExpression\\":\\"SET handledCount = if_not_exists(handledCount, :default) + :amount\\",\\"ReturnValues\\":\\"ALL_NEW\\"},\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:aws:states:::dynamodb:updateItem\\",\\"ResultPath\\":\\"$.Lock\\"},\\"CheckLock\\":{\\"Type\\":\\"Choice\\",\\"Choices\\":[{\\"Variable\\":\\"$.Lock.Attributes.handledCount.N\\",\\"StringEquals\\":\\"1\\",\\"Next\\":\\"InvokeFunction\\"}],\\"Default\\":\\"FailedLockFreed\\"},\\"FailedLockFreed\\":{\\"Next\\":\\"Finite\\",\\"Parameters\\":{\\"TableName\\":\\"",
+              "\\",\\"Key\\":{\\"taskName\\":{\\"S\\":\\"sleeper\\"}},\\"ExpressionAttributeValues\\":{\\":default\\":{\\"N\\":\\"0\\"},\\":amount\\":{\\"N\\":\\"1\\"}},\\"UpdateExpression\\":\\"SET handledCount = if_not_exists(handledCount, :default) + :amount\\",\\"ReturnValues\\":\\"ALL_NEW\\"},\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:aws:states:::dynamodb:updateItem\\",\\"ResultPath\\":\\"$.Lock\\"},\\"CheckLock\\":{\\"Type\\":\\"Choice\\",\\"Choices\\":[{\\"Variable\\":\\"$.Lock.Attributes.handledCount.N\\",\\"StringEquals\\":\\"1\\",\\"Next\\":\\"InvokeLambda\\"}],\\"Default\\":\\"FailedLockFreed\\"},\\"FailedLockFreed\\":{\\"Next\\":\\"Finite\\",\\"Parameters\\":{\\"TableName\\":\\"",
               Object {
                 "Fn::ImportValue": "qron-lock-table:ExportsOutputRefNewLockTableB8F3FB458E1EBBFF",
               },
-              "\\",\\"Key\\":{\\"taskName\\":{\\"S\\":\\"sleeper\\"}},\\"ExpressionAttributeValues\\":{\\":amount\\":{\\"N\\":\\"1\\"}},\\"UpdateExpression\\":\\"SET handledCount = handledCount - :amount\\",\\"ReturnValues\\":\\"ALL_NEW\\"},\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:aws:states:::dynamodb:updateItem\\"},\\"Finite\\":{\\"Type\\":\\"Fail\\"},\\"InvokeFunction\\":{\\"Next\\":\\"SuccessFreeLock\\",\\"Catch\\":[{\\"ErrorEquals\\":[\\"States.ALL\\"],\\"Next\\":\\"AssumeLockFreed\\"}],\\"Type\\":\\"Task\\",\\"Resource\\":\\"",
+              "\\",\\"Key\\":{\\"taskName\\":{\\"S\\":\\"sleeper\\"}},\\"ExpressionAttributeValues\\":{\\":amount\\":{\\"N\\":\\"1\\"}},\\"UpdateExpression\\":\\"SET handledCount = handledCount - :amount\\",\\"ReturnValues\\":\\"ALL_NEW\\"},\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:aws:states:::dynamodb:updateItem\\"},\\"Finite\\":{\\"Type\\":\\"Fail\\"},\\"InvokeLambda\\":{\\"Next\\":\\"SuccessFreeLock\\",\\"Retry\\":[{\\"ErrorEquals\\":[\\"Lambda.ServiceException\\",\\"Lambda.AWSLambdaException\\",\\"Lambda.SdkClientException\\"],\\"IntervalSeconds\\":2,\\"MaxAttempts\\":6,\\"BackoffRate\\":2}],\\"Catch\\":[{\\"ErrorEquals\\":[\\"States.ALL\\"],\\"Next\\":\\"AssumeLockFreed\\"}],\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":states:::lambda:invoke\\",\\"Parameters\\":{\\"FunctionName\\":\\"",
               Object {
                 "Fn::GetAtt": Array [
                   "SleepFunction0243A416",
                   "Arn",
                 ],
               },
-              "\\"},\\"SuccessFreeLock\\":{\\"Next\\":\\"Succeed\\",\\"Parameters\\":{\\"TableName\\":\\"",
+              "\\",\\"Payload.$\\":\\"$\\"}},\\"SuccessFreeLock\\":{\\"Next\\":\\"Succeed\\",\\"Parameters\\":{\\"TableName\\":\\"",
               Object {
                 "Fn::ImportValue": "qron-lock-table:ExportsOutputRefNewLockTableB8F3FB458E1EBBFF",
               },
@@ -570,7 +574,11 @@ Object {
               Object {
                 "Fn::ImportValue": "qron-lock-table:ExportsOutputRefNewLockTableB8F3FB458E1EBBFF",
               },
-              "\\",\\"Key\\":{\\"taskName\\":{\\"S\\":\\"sleeper-ecs\\"}},\\"ExpressionAttributeValues\\":{\\":amount\\":{\\"N\\":\\"1\\"}},\\"UpdateExpression\\":\\"SET handledCount = handledCount - :amount\\",\\"ReturnValues\\":\\"ALL_NEW\\"},\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:aws:states:::dynamodb:updateItem\\"},\\"Finite\\":{\\"Type\\":\\"Fail\\"},\\"MainState\\":{\\"Next\\":\\"SuccessFreeLock\\",\\"Catch\\":[{\\"ErrorEquals\\":[\\"States.ALL\\"],\\"Next\\":\\"AssumeLockFreed\\"}],\\"Parameters\\":{\\"Cluster\\":\\"",
+              "\\",\\"Key\\":{\\"taskName\\":{\\"S\\":\\"sleeper-ecs\\"}},\\"ExpressionAttributeValues\\":{\\":amount\\":{\\"N\\":\\"1\\"}},\\"UpdateExpression\\":\\"SET handledCount = handledCount - :amount\\",\\"ReturnValues\\":\\"ALL_NEW\\"},\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:aws:states:::dynamodb:updateItem\\"},\\"Finite\\":{\\"Type\\":\\"Fail\\"},\\"MainState\\":{\\"Next\\":\\"SuccessFreeLock\\",\\"Catch\\":[{\\"ErrorEquals\\":[\\"States.ALL\\"],\\"Next\\":\\"AssumeLockFreed\\"}],\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":states:::ecs:runTask\\",\\"Parameters\\":{\\"Cluster\\":\\"",
               Object {
                 "Fn::GetAtt": Array [
                   "ClusterEB0386A7",
@@ -588,11 +596,7 @@ Object {
                   "GroupId",
                 ],
               },
-              "\\"]}},\\"Overrides\\":{\\"ContainerOverrides\\":[{\\"Name\\":\\"main\\",\\"Command\\":[\\"-wait\\",\\"3s\\"]}]},\\"LaunchType\\":\\"FARGATE\\"},\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:",
-              Object {
-                "Ref": "AWS::Partition",
-              },
-              ":states:::ecs:runTask.sync\\"},\\"SuccessFreeLock\\":{\\"Next\\":\\"Succeed\\",\\"Parameters\\":{\\"TableName\\":\\"",
+              "\\"]}},\\"Overrides\\":{\\"ContainerOverrides\\":[{\\"Name\\":\\"main\\",\\"Command\\":[\\"-wait\\",\\"3s\\"]}]},\\"LaunchType\\":\\"FARGATE\\",\\"PlatformVersion\\":\\"LATEST\\"}},\\"SuccessFreeLock\\":{\\"Next\\":\\"Succeed\\",\\"Parameters\\":{\\"TableName\\":\\"",
               Object {
                 "Fn::ImportValue": "qron-lock-table:ExportsOutputRefNewLockTableB8F3FB458E1EBBFF",
               },
@@ -713,26 +717,6 @@ Object {
                   ],
                 },
               ],
-            },
-            Object {
-              "Action": Array [
-                "events:PutTargets",
-                "events:PutRule",
-                "events:DescribeRule",
-              ],
-              "Effect": "Allow",
-              "Resource": Object {
-                "Fn::Join": Array [
-                  "",
-                  Array [
-                    "arn:",
-                    Object {
-                      "Ref": "AWS::Partition",
-                    },
-                    ":events:ap-northeast-1:dummy:rule/StepFunctionsGetEventsForECSTaskRule",
-                  ],
-                ],
-              },
             },
           ],
           "Version": "2012-10-17",

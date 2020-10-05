@@ -6,11 +6,15 @@ import {
   FargateTaskDefinition,
   ContainerImage,
   LogDrivers,
+  FargatePlatformVersion,
 } from "@aws-cdk/aws-ecs";
 import { Vpc } from "@aws-cdk/aws-ec2";
 import { LogGroup, RetentionDays } from "@aws-cdk/aws-logs";
-import { Task, ServiceIntegrationPattern } from "@aws-cdk/aws-stepfunctions";
-import { RunEcsFargateTask } from "@aws-cdk/aws-stepfunctions-tasks";
+import { IntegrationPattern } from "@aws-cdk/aws-stepfunctions";
+import {
+  EcsRunTask,
+  EcsFargateLaunchTarget,
+} from "@aws-cdk/aws-stepfunctions-tasks";
 import { Rule, Schedule } from "@aws-cdk/aws-events";
 import { SfnStateMachine } from "@aws-cdk/aws-events-targets";
 import { TransactionalTask } from "@aereal/qron";
@@ -52,18 +56,16 @@ export class SleeperEcsStack extends Stack {
 
     const task = new TransactionalTask(this, "SleeperEcsTask", {
       lockTable,
-      invokeMain: new Task(this, "MainState", {
-        task: new RunEcsFargateTask({
-          cluster,
-          taskDefinition,
-          integrationPattern: ServiceIntegrationPattern.SYNC,
-          containerOverrides: [
-            {
-              containerName: mainContainer.containerName,
-              command: ["-wait", "3s"],
-            },
-          ],
+      invokeMain: new EcsRunTask(this, "MainState", {
+        cluster,
+        taskDefinition,
+        integrationPattern: IntegrationPattern.REQUEST_RESPONSE,
+        launchTarget: new EcsFargateLaunchTarget({
+          platformVersion: FargatePlatformVersion.LATEST,
         }),
+        containerOverrides: [
+          { containerDefinition: mainContainer, command: ["-wait", "3s"] },
+        ],
       }),
       taskName: "sleeper-ecs",
     });
