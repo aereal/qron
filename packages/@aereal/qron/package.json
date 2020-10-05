@@ -81,5 +81,8 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "dependencies": {
+    "@aereal/cdk-dynamodb-expression": "^0.1.0"
   }
 }

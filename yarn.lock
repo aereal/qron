@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@aereal/cdk-dynamodb-expression@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@aereal/cdk-dynamodb-expression/-/cdk-dynamodb-expression-0.1.0.tgz#a863cd1e207db9973cc362192bb3ac31f8bab064"
+  integrity sha512-A6Ip0XfOUi5GExTS03bb7mOw46NEGsKrwz5p+hT1l1lPaHVUV9CuBWGx2dbHha07qalazimVqWze4TwhGzcF0Q==
+
 "@aereal/eslint-config@^0.1.4":
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/@aereal/eslint-config/-/eslint-config-0.1.4.tgz#8c21e2385d8d1cd0c96b2f0edd86e796e1e160d3"
