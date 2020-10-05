@@ -1,4 +1,5 @@
-import { AttributeType, ITable } from "@aws-cdk/aws-dynamodb";
+import { dynamoExpr } from "@aereal/cdk-dynamodb-expression";
+import { ITable } from "@aws-cdk/aws-dynamodb";
 import {
   Choice,
   Condition,
@@ -7,11 +8,14 @@ import {
   IStateMachine,
   StateMachine,
   Succeed,
-  Task,
   TaskStateBase,
 } from "@aws-cdk/aws-stepfunctions";
+import {
+  DynamoAttributeValue,
+  DynamoReturnValues,
+  DynamoUpdateItem,
+} from "@aws-cdk/aws-stepfunctions-tasks";
 import { Construct } from "@aws-cdk/core";
-import { AttributeValue, UpdateItemTask } from "./dynamodb-sfn-task";
 
 export interface TransactionalTaskProps {
   /**
@@ -41,59 +45,23 @@ const keyTaskName = "taskName";
  */
 export class TransactionalTask extends Construct {
   public readonly stateMachine: IStateMachine;
+  private readonly getLockResultPath: string = "$.Lock";
+  private readonly lockTable: ITable;
+  private readonly taskName: string;
+  private readonly amount: DynamoAttributeValue = DynamoAttributeValue.fromNumber(
+    1
+  );
 
   constructor(scope: Construct, id: string, props: TransactionalTaskProps) {
     super(scope, id);
 
     const { lockTable, invokeMain, taskName } = props;
-
-    const lockKey: AttributeValue = {
-      name: keyTaskName,
-      type: AttributeType.STRING,
-      value: taskName,
-    };
+    this.lockTable = lockTable;
+    this.taskName = taskName;
 
     const getLockResultPath = "$.Lock";
 
-    const amount: AttributeValue = {
-      name: ":amount",
-      type: AttributeType.NUMBER,
-      value: "1",
-    };
-
-    const getLock = new Task(this, "GetLock", {
-      task: new UpdateItemTask({
-        table: lockTable,
-        parameters: {
-          key: lockKey,
-          updateExpression:
-            "SET handledCount = if_not_exists(handledCount, :default) + :amount",
-          expressionAttributeValues: [
-            {
-              name: ":default",
-              type: AttributeType.NUMBER,
-              value: "0",
-            },
-            amount,
-          ],
-          returnValues: "ALL_NEW",
-        },
-      }),
-      resultPath: getLockResultPath,
-    });
-
-    const freeLock = (id: string): Task =>
-      new Task(this, id, {
-        task: new UpdateItemTask({
-          table: lockTable,
-          parameters: {
-            key: lockKey,
-            updateExpression: "SET handledCount = handledCount - :amount",
-            expressionAttributeValues: [amount],
-            returnValues: "ALL_NEW",
-          },
-        }),
-      });
+    const getLock = this.getLockTask();
 
     // TODO: otherwise
     // TODO: retry?
@@ -106,18 +74,67 @@ export class TransactionalTask extends Construct {
           ),
           next
         )
-        .otherwise(freeLock("FailedLockFreed").next(new Fail(this, "Finite")));
+        .otherwise(
+          this.freeLockTask("FailedLockFreed").next(new Fail(this, "Finite"))
+        );
 
     this.stateMachine = new StateMachine(this, "StateMachine", {
       definition: getLock.next(
         checkLock(
           invokeMain
-            .addCatch(freeLock("AssumeLockFreed"))
+            .addCatch(this.freeLockTask("AssumeLockFreed"))
             .next(
-              freeLock("SuccessFreeLock").next(new Succeed(this, "Succeed"))
+              this.freeLockTask("SuccessFreeLock").next(
+                new Succeed(this, "Succeed")
+              )
             )
         )
       ),
     });
+  }
+
+  /**
+   *
+   */
+  private getLockTask(): DynamoUpdateItem {
+    const defaultCount = DynamoAttributeValue.fromNumber(0);
+    const [
+      updateExpression,
+      updateAttributeValues,
+    ] = dynamoExpr`SET handledCount = if_not_exists(handledCount, ${defaultCount}) + ${this.amount}`;
+    return new DynamoUpdateItem(this, "GetLock", {
+      table: this.lockTable,
+      key: this.lockKey,
+      updateExpression,
+      expressionAttributeValues: updateAttributeValues,
+      returnValues: DynamoReturnValues.ALL_NEW,
+      resultPath: this.getLockResultPath,
+    });
+  }
+
+  /**
+   *
+   */
+  private freeLockTask(id: string): DynamoUpdateItem {
+    const [
+      updateExpression,
+      values,
+    ] = dynamoExpr`SET handledCount = handledCount - ${DynamoAttributeValue.fromNumber(
+      1
+    )}`;
+    return new DynamoUpdateItem(this, id, {
+      table: this.lockTable,
+      key: this.lockKey,
+      updateExpression,
+      expressionAttributeValues: values,
+      returnValues: DynamoReturnValues.ALL_NEW,
+    });
+  }
+
+  /**
+   *
+   */
+  private get lockKey(): { [key: string]: DynamoAttributeValue } {
+    return { [keyTaskName]: DynamoAttributeValue.fromString(this.taskName) };
   }
 }

@@ -57,15 +57,23 @@ Object {
           "Fn::Join": Array [
             "",
             Array [
-              "{\\"StartAt\\":\\"GetLock\\",\\"States\\":{\\"GetLock\\":{\\"Next\\":\\"CheckLock\\",\\"Parameters\\":{\\"TableName\\":\\"",
+              "{\\"StartAt\\":\\"GetLock\\",\\"States\\":{\\"GetLock\\":{\\"Next\\":\\"CheckLock\\",\\"Type\\":\\"Task\\",\\"ResultPath\\":\\"$.Lock\\",\\"Resource\\":\\"arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":states:::dynamodb:updateItem\\",\\"Parameters\\":{\\"Key\\":{\\"taskName\\":{\\"S\\":\\"test-task\\"}},\\"TableName\\":\\"",
               Object {
                 "Ref": "LockTableB9DACF42",
               },
-              "\\",\\"Key\\":{\\"taskName\\":{\\"S\\":\\"test-task\\"}},\\"ExpressionAttributeValues\\":{\\":default\\":{\\"N\\":\\"0\\"},\\":amount\\":{\\"N\\":\\"1\\"}},\\"UpdateExpression\\":\\"SET handledCount = if_not_exists(handledCount, :default) + :amount\\",\\"ReturnValues\\":\\"ALL_NEW\\"},\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:aws:states:::dynamodb:updateItem\\",\\"ResultPath\\":\\"$.Lock\\"},\\"CheckLock\\":{\\"Type\\":\\"Choice\\",\\"Choices\\":[{\\"Variable\\":\\"$.Lock.Attributes.handledCount.N\\",\\"StringEquals\\":\\"1\\",\\"Next\\":\\"PublishTopic\\"}],\\"Default\\":\\"FailedLockFreed\\"},\\"FailedLockFreed\\":{\\"Next\\":\\"Finite\\",\\"Parameters\\":{\\"TableName\\":\\"",
+              "\\",\\"ExpressionAttributeValues\\":{\\":v5\\":{\\"N\\":\\"0\\"},\\":v6\\":{\\"N\\":\\"1\\"}},\\"ReturnValues\\":\\"ALL_NEW\\",\\"UpdateExpression\\":\\"SET handledCount = if_not_exists(handledCount, :v5) + :v6\\"}},\\"CheckLock\\":{\\"Type\\":\\"Choice\\",\\"Choices\\":[{\\"Variable\\":\\"$.Lock.Attributes.handledCount.N\\",\\"StringEquals\\":\\"1\\",\\"Next\\":\\"PublishTopic\\"}],\\"Default\\":\\"FailedLockFreed\\"},\\"FailedLockFreed\\":{\\"Next\\":\\"Finite\\",\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":states:::dynamodb:updateItem\\",\\"Parameters\\":{\\"Key\\":{\\"taskName\\":{\\"S\\":\\"test-task\\"}},\\"TableName\\":\\"",
               Object {
                 "Ref": "LockTableB9DACF42",
               },
-              "\\",\\"Key\\":{\\"taskName\\":{\\"S\\":\\"test-task\\"}},\\"ExpressionAttributeValues\\":{\\":amount\\":{\\"N\\":\\"1\\"}},\\"UpdateExpression\\":\\"SET handledCount = handledCount - :amount\\",\\"ReturnValues\\":\\"ALL_NEW\\"},\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:aws:states:::dynamodb:updateItem\\"},\\"Finite\\":{\\"Type\\":\\"Fail\\"},\\"PublishTopic\\":{\\"Next\\":\\"SuccessFreeLock\\",\\"Catch\\":[{\\"ErrorEquals\\":[\\"States.ALL\\"],\\"Next\\":\\"AssumeLockFreed\\"}],\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:",
+              "\\",\\"ExpressionAttributeValues\\":{\\":v9\\":{\\"N\\":\\"1\\"}},\\"ReturnValues\\":\\"ALL_NEW\\",\\"UpdateExpression\\":\\"SET handledCount = handledCount - :v9\\"}},\\"Finite\\":{\\"Type\\":\\"Fail\\"},\\"PublishTopic\\":{\\"Next\\":\\"SuccessFreeLock\\",\\"Catch\\":[{\\"ErrorEquals\\":[\\"States.ALL\\"],\\"Next\\":\\"AssumeLockFreed\\"}],\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:",
               Object {
                 "Ref": "AWS::Partition",
               },
@@ -73,15 +81,23 @@ Object {
               Object {
                 "Ref": "TopicBFC7AF6E",
               },
-              "\\",\\"Message\\":{}}},\\"SuccessFreeLock\\":{\\"Next\\":\\"Succeed\\",\\"Parameters\\":{\\"TableName\\":\\"",
+              "\\",\\"Message\\":{}}},\\"SuccessFreeLock\\":{\\"Next\\":\\"Succeed\\",\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":states:::dynamodb:updateItem\\",\\"Parameters\\":{\\"Key\\":{\\"taskName\\":{\\"S\\":\\"test-task\\"}},\\"TableName\\":\\"",
               Object {
                 "Ref": "LockTableB9DACF42",
               },
-              "\\",\\"Key\\":{\\"taskName\\":{\\"S\\":\\"test-task\\"}},\\"ExpressionAttributeValues\\":{\\":amount\\":{\\"N\\":\\"1\\"}},\\"UpdateExpression\\":\\"SET handledCount = handledCount - :amount\\",\\"ReturnValues\\":\\"ALL_NEW\\"},\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:aws:states:::dynamodb:updateItem\\"},\\"Succeed\\":{\\"Type\\":\\"Succeed\\"},\\"AssumeLockFreed\\":{\\"End\\":true,\\"Parameters\\":{\\"TableName\\":\\"",
+              "\\",\\"ExpressionAttributeValues\\":{\\":v8\\":{\\"N\\":\\"1\\"}},\\"ReturnValues\\":\\"ALL_NEW\\",\\"UpdateExpression\\":\\"SET handledCount = handledCount - :v8\\"}},\\"Succeed\\":{\\"Type\\":\\"Succeed\\"},\\"AssumeLockFreed\\":{\\"End\\":true,\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":states:::dynamodb:updateItem\\",\\"Parameters\\":{\\"Key\\":{\\"taskName\\":{\\"S\\":\\"test-task\\"}},\\"TableName\\":\\"",
               Object {
                 "Ref": "LockTableB9DACF42",
               },
-              "\\",\\"Key\\":{\\"taskName\\":{\\"S\\":\\"test-task\\"}},\\"ExpressionAttributeValues\\":{\\":amount\\":{\\"N\\":\\"1\\"}},\\"UpdateExpression\\":\\"SET handledCount = handledCount - :amount\\",\\"ReturnValues\\":\\"ALL_NEW\\"},\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:aws:states:::dynamodb:updateItem\\"}}}",
+              "\\",\\"ExpressionAttributeValues\\":{\\":v7\\":{\\"N\\":\\"1\\"}},\\"ReturnValues\\":\\"ALL_NEW\\",\\"UpdateExpression\\":\\"SET handledCount = handledCount - :v7\\"}}}}",
             ],
           ],
         },
@@ -170,9 +186,26 @@ Object {
               "Action": "dynamodb:UpdateItem",
               "Effect": "Allow",
               "Resource": Object {
-                "Fn::GetAtt": Array [
-                  "LockTableB9DACF42",
-                  "Arn",
+                "Fn::Join": Array [
+                  "",
+                  Array [
+                    "arn:",
+                    Object {
+                      "Ref": "AWS::Partition",
+                    },
+                    ":dynamodb:",
+                    Object {
+                      "Ref": "AWS::Region",
+                    },
+                    ":",
+                    Object {
+                      "Ref": "AWS::AccountId",
+                    },
+                    ":table/",
+                    Object {
+                      "Ref": "LockTableB9DACF42",
+                    },
+                  ],
                 ],
               },
             },
@@ -238,15 +271,23 @@ Object {
           "Fn::Join": Array [
             "",
             Array [
-              "{\\"StartAt\\":\\"GetLock\\",\\"States\\":{\\"GetLock\\":{\\"Next\\":\\"CheckLock\\",\\"Parameters\\":{\\"TableName\\":\\"",
+              "{\\"StartAt\\":\\"GetLock\\",\\"States\\":{\\"GetLock\\":{\\"Next\\":\\"CheckLock\\",\\"Type\\":\\"Task\\",\\"ResultPath\\":\\"$.Lock\\",\\"Resource\\":\\"arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":states:::dynamodb:updateItem\\",\\"Parameters\\":{\\"Key\\":{\\"taskName\\":{\\"S\\":\\"test-task\\"}},\\"TableName\\":\\"",
               Object {
                 "Ref": "LockTableB9DACF42",
               },
-              "\\",\\"Key\\":{\\"taskName\\":{\\"S\\":\\"test-task\\"}},\\"ExpressionAttributeValues\\":{\\":default\\":{\\"N\\":\\"0\\"},\\":amount\\":{\\"N\\":\\"1\\"}},\\"UpdateExpression\\":\\"SET handledCount = if_not_exists(handledCount, :default) + :amount\\",\\"ReturnValues\\":\\"ALL_NEW\\"},\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:aws:states:::dynamodb:updateItem\\",\\"ResultPath\\":\\"$.Lock\\"},\\"CheckLock\\":{\\"Type\\":\\"Choice\\",\\"Choices\\":[{\\"Variable\\":\\"$.Lock.Attributes.handledCount.N\\",\\"StringEquals\\":\\"1\\",\\"Next\\":\\"PublishTopic\\"}],\\"Default\\":\\"FailedLockFreed\\"},\\"FailedLockFreed\\":{\\"Next\\":\\"Finite\\",\\"Parameters\\":{\\"TableName\\":\\"",
+              "\\",\\"ExpressionAttributeValues\\":{\\":v0\\":{\\"N\\":\\"0\\"},\\":v1\\":{\\"N\\":\\"1\\"}},\\"ReturnValues\\":\\"ALL_NEW\\",\\"UpdateExpression\\":\\"SET handledCount = if_not_exists(handledCount, :v0) + :v1\\"}},\\"CheckLock\\":{\\"Type\\":\\"Choice\\",\\"Choices\\":[{\\"Variable\\":\\"$.Lock.Attributes.handledCount.N\\",\\"StringEquals\\":\\"1\\",\\"Next\\":\\"PublishTopic\\"}],\\"Default\\":\\"FailedLockFreed\\"},\\"FailedLockFreed\\":{\\"Next\\":\\"Finite\\",\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":states:::dynamodb:updateItem\\",\\"Parameters\\":{\\"Key\\":{\\"taskName\\":{\\"S\\":\\"test-task\\"}},\\"TableName\\":\\"",
               Object {
                 "Ref": "LockTableB9DACF42",
               },
-              "\\",\\"Key\\":{\\"taskName\\":{\\"S\\":\\"test-task\\"}},\\"ExpressionAttributeValues\\":{\\":amount\\":{\\"N\\":\\"1\\"}},\\"UpdateExpression\\":\\"SET handledCount = handledCount - :amount\\",\\"ReturnValues\\":\\"ALL_NEW\\"},\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:aws:states:::dynamodb:updateItem\\"},\\"Finite\\":{\\"Type\\":\\"Fail\\"},\\"PublishTopic\\":{\\"Next\\":\\"SuccessFreeLock\\",\\"Catch\\":[{\\"ErrorEquals\\":[\\"States.ALL\\"],\\"Next\\":\\"AssumeLockFreed\\"}],\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:",
+              "\\",\\"ExpressionAttributeValues\\":{\\":v4\\":{\\"N\\":\\"1\\"}},\\"ReturnValues\\":\\"ALL_NEW\\",\\"UpdateExpression\\":\\"SET handledCount = handledCount - :v4\\"}},\\"Finite\\":{\\"Type\\":\\"Fail\\"},\\"PublishTopic\\":{\\"Next\\":\\"SuccessFreeLock\\",\\"Catch\\":[{\\"ErrorEquals\\":[\\"States.ALL\\"],\\"Next\\":\\"AssumeLockFreed\\"}],\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:",
               Object {
                 "Ref": "AWS::Partition",
               },
@@ -254,15 +295,23 @@ Object {
               Object {
                 "Ref": "TopicBFC7AF6E",
               },
-              "\\",\\"Message\\":{}}},\\"SuccessFreeLock\\":{\\"Next\\":\\"Succeed\\",\\"Parameters\\":{\\"TableName\\":\\"",
+              "\\",\\"Message\\":{}}},\\"SuccessFreeLock\\":{\\"Next\\":\\"Succeed\\",\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":states:::dynamodb:updateItem\\",\\"Parameters\\":{\\"Key\\":{\\"taskName\\":{\\"S\\":\\"test-task\\"}},\\"TableName\\":\\"",
               Object {
                 "Ref": "LockTableB9DACF42",
               },
-              "\\",\\"Key\\":{\\"taskName\\":{\\"S\\":\\"test-task\\"}},\\"ExpressionAttributeValues\\":{\\":amount\\":{\\"N\\":\\"1\\"}},\\"UpdateExpression\\":\\"SET handledCount = handledCount - :amount\\",\\"ReturnValues\\":\\"ALL_NEW\\"},\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:aws:states:::dynamodb:updateItem\\"},\\"Succeed\\":{\\"Type\\":\\"Succeed\\"},\\"AssumeLockFreed\\":{\\"End\\":true,\\"Parameters\\":{\\"TableName\\":\\"",
+              "\\",\\"ExpressionAttributeValues\\":{\\":v3\\":{\\"N\\":\\"1\\"}},\\"ReturnValues\\":\\"ALL_NEW\\",\\"UpdateExpression\\":\\"SET handledCount = handledCount - :v3\\"}},\\"Succeed\\":{\\"Type\\":\\"Succeed\\"},\\"AssumeLockFreed\\":{\\"End\\":true,\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":states:::dynamodb:updateItem\\",\\"Parameters\\":{\\"Key\\":{\\"taskName\\":{\\"S\\":\\"test-task\\"}},\\"TableName\\":\\"",
               Object {
                 "Ref": "LockTableB9DACF42",
               },
-              "\\",\\"Key\\":{\\"taskName\\":{\\"S\\":\\"test-task\\"}},\\"ExpressionAttributeValues\\":{\\":amount\\":{\\"N\\":\\"1\\"}},\\"UpdateExpression\\":\\"SET handledCount = handledCount - :amount\\",\\"ReturnValues\\":\\"ALL_NEW\\"},\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:aws:states:::dynamodb:updateItem\\"}}}",
+              "\\",\\"ExpressionAttributeValues\\":{\\":v2\\":{\\"N\\":\\"1\\"}},\\"ReturnValues\\":\\"ALL_NEW\\",\\"UpdateExpression\\":\\"SET handledCount = handledCount - :v2\\"}}}}",
             ],
           ],
         },
@@ -311,9 +360,26 @@ Object {
               "Action": "dynamodb:UpdateItem",
               "Effect": "Allow",
               "Resource": Object {
-                "Fn::GetAtt": Array [
-                  "LockTableB9DACF42",
-                  "Arn",
+                "Fn::Join": Array [
+                  "",
+                  Array [
+                    "arn:",
+                    Object {
+                      "Ref": "AWS::Partition",
+                    },
+                    ":dynamodb:",
+                    Object {
+                      "Ref": "AWS::Region",
+                    },
+                    ":",
+                    Object {
+                      "Ref": "AWS::AccountId",
+                    },
+                    ":table/",
+                    Object {
+                      "Ref": "LockTableB9DACF42",
+                    },
+                  ],
                 ],
               },
             },
