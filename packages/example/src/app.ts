@@ -52,5 +52,8 @@ export class QronApp extends App {
         account: "dummy",
         region: "ap-northeast-1",
       },
+      context: {
+        vpcId: "dummy",
+      },
     });
 }
