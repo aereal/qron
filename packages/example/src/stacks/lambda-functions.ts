@@ -1,12 +1,12 @@
 import { join } from "path";
-import { Stack, StackProps, Construct, Duration } from "@aws-cdk/core";
 import {
-  Function as LambdaFunction,
   Code,
+  IFunction,
+  Function as LambdaFunction,
   Runtime,
   Tracing,
-  IFunction,
 } from "@aws-cdk/aws-lambda";
+import { Construct, Duration, Stack, StackProps } from "@aws-cdk/core";
 
 export class LambdaFunctionsStack extends Stack {
   public readonly sleepFunction: IFunction;

@@ -1,36 +1,15 @@
 import { App, AppProps, Environment } from "@aws-cdk/core";
+import { EcrRepoStack } from "./stacks/ecr-repo";
 import { LambdaFunctionsStack } from "./stacks/lambda-functions";
 import { LockTableStack } from "./stacks/lock-table";
-import { SleeperTaskStack } from "./stacks/sleeper-task";
-import { EcrRepoStack } from "./stacks/ecr-repo";
 import { SleeperEcsStack } from "./stacks/sleeper-ecs";
+import { SleeperTaskStack } from "./stacks/sleeper-task";
 
 interface QronAppProps extends AppProps {
   readonly env: Environment;
 }
 
 export class QronApp extends App {
-  static newFromContext = (): QronApp => {
-    const { CDK_DEFAULT_ACCOUNT, CDK_DEFAULT_REGION } = process.env;
-    if (CDK_DEFAULT_ACCOUNT === undefined) {
-      throw new Error("default account not found");
-    }
-    if (CDK_DEFAULT_REGION === undefined) {
-      throw new Error("default region not found");
-    }
-    return new QronApp({
-      env: { account: CDK_DEFAULT_ACCOUNT, region: CDK_DEFAULT_REGION },
-    });
-  };
-
-  static newForTest = (): QronApp =>
-    new QronApp({
-      env: {
-        account: "dummy",
-        region: "ap-northeast-1",
-      },
-    });
-
   private constructor(props: QronAppProps) {
     super(props);
 
@@ -53,4 +32,25 @@ export class QronApp extends App {
       lockTable: lockTableStack.newLockTable,
     });
   }
+
+  public static newFromContext = (): QronApp => {
+    const { CDK_DEFAULT_ACCOUNT, CDK_DEFAULT_REGION } = process.env;
+    if (CDK_DEFAULT_ACCOUNT === undefined) {
+      throw new Error("default account not found");
+    }
+    if (CDK_DEFAULT_REGION === undefined) {
+      throw new Error("default region not found");
+    }
+    return new QronApp({
+      env: { account: CDK_DEFAULT_ACCOUNT, region: CDK_DEFAULT_REGION },
+    });
+  };
+
+  public static newForTest = (): QronApp =>
+    new QronApp({
+      env: {
+        account: "dummy",
+        region: "ap-northeast-1",
+      },
+    });
 }

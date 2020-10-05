@@ -1,23 +1,23 @@
-import { Stack, StackProps, Construct } from "@aws-cdk/core";
-import { IRepository } from "@aws-cdk/aws-ecr";
+import { TransactionalTask } from "@aereal/qron";
 import { ITable } from "@aws-cdk/aws-dynamodb";
+import { Vpc } from "@aws-cdk/aws-ec2";
+import { IRepository } from "@aws-cdk/aws-ecr";
 import {
   Cluster,
-  FargateTaskDefinition,
   ContainerImage,
-  LogDrivers,
   FargatePlatformVersion,
+  FargateTaskDefinition,
+  LogDrivers,
 } from "@aws-cdk/aws-ecs";
-import { Vpc } from "@aws-cdk/aws-ec2";
+import { Rule, Schedule } from "@aws-cdk/aws-events";
+import { SfnStateMachine } from "@aws-cdk/aws-events-targets";
 import { LogGroup, RetentionDays } from "@aws-cdk/aws-logs";
 import { IntegrationPattern } from "@aws-cdk/aws-stepfunctions";
 import {
-  EcsRunTask,
   EcsFargateLaunchTarget,
+  EcsRunTask,
 } from "@aws-cdk/aws-stepfunctions-tasks";
-import { Rule, Schedule } from "@aws-cdk/aws-events";
-import { SfnStateMachine } from "@aws-cdk/aws-events-targets";
-import { TransactionalTask } from "@aereal/qron";
+import { Construct, Stack, StackProps } from "@aws-cdk/core";
 
 interface SleeperEcsStackProps extends StackProps {
   readonly repository: IRepository;
@@ -30,8 +30,12 @@ export class SleeperEcsStack extends Stack {
 
     const { repository, lockTable } = props;
 
+    const vpcId = this.node.tryGetContext("vpcId") as string | undefined;
+    if (vpcId === undefined) {
+      throw new Error("No vpcId context found");
+    }
     const vpc = Vpc.fromLookup(this, "ImportedVPC", {
-      vpcId: this.node.tryGetContext("vpcId"),
+      vpcId,
     });
 
     const cluster = new Cluster(this, "Cluster", { vpc });

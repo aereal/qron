@@ -543,7 +543,7 @@
     "@aws-cdk/core" "1.66.0"
     constructs "^3.0.4"
 
-"@aws-cdk/aws-sns@1.66.0":
+"@aws-cdk/aws-sns@1.66.0", "@aws-cdk/aws-sns@^1.66.0":
   version "1.66.0"
   resolved "https://registry.yarnpkg.com/@aws-cdk/aws-sns/-/aws-sns-1.66.0.tgz#b5e91c9951488ddcde4b96c795ceb781746a8bfb"
   integrity sha512-nmB4mjSe7EkWZk+SVg4KrZURplqQI1yc5D8cU2CUF0SDlLtoTb36Y/5GjucinIc9ayD/15HopW8DlPLAafHHrw==
@@ -578,7 +578,7 @@
     "@aws-cdk/core" "1.66.0"
     constructs "^3.0.4"
 
-"@aws-cdk/aws-stepfunctions-tasks@1.66.0":
+"@aws-cdk/aws-stepfunctions-tasks@1.66.0", "@aws-cdk/aws-stepfunctions-tasks@^1.66.0":
   version "1.66.0"
   resolved "https://registry.yarnpkg.com/@aws-cdk/aws-stepfunctions-tasks/-/aws-stepfunctions-tasks-1.66.0.tgz#d83e13eba1dd6bc3da3d5e2ca43a3657bf699818"
   integrity sha512-FQj+4+R+9uMbxfkgIuCaIWRFJW2KvRQGikulW9VTKrNKKLjqIBIOnl4/GiEMC5i8ece0obIFNQr5uBEVzdBH7Q==

@@ -1,11 +1,11 @@
-import { Stack } from "@aws-cdk/core";
-import { Table, AttributeType } from "@aws-cdk/aws-dynamodb";
+import { SynthUtils } from "@aws-cdk/assert";
+import { AttributeType, Table } from "@aws-cdk/aws-dynamodb";
 import { Rule, Schedule } from "@aws-cdk/aws-events";
 import { SfnStateMachine } from "@aws-cdk/aws-events-targets";
+import { Topic } from "@aws-cdk/aws-sns";
 import { TaskInput } from "@aws-cdk/aws-stepfunctions";
 import { SnsPublish } from "@aws-cdk/aws-stepfunctions-tasks";
-import { Topic } from "@aws-cdk/aws-sns";
-import { SynthUtils } from "@aws-cdk/assert";
+import { Stack } from "@aws-cdk/core";
 import { TransactionalTask } from "../src";
 
 describe("TransactionalTask", () => {

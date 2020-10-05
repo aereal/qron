@@ -1,5 +1,5 @@
-import { join, resolve } from "path";
 import { mkdirSync } from "fs";
+import { join, resolve } from "path";
 import { QronApp } from "../src/app";
 
 describe("Stacks", () => {
