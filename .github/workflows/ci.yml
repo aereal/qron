@@ -79,3 +79,20 @@ jobs:
           publish_dir: packages/@aereal/qron/docs
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'
+  create-release-pull-request:
+    needs: cdk
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: release
+      - run: |
+          git fetch origin main:main
+          git reset --hard main
+      - name: create release pull request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ github.token }}
+          title: Publish release
+          base: release
