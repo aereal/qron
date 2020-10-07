@@ -87,5 +87,21 @@
   },
   "dependencies": {
     "@aereal/cdk-dynamodb-expression": "^0.1.0"
+  },
+  "release": {
+    "branches": [
+      {
+        "name": "main",
+        "prerelease": true
+      },
+      "release"
+    ],
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/npm",
+      "@semantic-release/git",
+      "@semantic-release/github"
+    ]
   }
 }
