@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "@aereal/qron": "^0.0.4-alpha.0",
+    "@aereal/qron": "1.0.0-main.1",
     "@aws-cdk/assets": "1.66.0",
     "@aws-cdk/aws-apigateway": "1.66.0",
     "@aws-cdk/aws-applicationautoscaling": "1.66.0",

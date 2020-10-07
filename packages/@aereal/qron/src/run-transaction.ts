@@ -1,4 +1,4 @@
-import { dynamoExpr } from "@aereal/cdk-dynamodb-expression";
+import { ExpressionBuilder } from "@aereal/cdk-dynamodb-expression";
 import { ITable } from "@aws-cdk/aws-dynamodb";
 import {
   Choice,
@@ -54,6 +54,8 @@ export class RunTransactionalTask extends StateMachineFragment {
   private readonly amount: DynamoAttributeValue = DynamoAttributeValue.fromNumber(
     1
   );
+  private readonly getLockExprBuilder: ExpressionBuilder;
+  private readonly freeLockExprBuilder: ExpressionBuilder;
 
   constructor(scope: Construct, id: string, props: RunTransactionalTaskProps) {
     super(scope, id);
@@ -61,6 +63,8 @@ export class RunTransactionalTask extends StateMachineFragment {
     const { lockTable, invokeMain, taskName } = props;
     this.lockTable = lockTable;
     this.taskName = taskName;
+    this.getLockExprBuilder = new ExpressionBuilder();
+    this.freeLockExprBuilder = new ExpressionBuilder();
 
     const getLockResultPath = "$.Lock";
     const assumeLockFreed = this.freeLockTask("AssumeLockFreed");
@@ -90,15 +94,18 @@ export class RunTransactionalTask extends StateMachineFragment {
    */
   private getLockTask(): DynamoUpdateItem {
     const defaultCount = DynamoAttributeValue.fromNumber(0);
-    const [
-      updateExpression,
-      updateAttributeValues,
-    ] = dynamoExpr`SET handledCount = if_not_exists(handledCount, ${defaultCount}) + ${this.amount}`;
+    const {
+      expression,
+      expressionAttributeNames,
+      expressionAttributeValues,
+    } = this.getLockExprBuilder
+      .expr`SET handledCount = if_not_exists(handledCount, ${defaultCount}) + ${this.amount}`;
     return new DynamoUpdateItem(this, "GetLock", {
       table: this.lockTable,
       key: this.lockKey,
-      updateExpression,
-      expressionAttributeValues: updateAttributeValues,
+      updateExpression: expression,
+      expressionAttributeNames,
+      expressionAttributeValues,
       returnValues: DynamoReturnValues.ALL_NEW,
       resultPath: this.getLockResultPath,
     });
@@ -108,17 +115,20 @@ export class RunTransactionalTask extends StateMachineFragment {
    *
    */
   private freeLockTask(id: string): DynamoUpdateItem {
-    const [
-      updateExpression,
-      values,
-    ] = dynamoExpr`SET handledCount = handledCount - ${DynamoAttributeValue.fromNumber(
+    const {
+      expression,
+      expressionAttributeValues,
+      expressionAttributeNames,
+    } = this.freeLockExprBuilder
+      .expr`SET handledCount = handledCount - ${DynamoAttributeValue.fromNumber(
       1
     )}`;
     return new DynamoUpdateItem(this, id, {
       table: this.lockTable,
       key: this.lockKey,
-      updateExpression,
-      expressionAttributeValues: values,
+      updateExpression: expression,
+      expressionAttributeNames,
+      expressionAttributeValues,
       returnValues: DynamoReturnValues.ALL_NEW,
     });
   }
