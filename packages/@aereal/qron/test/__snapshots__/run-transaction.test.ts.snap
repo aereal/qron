@@ -44,7 +44,7 @@ Object {
               Object {
                 "Ref": "LockTableB9DACF42",
               },
-              "\\",\\"ExpressionAttributeValues\\":{\\":v3\\":{\\"N\\":\\"0\\"},\\":v4\\":{\\"N\\":\\"1\\"}},\\"ReturnValues\\":\\"ALL_NEW\\",\\"UpdateExpression\\":\\"SET handledCount = if_not_exists(handledCount, :v3) + :v4\\"}},\\"CheckLock\\":{\\"Type\\":\\"Choice\\",\\"Choices\\":[{\\"Variable\\":\\"$.Lock.Attributes.handledCount.N\\",\\"StringEquals\\":\\"1\\",\\"Next\\":\\"PublishTopic\\"}],\\"Default\\":\\"FailedLockFreed\\"},\\"FailedLockFreed\\":{\\"Next\\":\\"Finite\\",\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:",
+              "\\",\\"ExpressionAttributeNames\\":{},\\"ExpressionAttributeValues\\":{\\":v0\\":{\\"N\\":\\"0\\"},\\":v1\\":{\\"N\\":\\"1\\"}},\\"ReturnValues\\":\\"ALL_NEW\\",\\"UpdateExpression\\":\\"SET handledCount = if_not_exists(handledCount, :v0) + :v1\\"}},\\"CheckLock\\":{\\"Type\\":\\"Choice\\",\\"Choices\\":[{\\"Variable\\":\\"$.Lock.Attributes.handledCount.N\\",\\"StringEquals\\":\\"1\\",\\"Next\\":\\"PublishTopic\\"}],\\"Default\\":\\"FailedLockFreed\\"},\\"FailedLockFreed\\":{\\"Next\\":\\"Finite\\",\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:",
               Object {
                 "Ref": "AWS::Partition",
               },
@@ -52,7 +52,7 @@ Object {
               Object {
                 "Ref": "LockTableB9DACF42",
               },
-              "\\",\\"ExpressionAttributeValues\\":{\\":v2\\":{\\"N\\":\\"1\\"}},\\"ReturnValues\\":\\"ALL_NEW\\",\\"UpdateExpression\\":\\"SET handledCount = handledCount - :v2\\"}},\\"Finite\\":{\\"Type\\":\\"Fail\\"},\\"PublishTopic\\":{\\"Next\\":\\"SuccessFreeLock\\",\\"Catch\\":[{\\"ErrorEquals\\":[\\"States.ALL\\"],\\"Next\\":\\"AssumeLockFreed\\"}],\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:",
+              "\\",\\"ExpressionAttributeNames\\":{},\\"ExpressionAttributeValues\\":{\\":v2\\":{\\"N\\":\\"1\\"}},\\"ReturnValues\\":\\"ALL_NEW\\",\\"UpdateExpression\\":\\"SET handledCount = handledCount - :v2\\"}},\\"Finite\\":{\\"Type\\":\\"Fail\\"},\\"PublishTopic\\":{\\"Next\\":\\"SuccessFreeLock\\",\\"Catch\\":[{\\"ErrorEquals\\":[\\"States.ALL\\"],\\"Next\\":\\"AssumeLockFreed\\"}],\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:",
               Object {
                 "Ref": "AWS::Partition",
               },
@@ -68,7 +68,7 @@ Object {
               Object {
                 "Ref": "LockTableB9DACF42",
               },
-              "\\",\\"ExpressionAttributeValues\\":{\\":v1\\":{\\"N\\":\\"1\\"}},\\"ReturnValues\\":\\"ALL_NEW\\",\\"UpdateExpression\\":\\"SET handledCount = handledCount - :v1\\"}},\\"AssumeLockFreed\\":{\\"End\\":true,\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:",
+              "\\",\\"ExpressionAttributeNames\\":{},\\"ExpressionAttributeValues\\":{\\":v1\\":{\\"N\\":\\"1\\"}},\\"ReturnValues\\":\\"ALL_NEW\\",\\"UpdateExpression\\":\\"SET handledCount = handledCount - :v1\\"}},\\"AssumeLockFreed\\":{\\"End\\":true,\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:",
               Object {
                 "Ref": "AWS::Partition",
               },
@@ -76,7 +76,7 @@ Object {
               Object {
                 "Ref": "LockTableB9DACF42",
               },
-              "\\",\\"ExpressionAttributeValues\\":{\\":v0\\":{\\"N\\":\\"1\\"}},\\"ReturnValues\\":\\"ALL_NEW\\",\\"UpdateExpression\\":\\"SET handledCount = handledCount - :v0\\"}}}}",
+              "\\",\\"ExpressionAttributeNames\\":{},\\"ExpressionAttributeValues\\":{\\":v0\\":{\\"N\\":\\"1\\"}},\\"ReturnValues\\":\\"ALL_NEW\\",\\"UpdateExpression\\":\\"SET handledCount = handledCount - :v0\\"}}}}",
             ],
           ],
         },
