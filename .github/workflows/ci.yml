@@ -49,12 +49,25 @@ jobs:
       - name: build docs
         if: github.ref == 'refs/heads/main'
         run: yarn workspace @aereal/qron typedoc src/
+      - name: save docs to artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: docs
+          path: packages/@aereal/qron/docs
+  docs:
+    needs: cdk
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: download docs artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: docs
+          path: packages/@aereal/qron/docs
       - name: publish docs
-        if: github.ref == 'refs/heads/main'
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: packages/@aereal/qron/docs
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'
-
