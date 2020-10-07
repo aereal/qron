@@ -86,7 +86,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@aereal/cdk-dynamodb-expression": "^0.1.0"
+    "@aereal/cdk-dynamodb-expression": "^2.1.0"
   },
   "release": {
     "branches": [
