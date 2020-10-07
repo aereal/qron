@@ -55,6 +55,13 @@ jobs:
         with:
           name: docs
           path: packages/@aereal/qron/docs
+      - name: release
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/release'
+        run: yarn workspace @aereal/qron semantic-release
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
   docs:
     needs: cdk
     runs-on: ubuntu-latest
