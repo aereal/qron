@@ -6,6 +6,7 @@ on:
   push:
     branches:
       - main
+      - release
 jobs:
   lambda:
     runs-on: ubuntu-latest
@@ -47,7 +48,7 @@ jobs:
       - name: test
         run: yarn test
       - name: build docs
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/release'
         run: yarn workspace @aereal/qron typedoc src/
       - name: save docs to artifact
         uses: actions/upload-artifact@v2
@@ -57,7 +58,7 @@ jobs:
   docs:
     needs: cdk
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/release'
     steps:
       - name: download docs artifact
         uses: actions/download-artifact@v2
