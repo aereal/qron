@@ -8,21 +8,6 @@ on:
       - main
       - release
 jobs:
-  lambda:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-go@v1.1.2
-        with:
-          go-version: 1.13.x
-      - uses: actions/cache@v1
-        with:
-          path: ~/go/pkg/mod
-          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
-          restore-keys: |
-            ${{ runner.os }}-go-
-      - name: make
-        run: make
   cdk:
     runs-on: ubuntu-latest
     steps:
@@ -41,23 +26,22 @@ jobs:
           node-version: '12.x'
       - name: install
         run: yarn install --frozen-lockfile
-      - name: bootstrap
-        run: yarn bootstrap
-      - name: build
-        run: yarn build
       - name: test
         run: yarn test
       - name: build docs
         if: github.ref == 'refs/heads/release'
-        run: yarn workspace @aereal/qron typedoc src/
+        run: yarn docs
       - name: save docs to artifact
         uses: actions/upload-artifact@v2
         with:
           name: docs
-          path: packages/@aereal/qron/docs
+          path: docs
+      - name: build
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/release'
+        run: yarn build
       - name: release
         if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/release'
-        run: yarn workspace @aereal/qron semantic-release
+        run: yarn semantic-release
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -71,12 +55,12 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: docs
-          path: packages/@aereal/qron/docs
+          path: docs
       - name: publish docs
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: packages/@aereal/qron/docs
+          publish_dir: docs
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'
   create-release-pull-request:

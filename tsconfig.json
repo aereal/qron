@@ -1,9 +1,17 @@
 {
-  "extends": "./tsconfig.build.json",
   "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "@aereal/qron": ["@aereal/qron/src"]
-    }
-  }
+    "alwaysStrict": true,
+    "declaration": true,
+    "experimentalDecorators": true,
+    "lib": ["es2018"],
+    "module": "commonjs",
+    "noFallthroughCasesInSwitch": true,
+    "outDir": "built",
+    "strict": true,
+    "target": "ES2018"
+  },
+  "include": [
+    "src"
+  ],
+  "exclude": ["cdk.out", "node_modules"]
 }
