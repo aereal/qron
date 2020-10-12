@@ -8,21 +8,6 @@ on:
       - main
       - release
 jobs:
-  lambda:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-go@v1.1.2
-        with:
-          go-version: 1.13.x
-      - uses: actions/cache@v1
-        with:
-          path: ~/go/pkg/mod
-          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
-          restore-keys: |
-            ${{ runner.os }}-go-
-      - name: make
-        run: make
   cdk:
     runs-on: ubuntu-latest
     steps:
