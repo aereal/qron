@@ -1,0 +1,175 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TransactionalTask ok 1`] = `
+Object {
+  "Resources": Object {
+    "LockTableB9DACF42": Object {
+      "DeletionPolicy": "Retain",
+      "Properties": Object {
+        "AttributeDefinitions": Array [
+          Object {
+            "AttributeName": "id",
+            "AttributeType": "S",
+          },
+        ],
+        "KeySchema": Array [
+          Object {
+            "AttributeName": "id",
+            "KeyType": "HASH",
+          },
+        ],
+        "ProvisionedThroughput": Object {
+          "ReadCapacityUnits": 5,
+          "WriteCapacityUnits": 5,
+        },
+      },
+      "Type": "AWS::DynamoDB::Table",
+      "UpdateReplacePolicy": "Retain",
+    },
+    "StateMachine2E01A3A5": Object {
+      "DependsOn": Array [
+        "StateMachineRoleDefaultPolicyDF1E6607",
+        "StateMachineRoleB840431D",
+      ],
+      "Properties": Object {
+        "DefinitionString": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "{\\"StartAt\\":\\"GetLock\\",\\"States\\":{\\"GetLock\\":{\\"Next\\":\\"CheckLock\\",\\"Type\\":\\"Task\\",\\"ResultPath\\":\\"$.Lock\\",\\"Resource\\":\\"arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":states:::dynamodb:updateItem\\",\\"Parameters\\":{\\"Key\\":{\\"taskName\\":{\\"S\\":\\"test-task\\"}},\\"TableName\\":\\"",
+              Object {
+                "Ref": "LockTableB9DACF42",
+              },
+              "\\",\\"ExpressionAttributeNames\\":{},\\"ExpressionAttributeValues\\":{\\":v0\\":{\\"N\\":\\"0\\"},\\":v1\\":{\\"N\\":\\"1\\"}},\\"ReturnValues\\":\\"ALL_NEW\\",\\"UpdateExpression\\":\\"SET handledCount = if_not_exists(handledCount, :v0) + :v1\\"}},\\"CheckLock\\":{\\"Type\\":\\"Choice\\",\\"Choices\\":[{\\"Variable\\":\\"$.Lock.Attributes.handledCount.N\\",\\"StringEquals\\":\\"1\\",\\"Next\\":\\"PublishTopic\\"}],\\"Default\\":\\"FailedLockFreed\\"},\\"FailedLockFreed\\":{\\"Next\\":\\"Finite\\",\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":states:::dynamodb:updateItem\\",\\"Parameters\\":{\\"Key\\":{\\"taskName\\":{\\"S\\":\\"test-task\\"}},\\"TableName\\":\\"",
+              Object {
+                "Ref": "LockTableB9DACF42",
+              },
+              "\\",\\"ExpressionAttributeNames\\":{},\\"ExpressionAttributeValues\\":{\\":v2\\":{\\"N\\":\\"1\\"}},\\"ReturnValues\\":\\"ALL_NEW\\",\\"UpdateExpression\\":\\"SET handledCount = handledCount - :v2\\"}},\\"Finite\\":{\\"Type\\":\\"Fail\\"},\\"PublishTopic\\":{\\"Next\\":\\"SuccessFreeLock\\",\\"Catch\\":[{\\"ErrorEquals\\":[\\"States.ALL\\"],\\"Next\\":\\"AssumeLockFreed\\"}],\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":states:::sns:publish\\",\\"Parameters\\":{\\"TopicArn\\":\\"",
+              Object {
+                "Ref": "TopicBFC7AF6E",
+              },
+              "\\",\\"Message\\":{}}},\\"SuccessFreeLock\\":{\\"End\\":true,\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":states:::dynamodb:updateItem\\",\\"Parameters\\":{\\"Key\\":{\\"taskName\\":{\\"S\\":\\"test-task\\"}},\\"TableName\\":\\"",
+              Object {
+                "Ref": "LockTableB9DACF42",
+              },
+              "\\",\\"ExpressionAttributeNames\\":{},\\"ExpressionAttributeValues\\":{\\":v1\\":{\\"N\\":\\"1\\"}},\\"ReturnValues\\":\\"ALL_NEW\\",\\"UpdateExpression\\":\\"SET handledCount = handledCount - :v1\\"}},\\"AssumeLockFreed\\":{\\"End\\":true,\\"Type\\":\\"Task\\",\\"Resource\\":\\"arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":states:::dynamodb:updateItem\\",\\"Parameters\\":{\\"Key\\":{\\"taskName\\":{\\"S\\":\\"test-task\\"}},\\"TableName\\":\\"",
+              Object {
+                "Ref": "LockTableB9DACF42",
+              },
+              "\\",\\"ExpressionAttributeNames\\":{},\\"ExpressionAttributeValues\\":{\\":v0\\":{\\"N\\":\\"1\\"}},\\"ReturnValues\\":\\"ALL_NEW\\",\\"UpdateExpression\\":\\"SET handledCount = handledCount - :v0\\"}}}}",
+            ],
+          ],
+        },
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "StateMachineRoleB840431D",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::StepFunctions::StateMachine",
+    },
+    "StateMachineRoleB840431D": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": Object {
+                  "Fn::Join": Array [
+                    "",
+                    Array [
+                      "states.",
+                      Object {
+                        "Ref": "AWS::Region",
+                      },
+                      ".amazonaws.com",
+                    ],
+                  ],
+                },
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "StateMachineRoleDefaultPolicyDF1E6607": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "dynamodb:UpdateItem",
+              "Effect": "Allow",
+              "Resource": Object {
+                "Fn::Join": Array [
+                  "",
+                  Array [
+                    "arn:",
+                    Object {
+                      "Ref": "AWS::Partition",
+                    },
+                    ":dynamodb:",
+                    Object {
+                      "Ref": "AWS::Region",
+                    },
+                    ":",
+                    Object {
+                      "Ref": "AWS::AccountId",
+                    },
+                    ":table/",
+                    Object {
+                      "Ref": "LockTableB9DACF42",
+                    },
+                  ],
+                ],
+              },
+            },
+            Object {
+              "Action": "sns:Publish",
+              "Effect": "Allow",
+              "Resource": Object {
+                "Ref": "TopicBFC7AF6E",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "StateMachineRoleDefaultPolicyDF1E6607",
+        "Roles": Array [
+          Object {
+            "Ref": "StateMachineRoleB840431D",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "TopicBFC7AF6E": Object {
+      "Type": "AWS::SNS::Topic",
+    },
+  },
+}
+`;
