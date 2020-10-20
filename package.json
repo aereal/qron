@@ -20,7 +20,7 @@
     "@aws-cdk/core": ">= 1.66.0"
   },
   "devDependencies": {
-    "@aereal/eslint-config": "^0.1.4",
+    "@aereal/eslint-config": "^0.1.6",
     "@aws-cdk/assert": "^1.67.0",
     "@aws-cdk/assets": "^1.67.0",
     "@aws-cdk/aws-apigateway": "^1.67.0",
